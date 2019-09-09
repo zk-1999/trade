@@ -196,7 +196,7 @@ export default {
       width: 170px;
     }
     .el-select{
-      width: 265px;
+      width: 230px;
     }
     .xiang{
       width: 400px;

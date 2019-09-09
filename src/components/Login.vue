@@ -21,7 +21,7 @@
                 </div>
                 <el-form-item class="btns">
                      <el-button type="info" @click="login">登 录</el-button><br>
-                     <!-- <el-button type="info" >重置</el-button> -->
+                     <!-- <el-button type="info" @click="resetLoginForm" >重置</el-button> -->
                 </el-form-item>
             </el-form>
         </div>
@@ -49,9 +49,7 @@ export default {
     };
   },
   created () {
-    
-       this.getCookie(); 
-    
+       this.getCookie();
   }
   ,
     methods:{
@@ -61,10 +59,10 @@ export default {
         login(){
             // this.$router.push('/home')
             // this.$refs.loginFormRef.validate( async valid => {
-            this.$refs.loginFormRef.validate(valid => {
+            this.$refs.loginFormRef.validate(async valid => {
                 if(!valid) return;
-                // const {data:res}=await this.$http.post('login',this.loginForm);
-                // console.log(res);
+                const {data:res}=await this.$http.post('login',this.loginForm);
+                console.log(res);
                 
                 // if (res.meta.status !== 200) return this.$message.error('登陆失败');
                 // this.$message.success('登录成功');

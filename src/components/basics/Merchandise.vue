@@ -62,7 +62,7 @@
                 <el-table-column prop="name" label="克重"></el-table-column>
                 <el-table-column prop="name" label="门幅"></el-table-column>
                 <el-table-column prop="name" label="淋膜类型"></el-table-column>
-                <el-table-column prop="name" label="状态" width="70"></el-table-column>
+                <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
              <el-table :data="tableData" height="185" border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
@@ -73,7 +73,7 @@
                 <el-table-column prop="name" label="商品编号" width="100"></el-table-column>
                 <el-table-column prop="name" label="商品小类型" width="100"></el-table-column>
                 <el-table-column prop="name" label="克重"></el-table-column>
-                <el-table-column prop="name" label="状态" width="70"></el-table-column>
+                <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
              <el-table :data="tableData" height="185" border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
@@ -86,7 +86,7 @@
                 <el-table-column prop="name" label="尺寸/长"></el-table-column>
                 <el-table-column prop="name" label="尺寸/宽"></el-table-column>
                 <el-table-column prop="name" label="尺寸/高"></el-table-column>
-                <el-table-column prop="name" label="状态" width="70"></el-table-column>
+                <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
              <el-table :data="tableData" height="185" border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
@@ -96,7 +96,7 @@
                 <el-table-column prop="name" label="商品大类型" width="100"></el-table-column>
                 <el-table-column prop="name" label="商品编号" width="100"></el-table-column>
                 <el-table-column prop="name" label="淋膜类型"></el-table-column>
-                <el-table-column prop="name" label="状态" width="70"></el-table-column>
+                <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
              <el-table :data="tableData" height="185" border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
@@ -107,7 +107,7 @@
                 <el-table-column prop="name" label="商品编号" width="100"></el-table-column>
                 <el-table-column prop="name" label="宽度"></el-table-column>
                 <el-table-column prop="name" label="颜色"></el-table-column>
-                <el-table-column prop="name" label="状态" width="70"></el-table-column>
+                <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
           </el-col>
         </el-row>

@@ -77,9 +77,10 @@ export default {
   }
   .tian{
     text-align: right;
+
   }
   .cor{
-    width: 200px;
+    width: 260px;
     margin: 10px 0px;
     margin-left: 10px;
   }
