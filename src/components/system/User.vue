@@ -345,10 +345,10 @@ export default {
       line-height: 30px;
     }
     .demo-form-inline .el-input{
-      width: 120px;
+      width: 180px;
     }
     .el-select{
-      width: 265px;
+      width: 225px;
     }
     .quan{
       float: left;

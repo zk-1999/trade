@@ -11,7 +11,7 @@
           <el-col :span="24">
              <el-row :gutter="20">
                 <el-form :inline="true" class="demo-form-inline">
-                    <el-form-item label="名称：">
+                    <el-form-item label="设计稿编码：">
                     <el-input placeholder="请输入名称"></el-input>
                     </el-form-item>
                     <el-form-item label="颜色：">
@@ -34,6 +34,7 @@
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
           <el-table border stripe>
             <el-table-column type="index"></el-table-column>
+            <el-table-column  label="设计稿编码"></el-table-column>
             <el-table-column  label="名称"></el-table-column>
             <el-table-column  label="颜色"></el-table-column>
             <el-table-column  label="图片"></el-table-column>
@@ -53,7 +54,7 @@
       <el-dialog
         title="新增产品设计稿"
         :visible.sync="addyonghuDialogVisible"
-        width="35%"
+        width="40%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="120px">
             <el-form-item label="产品型号："><el-input placeholder="请输入产品型号"></el-input></el-form-item>      <el-form-item label="产品日期："><el-input placeholder="请输入产品日期"></el-input></el-form-item>
@@ -90,7 +91,7 @@
       <el-dialog
         title="编辑产品设计稿"
         :visible.sync="edityonghuDialogVisible"
-        width="35%"
+        width="40%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="120px">
             <el-form-item label="产品型号："><el-input placeholder="请输入产品型号"></el-input></el-form-item>      <el-form-item label="产品日期："><el-input placeholder="请输入产品日期"></el-input></el-form-item>

@@ -66,16 +66,16 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="产品编码："><el-input placeholder="请输入产品编码"></el-input></el-form-item>      <el-form-item label="产品名称："><el-input placeholder="请输入产品名称"></el-input></el-form-item>
-                    <el-form-item label="产品类型："><el-input placeholder="请输入产品类型"></el-input></el-form-item>      <el-form-item label="设计稿："><el-input placeholder="设计稿"></el-input></el-form-item>
-                    <el-form-item label="纸张品牌/内："><el-input placeholder="纸张品牌/内"></el-input></el-form-item>     <el-form-item label="克数/内："><el-input placeholder="克数/内"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/内："><el-input placeholder="淋膜类型/内"></el-input></el-form-item>   
+                    <el-form-item label="产品类型："><el-input placeholder="请输入产品类型"></el-input></el-form-item>      <el-form-item label="设计稿："><el-input placeholder="请输入设计稿"></el-input></el-form-item>
+                    <el-form-item label="纸张品牌/内："><el-input placeholder="请输入纸张品牌/内"></el-input></el-form-item>     <el-form-item label="克数/内："><el-input placeholder="请输入克数/内"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/内："><el-input placeholder="请输入淋膜类型/内"></el-input></el-form-item>   
                 </el-col>
                 <el-col :span="12"> 
-                    <el-form-item label="纸张品牌/外："><el-input placeholder="纸张品牌/外"></el-input></el-form-item>     <el-form-item label="克数/外："><el-input placeholder="克数/外"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/外："><el-input placeholder="淋膜类型/外"></el-input></el-form-item>  
-                    <el-form-item label="纸张品牌/中："><el-input placeholder="纸张品牌/中"></el-input></el-form-item>     <el-form-item label="克数/中："><el-input placeholder="克数/中"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/中："><el-input placeholder="淋膜类型/中"></el-input></el-form-item>  
-                    <el-form-item label="状态："><el-input placeholder="状态"></el-input></el-form-item>
+                    <el-form-item label="纸张品牌/外："><el-input placeholder="请输入纸张品牌/外"></el-input></el-form-item>     <el-form-item label="克数/外："><el-input placeholder="请输入克数/外"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/外："><el-input placeholder="请输入淋膜类型/外"></el-input></el-form-item>  
+                    <el-form-item label="纸张品牌/中："><el-input placeholder="请输入纸张品牌/中"></el-input></el-form-item>     <el-form-item label="克数/中："><el-input placeholder="请输入克数/中"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/中："><el-input placeholder="请输入淋膜类型/中"></el-input></el-form-item>  
+                    <el-form-item label="状态："><el-input placeholder="请输入状态"></el-input></el-form-item>
                 </el-col>
             </el-row>
         </el-form>
@@ -90,20 +90,19 @@
         width="48%"
         :before-close="handleClose">
        <el-form :label-position="labelPosition" label-width="120px">
-             <el-row>
+            <el-row>
                 <el-col :span="12">
                     <el-form-item label="产品编码："><el-input placeholder="请输入产品编码"></el-input></el-form-item>      <el-form-item label="产品名称："><el-input placeholder="请输入产品名称"></el-input></el-form-item>
-                    <el-form-item label="产品类型："><el-input placeholder="请输入产品类型"></el-input></el-form-item>      <el-form-item label="设计稿："><el-input placeholder="设计稿"></el-input></el-form-item>
-                    <el-form-item label="纸张品牌/内："><el-input placeholder="纸张品牌/内"></el-input></el-form-item>
-                    <el-form-item label="克数/内："><el-input placeholder="克数/内"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/内："><el-input placeholder="淋膜类型/内"></el-input></el-form-item>   
+                    <el-form-item label="产品类型："><el-input placeholder="请输入产品类型"></el-input></el-form-item>      <el-form-item label="设计稿："><el-input placeholder="请输入设计稿"></el-input></el-form-item>
+                    <el-form-item label="纸张品牌/内："><el-input placeholder="请输入纸张品牌/内"></el-input></el-form-item>     <el-form-item label="克数/内："><el-input placeholder="请输入克数/内"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/内："><el-input placeholder="请输入淋膜类型/内"></el-input></el-form-item>   
                 </el-col>
                 <el-col :span="12"> 
-                    <el-form-item label="纸张品牌/外："><el-input placeholder="纸张品牌/外"></el-input></el-form-item>     <el-form-item label="克数/外："><el-input placeholder="克数/外"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/外："><el-input placeholder="淋膜类型/外"></el-input></el-form-item>  
-                    <el-form-item label="纸张品牌/中："><el-input placeholder="纸张品牌/中"></el-input></el-form-item>     <el-form-item label="克数/中："><el-input placeholder="克数/中"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/中："><el-input placeholder="淋膜类型/中"></el-input></el-form-item>  
-                    <el-form-item label="状态："><el-input placeholder="状态"></el-input></el-form-item>
+                    <el-form-item label="纸张品牌/外："><el-input placeholder="请输入纸张品牌/外"></el-input></el-form-item>     <el-form-item label="克数/外："><el-input placeholder="请输入克数/外"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/外："><el-input placeholder="请输入淋膜类型/外"></el-input></el-form-item>  
+                    <el-form-item label="纸张品牌/中："><el-input placeholder="请输入纸张品牌/中"></el-input></el-form-item>     <el-form-item label="克数/中："><el-input placeholder="请输入克数/中"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/中："><el-input placeholder="请输入淋膜类型/中"></el-input></el-form-item>  
+                    <el-form-item label="状态："><el-input placeholder="请输入状态"></el-input></el-form-item>
                 </el-col>
             </el-row>
         </el-form>

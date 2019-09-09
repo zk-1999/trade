@@ -77,7 +77,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-form-item label="户籍：">
+          <el-form-item label="联系地址：">
             <el-select placeholder="省级地区" class="hu">
               <el-option></el-option>
             </el-select>
@@ -118,7 +118,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-form-item label="户籍：">
+          <el-form-item label="联系地址：">
             <el-select placeholder="省级地区" class="hu">
               <el-option></el-option>
             </el-select>
@@ -207,7 +207,7 @@ export default {
       width: 170px;
     }
     .el-select{
-      width: 265px;
+      width: 225px;
     }
     .xiang{
       width: 400px;

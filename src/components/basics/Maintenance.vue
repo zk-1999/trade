@@ -167,7 +167,7 @@
         </el-pagination>
       </el-card>
       <el-dialog
-        title="新增生产商品"
+        title="新增基础数据"
         :visible.sync="addyonghuDialogVisible"
         width="30%"
         :before-close="handleClose">
@@ -182,7 +182,7 @@
         </span>
       </el-dialog>
       <el-dialog
-        title="编辑生产商品"
+        title="编辑基础数据"
         :visible.sync="edityonghuDialogVisible"
         width="30%"
         :before-close="handleClose">
@@ -267,7 +267,7 @@ export default {
       width: 170px;
     }
     .el-select{
-      width: 265px;
+      width: 225px;
     }
     .xiang{
       width: 400px;

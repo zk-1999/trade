@@ -56,7 +56,6 @@
         width="30%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="100px">
-          <el-form-item label="职务编号："><el-input placeholder="请输入职务编号"></el-input></el-form-item>
           <el-form-item label="部门名称："><el-input placeholder="请输入部门名称"></el-input></el-form-item>
           <el-form-item label="职务名称："><el-input placeholder="请输入职务名称"></el-input></el-form-item>
           <el-form-item label="备注内容："><el-input type="textarea" :rows="2" placeholder="请输入备注内容"></el-input></el-form-item>
@@ -72,7 +71,6 @@
         width="30%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="100px">
-          <el-form-item label="职务编号："><el-input placeholder="请输入职务编号"></el-input></el-form-item>
           <el-form-item label="部门名称："><el-input placeholder="请输入部门名称"></el-input></el-form-item>
           <el-form-item label="职务名称："><el-input placeholder="请输入职务名称"></el-input></el-form-item>
           <el-form-item label="备注内容："><el-input type="textarea" :rows="2" placeholder="请输入备注内容"></el-input></el-form-item>
