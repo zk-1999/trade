@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="min1500">
        <!-- 面包屑导航区域 -->
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
@@ -12,7 +12,7 @@
           <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
         </div>
       </el-card>
-      <el-card>
+      <el-card class="min1300">
         <el-row :gutter="20" class="row">
           <el-col :span="24">
             <el-row :gutter="20">
@@ -250,6 +250,8 @@ export default {
     .quan{
       float: left;
       margin-right: 20px;
+      // width: 220px !important;
+      // min-width: 220px;
     }
     .el-card{
       height: 650px;

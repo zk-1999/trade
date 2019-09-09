@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="min1500">
        <!-- 面包屑导航区域 -->
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
