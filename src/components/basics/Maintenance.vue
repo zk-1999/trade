@@ -294,7 +294,8 @@ export default {
         height: 680px;
     }
     .el-pagination{
-        text-align: right;
-        margin-right: 50px;
+        // text-align: right;
+        // margin-right: 50px;
+        margin-top: 10px;
     }
 </style>

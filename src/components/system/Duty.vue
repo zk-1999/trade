@@ -83,13 +83,34 @@
         </span>
       </el-dialog>
       <el-dialog title="分配权限" :visible.sync="rightDialogVisible" width="50%" >
-        <el-tree
+        <!-- <el-tree
           :data="rightList"
           show-checkbox
           node-key="id"
           default-expand-all
           :props="defaultPropss">
-        </el-tree>
+        </el-tree> -->
+        <hr>
+        <el-row class="lei">
+          <el-col :span="8">权限类别</el-col>
+          <el-col :span="8">权限名称</el-col>
+          <el-col :span="8">权限描述</el-col>
+        </el-row>
+        <el-row  v-for="(item1) in rightList" :key="item1.id" class="yi">
+          <el-col :span="8">
+            <el-checkbox>{{item1.authName}}</el-checkbox>
+          </el-col>
+          <el-col :span="16">
+            <el-row v-for="(item2) in item1.children" :key="item2.id" class="er">
+              <el-col :span="12">
+                <el-checkbox>{{item2.authName}}</el-checkbox>
+              </el-col>
+              <el-col :span="12">
+                备注
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-row>
         <span slot="footer" class="dialog-footer">
             <el-button @click="rightDialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="rightDialogVisible=false">确 定</el-button>
@@ -265,5 +286,20 @@ export default {
     }
     .el-pagination{
         margin-top: 30px;
+    }
+    .yi{
+      border-bottom: 1px solid #999;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .er{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .lei{
+      text-align: center;
+      background: #999;
+      padding: 5px;
     }
 </style>

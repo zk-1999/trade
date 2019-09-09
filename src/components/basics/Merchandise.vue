@@ -172,17 +172,56 @@
         <el-form :label-position="labelPosition" label-width="120px">
           <el-row>
             <el-col :span="12">
-              <el-form-item label="客户编码："><el-input placeholder="客户编码"></el-input></el-form-item>
-              <el-form-item label="联系人："><el-input placeholder="请输入联系人"></el-input></el-form-item>
-              <el-form-item label="联系邮箱："><el-input placeholder="请输入联系邮箱"></el-input></el-form-item>
+              <el-form-item label="供应商编号："><el-input placeholder="请输入供应商编号"></el-input></el-form-item>
+              <el-form-item label="供应商名称："><el-input placeholder="请输入供应商名称"></el-input></el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="客户名称："><el-input placeholder="请输入客户名称"></el-input></el-form-item>
-              <el-form-item label="联系人手机："><el-input placeholder="请输入联系人手机"></el-input></el-form-item>
+              <el-form-item label="商品编号："><el-input placeholder="请输入商品编号"></el-input></el-form-item>
+              <el-form-item label="状态：">
+                <el-select class="tiantou" placeholder="请选择状态" v-model="value">
+                  <el-option  value="纸张"></el-option>
+                 </el-select>
+              </el-form-item>
             </el-col>
           </el-row>
-          <el-form-item label="详细地址："><el-input placeholder="请输入详细地址" class="xiang"></el-input></el-form-item>
-          <el-form-item label="银行卡号："><el-input placeholder="请输入银行卡号" class="xiang"></el-input></el-form-item>
+          <el-form-item label="商品大类型：">
+                <el-select class="tiantou" placeholder="请选择商品大类型" @change="showshoop"  v-model="value">
+                  <el-option value="纸张" id="show">纸张</el-option>
+                  <el-option  value="纸箱" id="show">纸箱</el-option>
+                  <el-option  value="袋子" id="show">袋子</el-option>
+                  <el-option  value="油墨" id="show">油墨</el-option>
+                  <el-option  value="胶带" id="show">胶带</el-option>
+                 </el-select>
+          </el-form-item>
+          <div v-show="bigType == '纸张'">
+            <el-form-item label="商品小类型："><el-input placeholder="请输入商品小类型" class="xiang"></el-input></el-form-item>          
+            <el-form-item label="品牌："><el-input placeholder="请输入品牌" class="xiang"></el-input></el-form-item>
+            <el-form-item label="克重："><el-input placeholder="请输入克重" class="xiang"></el-input></el-form-item>
+            <el-form-item label="门幅："><el-input placeholder="请输入门幅" class="xiang"></el-input></el-form-item>
+            <el-form-item label="淋膜类型："><el-input placeholder="请输入淋膜类型" class="xiang"></el-input></el-form-item>
+          </div>
+          <div v-show="bigType == '纸箱'">
+            <el-form-item label="淋膜类型："><el-input placeholder="请输入淋膜类型" class="xiang"></el-input></el-form-item>
+          </div>
+          <div v-show="bigType == '袋子'">
+            <el-form-item label="商品小类型："><el-input placeholder="请输入商品小类型" class="xiang"></el-input></el-form-item>          
+            <el-form-item label="品牌："><el-input placeholder="请输入品牌" class="xiang"></el-input></el-form-item>
+            <el-form-item label="克重："><el-input placeholder="请输入克重" class="xiang"></el-input></el-form-item>
+            <el-form-item label="门幅："><el-input placeholder="请输入门幅" class="xiang"></el-input></el-form-item>
+            <el-form-item label="淋膜类型："><el-input placeholder="请输入淋膜类型" class="xiang"></el-input></el-form-item>
+          </div>
+          <div v-show="bigType == '油墨'">
+            <el-form-item label="克重："><el-input placeholder="请输入克重" class="xiang"></el-input></el-form-item>
+          </div>
+          <div v-show="bigType == '胶带'">
+            <el-form-item label="尺寸/长："><el-input placeholder="请输入尺寸/长" class="xiang"></el-input></el-form-item>          
+            <el-form-item label="颜色/宽："><el-input placeholder="请输入颜色/宽" class="xiang"></el-input></el-form-item>
+            <el-form-item label="高："><el-input placeholder="请输入高" class="xiang"></el-input></el-form-item>
+          </div>
+          <div id="shoop">      
+            <el-form-item label="宽度："><el-input placeholder="请输入宽度" class="xiang"></el-input></el-form-item>  
+            <el-form-item label="颜色："><el-input placeholder="请输入颜色" class="xiang"></el-input></el-form-item>
+          </div>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="edityonghuDialogVisible = false">取 消</el-button>
@@ -291,7 +330,7 @@ export default {
       width: 170px;
     }
     .el-select{
-      width: 265px;
+      width: 230px;
     }
     .xiang{
       width: 400px;
