@@ -62,9 +62,7 @@
         <el-form :label-position="labelPosition" label-width="120px">
             <el-row>
                 <el-col :span="12">
-                <el-form-item label="产品类型："><el-input placeholder="请输入产品类型"></el-input></el-form-item>          
                 <el-form-item label="产品型号："><el-input placeholder="请输入产品型号"></el-input></el-form-item>
-                <el-form-item label="产品编号："><el-input placeholder="请输入产品编号"></el-input></el-form-item>          
                 <el-form-item label="单齿长/尺数："><el-input placeholder="单齿长/尺数"></el-input></el-form-item>
                 <el-form-item label="齿数/尺数："><el-input placeholder="齿数/尺数"></el-input></el-form-item>          
                 <el-form-item label="纸宽/尺数："><el-input placeholder="纸宽/尺数"></el-input></el-form-item>
@@ -78,7 +76,6 @@
                 <el-form-item label="放量："><el-input placeholder="请输入放量"></el-input></el-form-item>          
                 <el-form-item label="片数："><el-input placeholder="请输入片数"></el-input></el-form-item>
                 <el-form-item label="单个米数："><el-input placeholder="请输入单个米数"></el-input></el-form-item>
-                <el-form-item label="单个重量："><el-input placeholder="请输入单个重量"></el-input></el-form-item>          
                 <el-form-item label="机台号："><el-input placeholder="请输入机台号"></el-input></el-form-item>
                 <el-form-item label="模具号："><el-input placeholder="请输入模具号"></el-input></el-form-item>          
                 <el-form-item label="产能："><el-input placeholder="请输入产能"></el-input></el-form-item>
@@ -98,9 +95,7 @@
        <el-form :label-position="labelPosition" label-width="120px">
             <el-row>
                 <el-col :span="12">
-                <el-form-item label="产品类型："><el-input placeholder="请输入产品类型"></el-input></el-form-item>          
                 <el-form-item label="产品型号："><el-input placeholder="请输入产品型号"></el-input></el-form-item>
-                <el-form-item label="产品编号："><el-input placeholder="请输入产品编号"></el-input></el-form-item>          
                 <el-form-item label="单齿长/尺数："><el-input placeholder="单齿长/尺数"></el-input></el-form-item>
                 <el-form-item label="齿数/尺数："><el-input placeholder="齿数/尺数"></el-input></el-form-item>          
                 <el-form-item label="纸宽/尺数："><el-input placeholder="纸宽/尺数"></el-input></el-form-item>
@@ -114,7 +109,6 @@
                 <el-form-item label="放量："><el-input placeholder="请输入放量"></el-input></el-form-item>          
                 <el-form-item label="片数："><el-input placeholder="请输入片数"></el-input></el-form-item>
                 <el-form-item label="单个米数："><el-input placeholder="请输入单个米数"></el-input></el-form-item>
-                <el-form-item label="单个重量："><el-input placeholder="请输入单个重量"></el-input></el-form-item>          
                 <el-form-item label="机台号："><el-input placeholder="请输入机台号"></el-input></el-form-item>
                 <el-form-item label="模具号："><el-input placeholder="请输入模具号"></el-input></el-form-item>          
                 <el-form-item label="产能："><el-input placeholder="请输入产能"></el-input></el-form-item>

@@ -6,12 +6,71 @@
       </el-breadcrumb>
       <el-card class="gongzuo">
         <el-tabs :tab-position="tabPosition" style="height: 200px;">
-        <el-tab-pane label="待我审批">待我审批</el-tab-pane>
-        <el-tab-pane label="我已审批">我已审批</el-tab-pane>
-        <el-tab-pane label="审批中">审批中</el-tab-pane>
-        <el-tab-pane label="审批完成">审批完成</el-tab-pane>
-        <el-tab-pane label="待出库">待出库</el-tab-pane>
-        <el-tab-pane label="待入库">待入库</el-tab-pane>
+        <el-tab-pane label="待我审批">
+           <el-table :data="tableData" height="185" style="width: 100%">
+                <el-table-column prop="date" label="单据编号"></el-table-column>
+                <el-table-column prop="name" label="单据类型"></el-table-column>
+                <el-table-column prop="name" label="客户/供应商"></el-table-column>
+                <el-table-column prop="name" label="提交人"></el-table-column>
+                <el-table-column prop="name" label="提交时间"></el-table-column>
+                <el-table-column prop="name" label="操作"></el-table-column>
+            </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="我已审批">
+          <el-table :data="tableData" height="185" style="width: 100%">
+                <el-table-column prop="date" label="单据编号"></el-table-column>
+                <el-table-column prop="name" label="单据类型"></el-table-column>
+                <el-table-column prop="name" label="客户/供应商"></el-table-column>
+                <el-table-column prop="name" label="金额"></el-table-column>
+                <el-table-column prop="name" label="我的审批时间"></el-table-column>
+                <el-table-column prop="name" label="我的审批结果"></el-table-column>
+                
+            </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="审批中">
+          <el-table :data="tableData" height="185" style="width: 100%">
+                <el-table-column prop="date" label="单据编号"></el-table-column>
+                <el-table-column prop="name" label="单据类型"></el-table-column>
+                <el-table-column prop="name" label="客户/供应商"></el-table-column>
+                <el-table-column prop="name" label="金额"></el-table-column>
+                <el-table-column prop="name" label="提交人"></el-table-column>
+                <el-table-column prop="name" label="提交时间"></el-table-column>
+                <el-table-column prop="name" label="审批状态"></el-table-column>
+                <el-table-column prop="name" label="操作"></el-table-column>
+            </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="审批完成">
+          <el-table :data="tableData" height="185" style="width: 100%">
+                <el-table-column prop="date" label="单据编号"></el-table-column>
+                <el-table-column prop="name" label="单据类型"></el-table-column>
+                <el-table-column prop="name" label="客户/供应商"></el-table-column>
+                <el-table-column prop="name" label="金额"></el-table-column>
+                <el-table-column prop="name" label="最后审批人"></el-table-column>
+                <el-table-column prop="name" label="审批时间"></el-table-column>
+                <el-table-column prop="name" label="审批结果"></el-table-column>
+                <el-table-column prop="name" label="操作"></el-table-column>
+            </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="待出库">
+          <el-table :data="tableData" height="185" style="width: 100%">
+                <el-table-column prop="date" label="单据编号"></el-table-column>
+                <el-table-column prop="name" label="客户"></el-table-column>
+                <el-table-column prop="name" label="优惠后应收"></el-table-column>
+                <el-table-column prop="name" label="销售员"></el-table-column>
+                <el-table-column prop="name" label="单据日期"></el-table-column>
+                <el-table-column prop="name" label="交货日期"></el-table-column>
+            </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="待入库">
+          <el-table :data="tableData" height="185" style="width: 100%">
+                <el-table-column prop="date" label="单据编号"></el-table-column>
+                <el-table-column prop="name" label="供应商"></el-table-column>
+                <el-table-column prop="name" label="优惠后应付"></el-table-column>
+                <el-table-column prop="name" label="采购员"></el-table-column>
+                <el-table-column prop="name" label="单据日期"></el-table-column>
+                <el-table-column prop="name" label="交货日期"></el-table-column>
+            </el-table>
+        </el-tab-pane>
       </el-tabs>
       </el-card>
       <el-card class="chaxun">

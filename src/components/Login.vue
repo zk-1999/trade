@@ -61,8 +61,11 @@ export default {
             // this.$refs.loginFormRef.validate( async valid => {
             this.$refs.loginFormRef.validate(async valid => {
                 if(!valid) return;
-                const {data:res}=await this.$http.post('login',this.loginForm);
-                console.log(res);
+                // console.log(this.loginForm);
+                
+                // const {data:res}=await this.$http.post('login',this.loginForm);
+
+                // console.log(res);
                 
                 // if (res.meta.status !== 200) return this.$message.error('登陆失败');
                 // this.$message.success('登录成功');
@@ -74,7 +77,7 @@ export default {
                     //传入账号名，密码，和保存天数3个参数
                     self.setCookie(self.loginForm.username, self.loginForm.password, 7);
                 }else {
-                console.log("清空Cookie");
+                // console.log("清空Cookie");
                 //清空Cookie
                 self.clearCookie();
                 }
@@ -97,10 +100,10 @@ export default {
                   var arr2 = arr[i].split('='); //再次切割
                   //判断查找相对应的值
                   if (arr2[0] == 'userName') {
-                     console.log(arr2[1])
+                    //  console.log(arr2[1])
                       this.loginForm.username = arr2[1]; //保存到保存数据的地方
                   } else if (arr2[0] == 'password') {
-                    console.log(arr2[1])
+                    // console.log(arr2[1])
                       this.loginForm.password = arr2[1];
                   }
               }

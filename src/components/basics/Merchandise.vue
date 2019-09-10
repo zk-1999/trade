@@ -6,20 +6,6 @@
         <el-breadcrumb-item>基础资料</el-breadcrumb-item>
         <el-breadcrumb-item>供应商商品管理</el-breadcrumb-item>
       </el-breadcrumb>
-      <el-card class="quan">
-        <div class="shu">
-          <div class="togglr-button">全部部门</div>  
-          <el-button type="text">供应商名称1</el-button>
-          <el-button type="text">供应商名称2</el-button>
-          <el-button type="text">供应商名称3</el-button>
-          <el-button type="text">供应商名称4</el-button>
-          <el-button type="text">供应商名称5</el-button>
-          <el-button type="text">供应商名称6</el-button>
-          <el-button type="text">供应商名称7</el-button>
-          <el-button type="text">供应商名称8</el-button>
-          <el-button type="text">供应商名称9</el-button>
-        </div>
-      </el-card>
       <el-card>
         <el-row :gutter="20" class="row">
           <el-col :span="24">
@@ -50,61 +36,70 @@
             <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button> 
             <el-button type="danger"  @click="deletebumen">删除</el-button>
             <el-button type="info"  @click="rightDialogVisible= true">启用、禁用</el-button>
-            <el-table :data="tableData" height="185" border style="width: 100%">
+            <el-table :data="tableData" border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index" width="50" fixed></el-table-column>
-                <el-table-column prop="date" label="供应商编码" width="100"></el-table-column>
-                <el-table-column prop="name" label="供应商名称" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品大类型" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品编号" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品小类型" width="100"></el-table-column>
+                <el-table-column prop="date" label="供应商编码" ></el-table-column>
+                <el-table-column prop="name" label="供应商名称" ></el-table-column>
+                <el-table-column prop="name" label="商品大类型" ></el-table-column>
+                <el-table-column prop="name" label="商品编号" ></el-table-column>
+                <el-table-column prop="name" label="商品小类型" ></el-table-column>
                 <el-table-column prop="name" label="品牌"></el-table-column>
                 <el-table-column prop="name" label="克重"></el-table-column>
                 <el-table-column prop="name" label="门幅"></el-table-column>
                 <el-table-column prop="name" label="淋膜类型"></el-table-column>
                 <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
-             <el-table :data="tableData" height="185" border style="width: 100%">
+            <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage4"
+          :page-sizes="[100, 200, 300, 400]"
+          :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400">
+        </el-pagination>
+             <el-table :data="tableData" class="shoop"  border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index" width="50" fixed></el-table-column>
-                <el-table-column prop="date" label="供应商编码" width="100"></el-table-column>
-                <el-table-column prop="name" label="供应商名称" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品大类型" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品编号" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品小类型" width="100"></el-table-column>
+                <el-table-column prop="date" label="供应商编码" ></el-table-column>
+                <el-table-column prop="name" label="供应商名称" ></el-table-column>
+                <el-table-column prop="name" label="商品大类型" ></el-table-column>
+                <el-table-column prop="name" label="商品编号"   ></el-table-column>
+                <el-table-column prop="name" label="商品小类型" ></el-table-column>
                 <el-table-column prop="name" label="克重"></el-table-column>
                 <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
-             <el-table :data="tableData" height="185" border style="width: 100%">
+             <el-table :data="tableData" class="shoop" border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index" width="50" ></el-table-column>
-                <el-table-column prop="date" label="供应商编码" width="100"></el-table-column>
-                <el-table-column prop="name" label="供应商名称" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品大类型" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品编号" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品小类型" width="100"></el-table-column>
+                <el-table-column prop="date" label="供应商编码" ></el-table-column>
+                <el-table-column prop="name" label="供应商名称" ></el-table-column>
+                <el-table-column prop="name" label="商品大类型" ></el-table-column>
+                <el-table-column prop="name" label="商品编号"   ></el-table-column>
+                <el-table-column prop="name" label="商品小类型" ></el-table-column>
                 <el-table-column prop="name" label="尺寸/长"></el-table-column>
                 <el-table-column prop="name" label="尺寸/宽"></el-table-column>
                 <el-table-column prop="name" label="尺寸/高"></el-table-column>
                 <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
-             <el-table :data="tableData" height="185" border style="width: 100%">
+             <el-table :data="tableData" class="shoop"  border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index" width="50" ></el-table-column>
-               <el-table-column prop="date" label="供应商编码" width="100"></el-table-column>
-                <el-table-column prop="name" label="供应商名称" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品大类型" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品编号" width="100"></el-table-column>
+               <el-table-column prop="date" label="供应商编码"  ></el-table-column>
+                <el-table-column prop="name" label="供应商名称" ></el-table-column>
+                <el-table-column prop="name" label="商品大类型" ></el-table-column>
+                <el-table-column prop="name" label="商品编号"   ></el-table-column>
                 <el-table-column prop="name" label="淋膜类型"></el-table-column>
                 <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
-             <el-table :data="tableData" height="185" border style="width: 100%">
+             <el-table :data="tableData" class="shoop" border style="width: 100%">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index" width="50" ></el-table-column>
-                <el-table-column prop="date" label="供应商编码" width="100"></el-table-column>
-                <el-table-column prop="name" label="供应商名称" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品大类型" width="100"></el-table-column>
-                <el-table-column prop="name" label="商品编号" width="100"></el-table-column>
+                <el-table-column prop="date" label="供应商编码" ></el-table-column>
+                <el-table-column prop="name" label="供应商名称" ></el-table-column>
+                <el-table-column prop="name" label="商品大类型" ></el-table-column>
+                <el-table-column prop="name" label="商品编号"   ></el-table-column>
                 <el-table-column prop="name" label="宽度"></el-table-column>
                 <el-table-column prop="name" label="颜色"></el-table-column>
                 <el-table-column  label="状态" width="70"></el-table-column>
@@ -246,30 +241,6 @@ export default {
           date: 'GYSOO1',
           name: '祥子纸业',
           address: '纸张'
-        }, {
-          date: 'GYSOO1',
-          name: '祥子纸业',
-          address: '纸张'
-        }, {
-          date: 'GYSOO1',
-          name: '祥子纸业',
-          address: '纸张'
-        }, {
-          date: 'GYSOO1',
-          name: '祥子纸业',
-          address: '纸张'
-        }, {
-         date: 'GYSOO1',
-          name: '祥子纸业',
-          address: '纸张'
-        }, {
-          date: 'GYSOO1',
-          name: '祥子纸业',
-          address: '纸张'
-        }, {
-          date: 'GYSOO1',
-          name: '祥子纸业',
-          address: '纸张'
         }]
     }
   },
@@ -341,7 +312,7 @@ export default {
       width: 133px;
     }
      .quan{
-      height: 1170px;
+      height: 570px;
       float: left;
       margin-right: 20px;
     }
@@ -369,7 +340,7 @@ export default {
             
         }
     }
-    #shoop{
+    .shoop{
       display: none;
     }
 </style>
