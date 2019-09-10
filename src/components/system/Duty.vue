@@ -30,13 +30,13 @@
             <el-button type="warning" @click="editbumenDialogVisible= true">编辑</el-button> 
             <el-button type="danger"  @click="deletebumen">删除</el-button>
             <el-button type="info"  @click="rightDialogVisible= true">权限设置</el-button>
-            <el-table border stripe  :data="tableData">
+            <el-table border stripe  :data="table">
               <el-table-column type="selection" width="55"></el-table-column>
               <el-table-column type="index" width="50" ></el-table-column>              
-              <el-table-column label="职务编号" property="date"></el-table-column>
-              <el-table-column label="部门名称" property="name"></el-table-column>
-              <el-table-column label="职务名称" property="address"></el-table-column>
-              <el-table-column width="290px" label="备注" property="beizhu"></el-table-column>
+              <!-- <el-table-column label="职务编号" property="date"></el-table-column> -->
+              <el-table-column label="部门名称" prop="a" property="name"></el-table-column>
+              <el-table-column label="职务名称" prop="b" property="address"></el-table-column>
+              <el-table-column width="290px" prop="c" label="备注" property="beizhu"></el-table-column>
             </el-table>
           </el-col>
         </el-row>
@@ -71,9 +71,9 @@
         width="30%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="100px">
-          <el-form-item label="部门名称："><el-input placeholder="请输入部门名称"></el-input></el-form-item>
-          <el-form-item label="职务名称："><el-input placeholder="请输入职务名称"></el-input></el-form-item>
-          <el-form-item label="备注内容："><el-input type="textarea" :rows="2" placeholder="请输入备注内容"></el-input></el-form-item>
+          <el-form-item label="部门名称："><el-input placeholder="请输入部门名称" v-model="table[0].a"></el-input></el-form-item>
+          <el-form-item label="职务名称："><el-input placeholder="请输入职务名称" v-model="table[0].b"></el-input></el-form-item>
+          <el-form-item label="备注内容："><el-input type="textarea" :rows="2" placeholder="请输入备注内容" v-model="table[0].c"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editbumenDialogVisible = false">取 消</el-button>
@@ -131,6 +131,12 @@ export default {
        currentPage2: 5,
        currentPage3: 5,
        currentPage4: 4,
+        table: [{
+          a: '生产部门',
+          b: '2737',
+          c: '主管',
+          d:'祥子',
+        }],
        tableData: [{
           date: '1001',
           name: '财务部',

@@ -19,12 +19,12 @@
            </el-col>
         </el-row>
          <el-button type="success"  @click="addbumenDialogVisible = true">新增</el-button> <el-button type="warning" @click="editbumenDialogVisible= true">编辑</el-button> <el-button type="danger"  @click="deletebumen">删除</el-button>
-          <el-table border stripe>
+          <el-table border stripe :data="tableData">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
-            <el-table-column prop="roleName" label="部门编号"></el-table-column>
-            <el-table-column prop="roleDesc" label="部门名称"></el-table-column>
-            <el-table-column width="290px" label="备注"></el-table-column>
+            <!-- <el-table-column  label="部门编号"></el-table-column> -->
+            <el-table-column prop="a" label="部门名称"></el-table-column>
+            <el-table-column prop="b" label="备注"></el-table-column>
           </el-table>
       </el-card>
       <el-dialog
@@ -47,8 +47,8 @@
         width="30%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="100px">
-          <el-form-item label="部门名称："><el-input placeholder="请输入部门名称"></el-input></el-form-item>
-          <el-form-item label="备注内容："><el-input type="textarea" :rows="2" placeholder="请输入备注内容"></el-input></el-form-item>
+          <el-form-item label="部门名称："><el-input placeholder="请输入部门名称" v-model="tableData[0].a"></el-input></el-form-item>
+          <el-form-item label="备注内容："><el-input type="textarea" :rows="2"  v-model="tableData[0].b" placeholder="请输入备注内容"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editbumenDialogVisible = false">取 消</el-button>
@@ -64,6 +64,19 @@ export default {
       labelPosition: 'right',
       addbumenDialogVisible: false,
       editbumenDialogVisible:false,
+      tableData: [{
+          a: '惠普',
+          b: '是',
+          c: '原材料供应商',
+          d:'祥子',
+          e:'18859577302',
+          f:'启用',
+          g:'管理员',
+          h:'2019-06-25 00:00',
+          i:'53245454@qq.com',
+          j:'',
+          k:''
+        }]
     }
   },
   created () {   

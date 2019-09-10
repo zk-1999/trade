@@ -33,17 +33,17 @@
           <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button>
           <el-button type="danger" @click="deletebumen">删除</el-button>
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
-          <el-table border stripe>
+          <el-table border stripe :data="tableData">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
-            <el-table-column prop="roleName" label="供应商编码"></el-table-column>
-            <el-table-column prop="roleDesc" label="供应商名称"></el-table-column>
-            <el-table-column prop="roleDesc" label="类型"></el-table-column>
-            <el-table-column prop="roleName" label="联系人"></el-table-column>
-            <el-table-column prop="roleDesc" label="联系人手机"></el-table-column>
-            <el-table-column prop="roleDesc" label="状态"></el-table-column>
-            <el-table-column prop="roleName" label="创建人"></el-table-column>
-            <el-table-column prop="roleDesc" label="创建时间"></el-table-column>
+            <el-table-column prop="a" label="供应商编码"></el-table-column>
+            <el-table-column prop="b" label="供应商名称"></el-table-column>
+            <el-table-column prop="c" label="类型"></el-table-column>
+            <el-table-column prop="d" label="联系人"></el-table-column>
+            <el-table-column prop="e" label="联系人手机"></el-table-column>
+            <el-table-column prop="f" label="状态"></el-table-column>
+            <el-table-column prop="g" label="创建人"></el-table-column>
+            <el-table-column prop="h" label="创建时间"></el-table-column>
           </el-table></el-col>
         </el-row>
         <el-pagination
@@ -105,13 +105,13 @@
         <el-form :label-position="labelPosition" label-width="120px">
           <el-row>
             <el-col :span="12">
-              <el-form-item label="供应商编码："><el-input placeholder="供应商编码"></el-input></el-form-item>
-              <el-form-item label="联系人："><el-input placeholder="请输入联系人"></el-input></el-form-item>
-              <el-form-item label="联系邮箱："><el-input placeholder="请输入联系邮箱"></el-input></el-form-item>
+              <el-form-item label="供应商编码："><el-input placeholder="供应商编码" v-model="tableData[0].a"></el-input></el-form-item>
+              <el-form-item label="联系人："><el-input placeholder="请输入联系人" v-model="tableData[0].d"></el-input></el-form-item>
+              <el-form-item label="联系邮箱："><el-input placeholder="请输入联系邮箱" v-model="tableData[0].i"></el-input></el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="供应商名称："><el-input placeholder="请输入供应商名称"></el-input></el-form-item>
-              <el-form-item label="联系人手机："><el-input placeholder="请输入联系人手机"></el-input></el-form-item>
+              <el-form-item label="供应商名称："><el-input placeholder="请输入供应商名称" v-model="tableData[0].b"></el-input></el-form-item>
+              <el-form-item label="联系人手机："><el-input placeholder="请输入联系人手机" v-model="tableData[0].e"></el-input></el-form-item>
               <el-form-item label="类型：">
                 <el-select class="tiantou" placeholder="请选择类型">
                   <el-option></el-option>
@@ -152,6 +152,19 @@ export default {
        currentPage2: 5,
        currentPage3: 5,
        currentPage4: 4,
+         tableData: [{
+          a: 'GYSOO1',
+          b: '祥子纸业',
+          c: '原材料供应商',
+          d:'祥子',
+          e:'18859577302',
+          f:'启用',
+          g:'管理员',
+          h:'2019-06-25 00:00',
+          i:'53245454@qq.com',
+          j:'',
+          k:''
+        }]
     }
   },
   created () {

@@ -34,137 +34,137 @@
           <div class="fenge"></div>
           <el-tabs :tab-position="tabPosition" style="height: 450px;" type="border-card">
             <el-tab-pane label="产品编号名称">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column  label="名称"></el-table-column>
-                <el-table-column  label="所属基础数据"></el-table-column>
-                <el-table-column  label="状态"></el-table-column>
-              </el-table>
-            </el-tab-pane>
-            <el-tab-pane label="纸张品牌">
-              <el-table border stripe>
-                <el-table-column type="selection" width="55"></el-table-column>
-                <el-table-column type="index"></el-table-column>
-                <el-table-column  label="名称"></el-table-column>
-                <el-table-column  label="所属基础数据"></el-table-column>
-                <el-table-column  label="状态"></el-table-column>
-              </el-table>
-            </el-tab-pane>
-            <el-tab-pane label="淋膜类型">
-              <el-table border stripe>
-                <el-table-column type="selection" width="55"></el-table-column>
-                <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
-            <el-tab-pane label="纸张克重">
-              <el-table border stripe>
+            <el-tab-pane label="纸张品牌">
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
+                <el-table-column  label="状态"></el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="淋膜类型" >
+              <el-table border stripe :data="tableData">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column type="index"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
+                <el-table-column  label="状态"></el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="纸张克重">
+              <el-table border stripe :data="tableData">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column type="index"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="配盖">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="印刷方式">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="库存单位">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="供应商类型">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="包装类型1">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="包装类型2">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="货币类型">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="收入类型">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="支出类型">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="产品刀模">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
             <el-tab-pane label="仓库类型">
-              <el-table border stripe>
+              <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
-                <el-table-column label="名称"></el-table-column>
-                <el-table-column label="所属基础数据"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
             </el-tab-pane>
@@ -202,8 +202,8 @@
         width="30%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="120px">
-          <el-form-item label="名称："><el-input placeholder="请输入名称"></el-input></el-form-item>
-          <el-form-item label="所属基础数据"><el-input placeholder="请输入所属基础数据"></el-input></el-form-item>
+          <el-form-item label="名称："><el-input placeholder="请输入名称" v-model="tableData[0].a"></el-input></el-form-item>
+          <el-form-item label="所属基础数据"><el-input placeholder="请输入所属基础数据" v-model="tableData[0].b"></el-input></el-form-item>
           <el-form-item label="状态："><el-input placeholder="请输入状态"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -226,6 +226,19 @@ export default {
         currentPage2: 5,
         currentPage3: 5,
         currentPage4: 4,
+        tableData: [{
+          a: '单PE',
+          b: '淋膜类型',
+          c: '原材料供应商',
+          d:'祥子',
+          e:'18859577302',
+          f:'启用',
+          g:'管理员',
+          h:'2019-06-25 00:00',
+          i:'53245454@qq.com',
+          j:'',
+          k:''
+        }]
     }
   },
   created () {

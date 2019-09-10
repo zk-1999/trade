@@ -36,18 +36,18 @@
             <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button> 
             <el-button type="danger"  @click="deletebumen">删除</el-button>
             <el-button type="info"  @click="rightDialogVisible= true">启用、禁用</el-button>
-            <el-table :data="tableData" border style="width: 100%">
+            <el-table :data="tableData" border >
                 <el-table-column type="selection" width="55"></el-table-column>
-                <el-table-column type="index" width="50" fixed></el-table-column>
-                <el-table-column prop="date" label="供应商编码" ></el-table-column>
-                <el-table-column prop="name" label="供应商名称" ></el-table-column>
-                <el-table-column prop="name" label="商品大类型" ></el-table-column>
-                <el-table-column prop="name" label="商品编号" ></el-table-column>
-                <el-table-column prop="name" label="商品小类型" ></el-table-column>
-                <el-table-column prop="name" label="品牌"></el-table-column>
-                <el-table-column prop="name" label="克重"></el-table-column>
-                <el-table-column prop="name" label="门幅"></el-table-column>
-                <el-table-column prop="name" label="淋膜类型"></el-table-column>
+                <el-table-column type="index" width="55" fixed></el-table-column>
+                <el-table-column prop="a" label="供应商编码" ></el-table-column>
+                <el-table-column prop="b" label="供应商名称" ></el-table-column>
+                <el-table-column prop="c" label="商品大类型" ></el-table-column>
+                <el-table-column prop="d" label="商品编号" ></el-table-column>
+                <el-table-column prop="e" label="商品小类型" ></el-table-column>
+                <el-table-column prop="f" label="品牌"></el-table-column>
+                <el-table-column prop="g" label="克重"></el-table-column>
+                <el-table-column prop="h" label="门幅"></el-table-column>
+                <el-table-column prop="i" label="淋膜类型"></el-table-column>
                 <el-table-column  label="状态" width="70"></el-table-column>
             </el-table>
             <el-pagination
@@ -171,17 +171,17 @@
         :visible.sync="edityonghuDialogVisible"
         width="48%"
         :before-close="handleClose">
-       <el-form :label-position="labelPosition" label-width="120px">
+       <el-form :label-position="labelPosition" label-width="120px" >
           <el-row>
             <el-col :span="12">
-              <el-form-item label="供应商编号："><el-input placeholder="请输入供应商编号"></el-input></el-form-item>
-              <el-form-item label="供应商名称："><el-input placeholder="请输入供应商名称"></el-input></el-form-item>
+              <el-form-item label="供应商编号："><el-input placeholder="请输入供应商编号" v-model="tableData[0].a"></el-input></el-form-item>
+              <el-form-item label="供应商名称："><el-input placeholder="请输入供应商名称" v-model="tableData[0].b"></el-input></el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="商品编号："><el-input placeholder="请输入商品编号"></el-input></el-form-item>
+              <el-form-item label="商品编号："><el-input placeholder="请输入商品编号" v-model="tableData[0].d"></el-input></el-form-item>
               <el-form-item label="状态：">
                 <el-select class="tiantou" placeholder="请选择状态">
-                  <el-option  value="纸张"></el-option>
+                  <el-option  value="已激活" >已激活</el-option>
                  </el-select>
               </el-form-item>
             </el-col>
@@ -196,15 +196,15 @@
                  </el-select>
           </el-form-item>
           <div v-show="bigType == '纸张'">
-            <el-form-item label="商品小类型："><el-input placeholder="请输入商品小类型" class="xiang"></el-input></el-form-item>          
-            <el-form-item label="品牌："><el-input placeholder="请输入品牌" class="xiang"></el-input></el-form-item>
-            <el-form-item label="克重："><el-input placeholder="请输入克重" class="xiang"></el-input></el-form-item>
-            <el-form-item label="门幅："><el-input placeholder="请输入门幅" class="xiang"></el-input></el-form-item>
-            <el-form-item label="淋膜类型："><el-input placeholder="请输入淋膜类型" class="xiang"></el-input></el-form-item>
+            <el-form-item label="商品小类型："><el-input placeholder="请输入商品小类型" class="xiang" v-model="tableData[0].e"></el-input></el-form-item>          
+            <el-form-item label="品牌："><el-input placeholder="请输入品牌" class="xiang"  v-model="tableData[0].f"></el-input></el-form-item>
+            <el-form-item label="克重："><el-input placeholder="请输入克重" class="xiang"  v-model="tableData[0].g"></el-input></el-form-item>
+            <el-form-item label="门幅："><el-input placeholder="请输入门幅" class="xiang" v-model="tableData[0].h"></el-input></el-form-item>
+            <el-form-item label="淋膜类型："><el-input placeholder="请输入淋膜类型" class="xiang" v-model="tableData[0].i"></el-input></el-form-item>
           </div>
           <div v-show="bigType == '纸箱'">
-            <el-form-item label="商品小类型："><el-input placeholder="请输入商品小类型" class="xiang"></el-input></el-form-item>
-            <el-form-item label="克重："><el-input placeholder="请输入克重" class="xiang"></el-input></el-form-item>
+            <el-form-item label="商品小类型："><el-input placeholder="请输入商品小类型" class="xiang" v-model="tableData[0].e"></el-input></el-form-item>
+            <el-form-item label="克重："><el-input placeholder="请输入克重" class="xiang" v-model="tableData[0].g"></el-input></el-form-item>
           </div>
           <div v-show="bigType == '袋子'">
             <el-form-item label="商品小类型："><el-input placeholder="请输入商品小类型" class="xiang"></el-input></el-form-item>          
@@ -238,9 +238,17 @@ export default {
        resetPassdialogVisible:false,
        bigType: '',
        tableData: [{
-          date: 'GYSOO1',
-          name: '祥子纸业',
-          address: '纸张'
+          a: 'GYSOO1',
+          b: '祥子纸业',
+          c: '纸张',
+          d:'C100XL',
+          e:'木浆纸',
+          f:'太阳',
+          g:'320',
+          h:'387',
+          i:'单PE-内亚',
+          j:'',
+          k:''
         }]
     }
   },

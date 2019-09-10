@@ -8,9 +8,9 @@
            <div class="tubiao"> 
                <div class="im"><img src="../assets/img/yong.jpg" alt=""></div>
                <div class="yong">你好，王工</div>
-               <el-badge :value="3" class="item"><el-button size="small" type="success" circle icon="el-icon-chat-line-round"></el-button></el-badge>
-               <el-button type="warning" icon="el-icon-setting" size="small" circle @click="shezhidialogVisible=true"></el-button>
-               <el-button type="info" @click="logout" size="small">退出</el-button>
+               <el-badge  :value="3" class="item tuituxin"><el-button size="small" type="success" circle icon="el-icon-chat-line-round"></el-button></el-badge>
+               <el-button class="tuituxin" type="warning" icon="el-icon-setting" size="small" circle @click="shezhidialogVisible=true"></el-button>
+               <el-button type="info" @click="logout" size="small" class="tuituxin">退出</el-button>
             </div>
         </el-header>
         <el-container>
@@ -212,6 +212,9 @@ export default {
             border-radius: 50%;
             margin-left: -100px;
         }
+    }
+    .tuituxin{
+        margin-top:-15px;
     }
   
 </style>

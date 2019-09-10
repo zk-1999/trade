@@ -8,12 +8,15 @@
         <el-tabs :tab-position="tabPosition" style="height: 200px;">
         <el-tab-pane label="待我审批">
            <el-table :data="tableData" height="185" style="width: 100%">
-                <el-table-column prop="date" label="单据编号"></el-table-column>
-                <el-table-column prop="name" label="单据类型"></el-table-column>
-                <el-table-column prop="name" label="客户/供应商"></el-table-column>
-                <el-table-column prop="name" label="提交人"></el-table-column>
-                <el-table-column prop="name" label="提交时间"></el-table-column>
-                <el-table-column prop="name" label="操作"></el-table-column>
+                <el-table-column prop="a" label="单据编号"></el-table-column>
+                <el-table-column prop="b" label="单据类型"></el-table-column>
+                <el-table-column prop="c" label="客户/供应商"></el-table-column>
+                <el-table-column prop="d" label="提交人"></el-table-column>
+                <el-table-column prop="e" label="提交时间"></el-table-column>
+                <el-table-column label="操作">
+                   <el-button type="success" size="mini">通过</el-button>
+                   <el-button type="info" size="mini">驳回</el-button>
+                </el-table-column>
             </el-table>
         </el-tab-pane>
         <el-tab-pane label="我已审批">
@@ -75,26 +78,27 @@
       </el-card>
       <el-card class="chaxun">
         <div class="cy">查询</div>
+        <div class="tian">客户查询：
+          <el-input placeholder="请输入查询客户" clearable  class="cor" v-model="cc">
+            <el-button slot="append" icon="el-icon-search" @click="a"></el-button>
+          </el-input>
+        </div>
+        <div class="tian">供应商查询：
+          <el-input placeholder="请输入查询供应商" clearable  class="cor" v-model="dd">
+            <el-button slot="append" icon="el-icon-search" @click="b"></el-button>
+          </el-input>
+        </div>
         <div class="tian">单据查询：
-          <el-input placeholder="请输入查询单据" clearable  class="cor">
+          <el-input placeholder="请输入查询单据" clearable  class="cor" v-model="aa">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </div>
         <div class="tian">库存查询：
-          <el-input placeholder="请输入查询库存" clearable  class="cor" >
-            <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-input placeholder="请输入查询库存" clearable  class="cor" v-model="bb">
+            <el-button slot="append" icon="el-icon-search" ></el-button>
           </el-input>
         </div>
-        <div class="tian">客户查询：
-          <el-input placeholder="请输入查询客户" clearable  class="cor" >
-            <el-button slot="append" icon="el-icon-search"></el-button>
-          </el-input>
-        </div>
-        <div class="tian">供应商查询：
-          <el-input placeholder="请输入查询供应商" clearable  class="cor" >
-            <el-button slot="append" icon="el-icon-search"></el-button>
-          </el-input>
-        </div>
+        
       </el-card>
       <el-card class="yujing">
         <div class="cy">库存预警</div>
@@ -107,10 +111,27 @@ export default {
   data () {
     return {
     tabPosition: 'top',
+    tableData: [{
+          a: 'CG20190404001',
+          b: '采购单',
+          c: '测试用户',
+          d:'张三',
+          e:'2019-04-04',
+        }],
+        aa:'',
+        bb:'',
+        cc:'',
+        dd:'',
     };
   },
     methods:{
-    
+    a(){
+      this.$router.push('/client')
+    },
+    b(){
+      this.$router.push('/supplier')
+
+    }
     }
 }
 </script>

@@ -39,20 +39,20 @@
           <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button>
           <el-button type="danger" @click="resetPassdialogVisible=true">密码重置</el-button>
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
-          <el-table border stripe>
+          <el-table border stripe :data="table">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
-            <el-table-column prop="roleName" label="头像"></el-table-column>
-            <el-table-column prop="roleDesc" label="姓名"></el-table-column>
-            <el-table-column prop="roleDesc" label="登录账号"></el-table-column>
-            <el-table-column prop="roleName" label="手机号码"></el-table-column>
-            <el-table-column prop="roleDesc" label="部门"></el-table-column>
-            <el-table-column prop="roleDesc" label="职务"></el-table-column>
-            <el-table-column prop="roleName" label="分销业务"></el-table-column>
-            <el-table-column prop="roleDesc" label="性别"></el-table-column>
-            <el-table-column prop="roleDesc" label="工号"></el-table-column>
-            <el-table-column prop="roleName" label="地区"></el-table-column>
-            <el-table-column prop="roleDesc" label="备注"></el-table-column>
+            <!-- <el-table-column prop="roleName" label="头像"></el-table-column> -->
+            <el-table-column prop="a" label="姓名"></el-table-column>
+            <el-table-column prop="b" label="登录账号"></el-table-column>
+            <el-table-column prop="c" label="手机号码"></el-table-column>
+            <el-table-column prop="d" label="部门"></el-table-column>
+            <el-table-column prop="e" label="职务"></el-table-column>
+            <el-table-column prop="f" label="分销业务"></el-table-column>
+            <el-table-column prop="g" label="性别"></el-table-column>
+            <el-table-column prop="h" label="工号"></el-table-column>
+            <el-table-column prop="i" label="地区"></el-table-column>
+            <el-table-column prop="j" label="备注"></el-table-column>
           </el-table></el-col>
         </el-row>
       </el-card>
@@ -149,8 +149,8 @@
         <el-form :label-position="labelPosition" label-width="120px">
           <el-row>
             <el-col :span="12">
-              <el-form-item label="姓名："><el-input placeholder="请输入姓名"></el-input></el-form-item>
-              <el-form-item label="登录账号："><el-input placeholder="请输入登录账号"></el-input></el-form-item>
+              <el-form-item label="姓名："><el-input placeholder="请输入姓名" v-model="table[0].a"></el-input></el-form-item>
+              <el-form-item label="登录账号："><el-input placeholder="请输入登录账号" v-model="table[0].b"></el-input></el-form-item>
               <el-form-item label="部门：">
                 <el-select class="tiantou" placeholder="请选择部门">
                   <el-option></el-option>
@@ -158,8 +158,8 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="手机号："><el-input placeholder="请输入手机"></el-input></el-form-item>
-              <el-form-item label="工号："><el-input placeholder="工号"></el-input></el-form-item>
+              <el-form-item label="手机号："><el-input placeholder="请输入手机"  v-model="table[0].c"></el-input></el-form-item>
+              <el-form-item label="工号："><el-input placeholder="工号" v-model="table[0].h"></el-input></el-form-item>
               <el-form-item label="职务：">
                 <el-select class="tiantou" placeholder="请选择职务">
                   <el-option></el-option>
@@ -252,6 +252,19 @@ export default {
       addyonghuDialogVisible: false,
       edityonghuDialogVisible:false,
       resetPassdialogVisible:false,
+      table: [{
+          a: '张三',
+          b: 'zhangsan',
+          c: '18354682635',
+          d:'采购部门',
+          e:'主管',
+          f:'未知',
+          g:'男',
+          h:'0003',
+          i:'杭州',
+          j:'备注',
+          k:''
+        }],
       data: [{
           label: '一级 1',
           children: [{

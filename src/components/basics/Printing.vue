@@ -29,20 +29,23 @@
           <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button>
           <el-button type="danger" @click="deletebumen">删除</el-button>
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
-          <el-table border stripe>
+          <el-table border stripe :data="tableData">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
-            <el-table-column prop="roleName" label="型号"></el-table-column>
-            <el-table-column prop="roleDesc" label="编号"></el-table-column>
-            <el-table-column prop="roleDesc" label="类型"></el-table-column>
-            <el-table-column prop="roleDesc" label="尺数"></el-table-column>
-            <el-table-column prop="roleName" label="净门幅"></el-table-column>
-            <el-table-column prop="roleDesc" label="可用"></el-table-column>
-            <el-table-column prop="roleDesc" label="计划"></el-table-column>
-            <el-table-column prop="roleName" label="放量"></el-table-column>
-            <el-table-column prop="roleDesc" label="片数"></el-table-column>
-            <el-table-column prop="roleDesc" label="印刷米数"></el-table-column>
-            <el-table-column prop="roleDesc" label="印刷重量"></el-table-column>
+            <el-table-column prop="a" label="型号"></el-table-column>
+            <el-table-column prop="b" label="编号"></el-table-column>
+            <el-table-column prop="c" label="单齿长/尺数" width="100px"></el-table-column>
+            <el-table-column prop="d" label="齿数/尺数"></el-table-column>
+            <el-table-column prop="e" label="纸宽/尺数"></el-table-column>
+            <el-table-column prop="f" label="片数/尺数" ></el-table-column>
+            <el-table-column prop="g" label="纸张/净门幅" width="100px"></el-table-column>
+            <el-table-column prop="h" label="片数/净门幅" width="100px"></el-table-column>
+            <el-table-column prop="i" label="可用纸长"></el-table-column>
+            <el-table-column prop="j" label="计划纸长"></el-table-column>
+            <el-table-column prop="k" label="放量"></el-table-column>
+            <el-table-column prop="l" label="片数"></el-table-column>
+            <el-table-column prop="m" label="印刷米数"></el-table-column>
+            <el-table-column prop="n" label="印刷重量"></el-table-column>
           </el-table></el-col>
         </el-row>
         <el-pagination
@@ -99,23 +102,27 @@
        <el-form :label-position="labelPosition" label-width="120px">
             <el-row>
                 <el-col :span="12">
-                <el-form-item label="产品型号："><el-input placeholder="请输入产品型号"></el-input></el-form-item>
-                <el-form-item label="单齿长/尺数："><el-input placeholder="单齿长/尺数"></el-input></el-form-item>
-                <el-form-item label="齿数/尺数："><el-input placeholder="齿数/尺数"></el-input></el-form-item>          
-                <el-form-item label="纸宽/尺数："><el-input placeholder="纸宽/尺数"></el-input></el-form-item>
-                <el-form-item label="片数/尺数："><el-input placeholder="片数/尺数"></el-input></el-form-item>          
-                <el-form-item label="纸张/净门幅："><el-input placeholder="纸张/净门幅"></el-input></el-form-item>
-                <el-form-item label="片数/净门幅："><el-input placeholder="片数/净门幅"></el-input></el-form-item>
+                <el-form-item label="产品类型："><el-input placeholder="请输入产品类型" v-model="tableData[0].o"></el-input></el-form-item>
+                <el-form-item label="产品型号："><el-input placeholder="请输入产品型号" v-model="tableData[0].a"></el-input></el-form-item>
+                <el-form-item label="产品编号："><el-input placeholder="请输入产品编号" v-model="tableData[0].b"></el-input></el-form-item>
+                <el-form-item label="单齿长/尺数："><el-input placeholder="单齿长/尺数" v-model="tableData[0].c"></el-input></el-form-item>
+                <el-form-item label="齿数/尺数："><el-input placeholder="齿数/尺数" v-model="tableData[0].d"></el-input></el-form-item>          
+                <el-form-item label="纸宽/尺数："><el-input placeholder="纸宽/尺数" v-model="tableData[0].e"></el-input></el-form-item>
+                <el-form-item label="片数/尺数："><el-input placeholder="片数/尺数" v-model="tableData[0].f"></el-input></el-form-item>          
+                <el-form-item label="纸张/净门幅："><el-input placeholder="纸张/净门幅" v-model="tableData[0].g"></el-input></el-form-item>
+                <el-form-item label="片数/净门幅："><el-input placeholder="片数/净门幅" v-model="tableData[0].h"></el-input></el-form-item>
                 </el-col>
                 <el-col :span="12"> 
-                <el-form-item label="可用纸长："><el-input placeholder="请输入可用纸长"></el-input></el-form-item>        
-                <el-form-item label="计划纸长："><el-input placeholder="请输入计划纸长"></el-input></el-form-item>
-                <el-form-item label="放量："><el-input placeholder="请输入放量"></el-input></el-form-item>          
-                <el-form-item label="片数："><el-input placeholder="请输入片数"></el-input></el-form-item>
-                <el-form-item label="单个米数："><el-input placeholder="请输入单个米数"></el-input></el-form-item>
+                <el-form-item label="可用纸长："><el-input placeholder="请输入可用纸长" v-model="tableData[0].i"></el-input></el-form-item>
+                <el-form-item label="计划纸长："><el-input placeholder="请输入计划纸长" v-model="tableData[0].j"></el-input></el-form-item>
+                <el-form-item label="放量："><el-input placeholder="请输入放量" v-model="tableData[0].k"></el-input></el-form-item>          
+                <el-form-item label="片数："><el-input placeholder="请输入片数" v-model="tableData[0].l"></el-input></el-form-item>
+                <el-form-item label="单个米数："><el-input placeholder="请输入单个米数" v-model="tableData[0].m"></el-input></el-form-item>
+                <el-form-item label="单个重量："><el-input placeholder="请输入单个重量" v-model="tableData[0].n"></el-input></el-form-item>
                 <el-form-item label="机台号："><el-input placeholder="请输入机台号"></el-input></el-form-item>
                 <el-form-item label="模具号："><el-input placeholder="请输入模具号"></el-input></el-form-item>          
                 <el-form-item label="产能："><el-input placeholder="请输入产能"></el-input></el-form-item>
+                </el-col>
                 </el-col>
             </el-row>
         </el-form>
@@ -138,6 +145,23 @@ export default {
        currentPage2: 5,
        currentPage3: 5,
        currentPage4: 4,
+         tableData: [{
+          a: '4oz单层',
+          b: 'SW-04',
+          c: '3.175',
+          d:'125',
+          e:'396.8750',
+          f:'5',
+          g:'732.7464',
+          h:'4',
+          i:'737',
+          j:'737',
+          k:'4.2536',
+          l:'20',
+          m:'586',
+          n:'2667',
+          o:'杯子'
+        }]
     }
   },
   created () {

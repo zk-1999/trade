@@ -29,23 +29,23 @@
           <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button>
           <el-button type="danger" @click="deletebumen">删除</el-button>
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
-          <el-table border stripe>
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column type="index"></el-table-column>
-            <el-table-column  label="产品编码"></el-table-column>
-            <el-table-column  label="产品名称"></el-table-column>
-            <el-table-column  label="产品类型"></el-table-column>
-            <el-table-column  label="设计稿"></el-table-column>
-            <el-table-column  label="纸张品牌/内" width="100px"></el-table-column>
-            <el-table-column  label="克数"></el-table-column>
-            <el-table-column  label="淋膜类型"></el-table-column>
-            <el-table-column  label="纸张品牌/外" width="100px"></el-table-column>
-            <el-table-column  label="克数"></el-table-column>
-            <el-table-column  label="淋膜类型"></el-table-column>
-            <el-table-column  label="纸张品牌/中" width="100px"></el-table-column>
-            <el-table-column  label="克数"></el-table-column>
-            <el-table-column  label="淋膜类型"></el-table-column>
-            <el-table-column  label="状态"></el-table-column>
+          <el-table border stripe :data="tableData">
+            <el-table-column type="selection" width="30"></el-table-column>
+            <el-table-column type="index" width="30"></el-table-column>
+            <el-table-column prop="a"  label="产品编码"></el-table-column>
+            <el-table-column prop="b" label="产品名称"></el-table-column>
+            <el-table-column prop="c" label="产品类型"></el-table-column>
+            <el-table-column prop="d" label="设计稿" width="140px"></el-table-column>
+            <el-table-column prop="e" label="纸张品牌/内" width="100px"></el-table-column>
+            <el-table-column prop="f" label="克数"></el-table-column>
+            <el-table-column prop="g" label="淋膜类型"></el-table-column>
+            <el-table-column prop="h" label="纸张品牌/外" width="100px"></el-table-column>
+            <el-table-column prop="i" label="克数"></el-table-column>
+            <el-table-column prop="j" label="淋膜类型"></el-table-column>
+            <el-table-column prop="k" label="纸张品牌/中" width="100px"></el-table-column>
+            <el-table-column prop="l" label="克数"></el-table-column>
+            <el-table-column prop="m" label="淋膜类型"></el-table-column>
+            <el-table-column prop="n" label="状态" width="60px"></el-table-column>
           </el-table></el-col>
         </el-row>
         <el-pagination
@@ -93,16 +93,16 @@
        <el-form :label-position="labelPosition" label-width="120px">
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="产品编码："><el-input placeholder="请输入产品编码"></el-input></el-form-item>      <el-form-item label="产品名称："><el-input placeholder="请输入产品名称"></el-input></el-form-item>
-                    <el-form-item label="产品类型："><el-input placeholder="请输入产品类型"></el-input></el-form-item>      <el-form-item label="设计稿："><el-input placeholder="请输入设计稿"></el-input></el-form-item>
-                    <el-form-item label="纸张品牌/内："><el-input placeholder="请输入纸张品牌/内"></el-input></el-form-item>     <el-form-item label="克数/内："><el-input placeholder="请输入克数/内"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/内："><el-input placeholder="请输入淋膜类型/内"></el-input></el-form-item>   
+                    <el-form-item label="产品编码："><el-input placeholder="请输入产品编码" v-model="tableData[0].a"></el-input></el-form-item>      <el-form-item label="产品名称："><el-input v-model="tableData[0].b" placeholder="请输入产品名称"></el-input></el-form-item>
+                    <el-form-item label="产品类型："><el-input placeholder="请输入产品类型" v-model="tableData[0].c"></el-input></el-form-item>      <el-form-item label="设计稿："><el-input placeholder="请输入设计稿" v-model="tableData[0].d"></el-input></el-form-item>
+                    <el-form-item label="纸张品牌/内："><el-input placeholder="请输入纸张品牌/内" v-model="tableData[0].e"></el-input></el-form-item>     <el-form-item label="克数/内："><el-input placeholder="请输入克数/内" v-model="tableData[0].f"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/内："><el-input placeholder="请输入淋膜类型/内" v-model="tableData[0].g"></el-input></el-form-item>   
                 </el-col>
                 <el-col :span="12"> 
-                    <el-form-item label="纸张品牌/外："><el-input placeholder="请输入纸张品牌/外"></el-input></el-form-item>     <el-form-item label="克数/外："><el-input placeholder="请输入克数/外"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/外："><el-input placeholder="请输入淋膜类型/外"></el-input></el-form-item>  
-                    <el-form-item label="纸张品牌/中："><el-input placeholder="请输入纸张品牌/中"></el-input></el-form-item>     <el-form-item label="克数/中："><el-input placeholder="请输入克数/中"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/中："><el-input placeholder="请输入淋膜类型/中"></el-input></el-form-item>  
+                    <el-form-item label="纸张品牌/外："><el-input placeholder="请输入纸张品牌/外" v-model="tableData[0].h"></el-input></el-form-item>     <el-form-item label="克数/外："><el-input placeholder="请输入克数/外" v-model="tableData[0].i"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/外："><el-input placeholder="请输入淋膜类型/外" v-model="tableData[0].j"></el-input></el-form-item>  
+                    <el-form-item label="纸张品牌/中："><el-input placeholder="请输入纸张品牌/中" v-model="tableData[0].k"></el-input></el-form-item>     <el-form-item label="克数/中："><el-input placeholder="请输入克数/中" v-model="tableData[0].l"></el-input></el-form-item>
+                    <el-form-item label="淋膜类型/中："><el-input placeholder="请输入淋膜类型/中" v-model="tableData[0].m"></el-input></el-form-item>  
                     <el-form-item label="状态："><el-input placeholder="请输入状态"></el-input></el-form-item>
                 </el-col>
             </el-row>
@@ -126,6 +126,22 @@ export default {
        currentPage2: 5,
        currentPage3: 5,
        currentPage4: 4,
+         tableData: [{
+          a: 'CP0001',
+          b: '8oz单层',
+          c: '8SW',
+          d:'8SW-2019010-FC',
+          e:'太阳',
+          f:'320',
+          g:'单PE-内亚18',
+          h:'太阳',
+          i:'320',
+          j:'单PE-内亚18',
+          k:'太阳',
+          l:'320',
+          m:'单PE-内亚18',
+          n:'',
+        }]
     }
   },
   created () {

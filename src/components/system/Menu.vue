@@ -21,12 +21,12 @@
          <el-button type="success" @click="addbumenDialogVisible = true">新增</el-button>
          <el-button type="warning" @click="editbumenDialogVisible= true">编辑</el-button>
          <el-button type="danger" @click="deletebumen">删除</el-button>
-          <el-table border stripe>
+          <el-table border stripe :data="table" style="width: 80%">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
-            <el-table-column prop="roleName" label="一级菜单名称"></el-table-column>
-            <el-table-column prop="roleDesc" label="二级菜单名称"></el-table-column>
-            <el-table-column width="290px" label="菜单访问路径"></el-table-column>
+            <el-table-column prop="a"  label="一级菜单名称" ></el-table-column>
+            <el-table-column prop="b" label="二级菜单名称"></el-table-column>
+            <el-table-column prop="c" label="菜单访问路径" ></el-table-column>
           </el-table>
       </el-card>
       <el-dialog
@@ -50,9 +50,9 @@
         width="30%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="120px">
-          <el-form-item label="一级菜单名称："><el-input placeholder="请输入一级菜单名称"></el-input></el-form-item>
-          <el-form-item label="二级菜单名称："><el-input placeholder="请输入二级菜单名称"></el-input></el-form-item>
-          <el-form-item label="菜单访问路径："><el-input placeholder="请输入菜单访问路径"></el-input></el-form-item>
+          <el-form-item label="一级菜单名称："><el-input placeholder="请输入一级菜单名称" v-model="table[0].a"></el-input></el-form-item>
+          <el-form-item label="二级菜单名称："><el-input placeholder="请输入二级菜单名称" v-model="table[0].b"></el-input></el-form-item>
+          <el-form-item label="菜单访问路径："><el-input placeholder="请输入菜单访问路径" v-model="table[0].c"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editbumenDialogVisible = false">取 消</el-button>
@@ -70,6 +70,12 @@ export default {
       labelPosition: 'right',
       addbumenDialogVisible: false,
       editbumenDialogVisible:false,
+      table: [{
+          a: '系统管理',
+          b: '部门设置',
+          c: 'department',
+          d:'祥子',
+        }],
     }
   },
   created () {

@@ -8,15 +8,15 @@
       </el-breadcrumb>
       <el-card>
         <el-button type="primary">导出日志</el-button>
-        <el-table border stripe>
+        <el-table border stripe :data="table">
           <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column type="index"></el-table-column>
-          <el-table-column prop="roleName" label="时间"></el-table-column>
-          <el-table-column prop="roleDesc" label="用户"></el-table-column>
-          <el-table-column width="290px" label="所属部门"></el-table-column>
-          <el-table-column prop="roleName" label="所属职位"></el-table-column>
-          <el-table-column prop="roleDesc" label="IP地址"></el-table-column>
-          <el-table-column width="290px" label="操作记录"></el-table-column>
+          <el-table-column prop="a" label="时间"></el-table-column>
+          <el-table-column prop="b" label="用户"></el-table-column>
+          <el-table-column prop="c" label="所属部门"></el-table-column>
+          <el-table-column prop="d" label="所属职位"></el-table-column>
+          <el-table-column prop="e" label="IP地址"></el-table-column>
+          <el-table-column prop="f" label="操作记录"></el-table-column>
         </el-table>
         <el-pagination
           @size-change="handleSizeChange"
@@ -37,7 +37,15 @@ export default {
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
-        currentPage4: 4
+        currentPage4: 4,
+        table: [{
+          a: '2019-09-03 14:36:21',
+          b: 'admin',
+          c: '采购部门',
+          d:'主管',
+          e:'189.12.135.21',
+          f:'登录',
+        }],
     }
   },
   created () {

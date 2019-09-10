@@ -32,14 +32,14 @@
           <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button>
           <el-button type="danger" @click="deletebumen">删除</el-button>
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
-          <el-table border stripe>
+          <el-table border stripe :data="tableData">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
-            <el-table-column  label="设计稿编码"></el-table-column>
-            <el-table-column  label="名称"></el-table-column>
-            <el-table-column  label="颜色"></el-table-column>
-            <el-table-column  label="图片"></el-table-column>
-            <el-table-column  label="状态"></el-table-column>
+            <el-table-column prop="a" label="设计稿编码"></el-table-column>
+            <!-- <el-table-column prop="b" label="名称"></el-table-column> -->
+            <el-table-column prop="b" label="颜色"></el-table-column>
+            <el-table-column prop="" label="图片"></el-table-column>
+            <el-table-column prop="" label="状态"></el-table-column>
           </el-table></el-col>
         </el-row>
         <el-pagination
@@ -95,11 +95,11 @@
         width="40%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="120px">
-            <el-form-item label="产品型号："><el-input placeholder="请输入产品型号"></el-input></el-form-item>      <el-form-item label="产品日期："><el-input placeholder="请输入产品日期"></el-input></el-form-item>
-            <el-form-item label="产品名称："><el-input placeholder="请输入产品名称"></el-input></el-form-item>      <el-form-item label="颜色：">
+            <el-form-item label="产品型号："><el-input placeholder="请输入产品型号" v-model="tableData[0].d"></el-input></el-form-item>      <el-form-item label="产品日期："><el-input placeholder="请输入产品日期" v-model="tableData[0].e"></el-input></el-form-item>
+            <el-form-item label="产品名称："><el-input placeholder="请输入产品名称" v-model="tableData[0].f"></el-input></el-form-item>      <el-form-item label="颜色：">
               <el-row>
                 <el-col :span="12">
-                   <el-input placeholder="请输入颜色1"></el-input>
+                   <el-input placeholder="请输入颜色1" v-model="tableData[0].b"></el-input>
                    <el-input placeholder="请输入颜色2"></el-input>
                    <el-input placeholder="请输入颜色3"></el-input>
                    <el-input placeholder="请输入颜色4"></el-input>
@@ -115,7 +115,7 @@
             <el-form-item label="上传设计稿：">
                 <el-image >
                     <div slot="placeholder" class="image-slot">
-                       <img src="../../assets/logo.png" alt="">
+                       <!-- <img src="../../assets/logo.png" alt=""> -->
                     </div>
                 </el-image>
             </el-form-item>
@@ -140,6 +140,19 @@ export default {
         currentPage2: 5,
         currentPage3: 5,
         currentPage4: 4,
+           tableData: [{
+          a: '8SW-20190510-Hansson Hammar',
+          b: 'red',
+          c: '原材料供应商',
+          d:'8SW',
+          e:'20190510',
+          f:'Hansson Hammar',
+          g:'管理员',
+          h:'2019-06-25 00:00',
+          i:'53245454@qq.com',
+          j:'',
+          k:''
+        }]
     }
   },
   created () {
