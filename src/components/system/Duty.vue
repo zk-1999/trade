@@ -23,7 +23,7 @@
                   </el-input>
                 </el-col>
                 <el-col :span="3">
-                  <el-button type="primary" >重置</el-button>
+                  <el-button type="primary" class="chongzhi">重置</el-button>
                 </el-col>
             </el-row>
             <el-button type="success"  @click="addbumenDialogVisible = true">新增</el-button>
@@ -299,5 +299,8 @@ export default {
       text-align: center;
       background: #999;
       padding: 5px;
+    }
+    .chongzhi{
+      margin-top: 0px;
     }
 </style>

@@ -34,6 +34,7 @@
           <el-button type="danger" @click="deletebumen">删除</el-button>
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
           <el-table border stripe>
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
             <el-table-column prop="roleName" label="客户编码"></el-table-column>
             <el-table-column prop="roleDesc" label="客户名称"></el-table-column>

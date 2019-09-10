@@ -30,6 +30,7 @@
           <el-button type="danger" @click="deletebumen">删除</el-button>
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
           <el-table border stripe>
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
             <el-table-column prop="roleName" label="型号"></el-table-column>
             <el-table-column prop="roleDesc" label="编号"></el-table-column>
@@ -62,7 +63,9 @@
         <el-form :label-position="labelPosition" label-width="120px">
             <el-row>
                 <el-col :span="12">
+                <el-form-item label="产品类型："><el-input placeholder="请输入产品类型"></el-input></el-form-item>
                 <el-form-item label="产品型号："><el-input placeholder="请输入产品型号"></el-input></el-form-item>
+                <el-form-item label="产品编号："><el-input placeholder="请输入产品编号"></el-input></el-form-item>
                 <el-form-item label="单齿长/尺数："><el-input placeholder="单齿长/尺数"></el-input></el-form-item>
                 <el-form-item label="齿数/尺数："><el-input placeholder="齿数/尺数"></el-input></el-form-item>          
                 <el-form-item label="纸宽/尺数："><el-input placeholder="纸宽/尺数"></el-input></el-form-item>
@@ -71,11 +74,12 @@
                 <el-form-item label="片数/净门幅："><el-input placeholder="片数/净门幅"></el-input></el-form-item>
                 </el-col>
                 <el-col :span="12"> 
-                <el-form-item label="可用纸长："><el-input placeholder="请输入可用纸长"></el-input></el-form-item>        
+                <el-form-item label="可用纸长："><el-input placeholder="请输入可用纸长"></el-input></el-form-item>
                 <el-form-item label="计划纸长："><el-input placeholder="请输入计划纸长"></el-input></el-form-item>
                 <el-form-item label="放量："><el-input placeholder="请输入放量"></el-input></el-form-item>          
                 <el-form-item label="片数："><el-input placeholder="请输入片数"></el-input></el-form-item>
                 <el-form-item label="单个米数："><el-input placeholder="请输入单个米数"></el-input></el-form-item>
+                <el-form-item label="单个重量："><el-input placeholder="请输入单个重量"></el-input></el-form-item>
                 <el-form-item label="机台号："><el-input placeholder="请输入机台号"></el-input></el-form-item>
                 <el-form-item label="模具号："><el-input placeholder="请输入模具号"></el-input></el-form-item>          
                 <el-form-item label="产能："><el-input placeholder="请输入产能"></el-input></el-form-item>

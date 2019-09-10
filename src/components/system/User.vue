@@ -40,6 +40,7 @@
           <el-button type="danger" @click="resetPassdialogVisible=true">密码重置</el-button>
           <el-button type="info" @click="deletebumen">启用、禁用</el-button>
           <el-table border stripe>
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
             <el-table-column prop="roleName" label="头像"></el-table-column>
             <el-table-column prop="roleDesc" label="姓名"></el-table-column>

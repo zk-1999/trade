@@ -9,6 +9,7 @@
       <el-card>
         <el-button type="primary">导出日志</el-button>
         <el-table border stripe>
+          <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column type="index"></el-table-column>
           <el-table-column prop="roleName" label="时间"></el-table-column>
           <el-table-column prop="roleDesc" label="用户"></el-table-column>
@@ -55,11 +56,10 @@ export default {
     .el-card{
       margin-top: 15px;
     }
-    .el-table{
-      margin-top: 15px;
-    }
+ 
     .el-button{
       float: right;
+      margin-bottom: 15px;
     }
     .el-pagination{
       margin-top: 30px;

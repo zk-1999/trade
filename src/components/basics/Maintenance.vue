@@ -35,6 +35,7 @@
           <el-tabs :tab-position="tabPosition" style="height: 450px;" type="border-card">
             <el-tab-pane label="产品编号名称">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column  label="名称"></el-table-column>
                 <el-table-column  label="所属基础数据"></el-table-column>
@@ -43,6 +44,7 @@
             </el-tab-pane>
             <el-tab-pane label="纸张品牌">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column  label="名称"></el-table-column>
                 <el-table-column  label="所属基础数据"></el-table-column>
@@ -51,6 +53,7 @@
             </el-tab-pane>
             <el-tab-pane label="淋膜类型">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -59,6 +62,7 @@
             </el-tab-pane>
             <el-tab-pane label="纸张克重">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -67,6 +71,7 @@
             </el-tab-pane>
             <el-tab-pane label="配盖">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -75,6 +80,7 @@
             </el-tab-pane>
             <el-tab-pane label="印刷方式">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -83,6 +89,7 @@
             </el-tab-pane>
             <el-tab-pane label="库存单位">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -91,6 +98,7 @@
             </el-tab-pane>
             <el-tab-pane label="供应商类型">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -99,6 +107,7 @@
             </el-tab-pane>
             <el-tab-pane label="包装类型1">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -107,6 +116,7 @@
             </el-tab-pane>
             <el-tab-pane label="包装类型2">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -115,6 +125,7 @@
             </el-tab-pane>
             <el-tab-pane label="货币类型">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -123,6 +134,7 @@
             </el-tab-pane>
             <el-tab-pane label="收入类型">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -131,6 +143,7 @@
             </el-tab-pane>
             <el-tab-pane label="支出类型">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -139,6 +152,7 @@
             </el-tab-pane>
             <el-tab-pane label="产品刀模">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -147,6 +161,7 @@
             </el-tab-pane>
             <el-tab-pane label="仓库类型">
               <el-table border stripe>
+                <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column label="名称"></el-table-column>
                 <el-table-column label="所属基础数据"></el-table-column>
@@ -289,6 +304,7 @@ export default {
         width: 100%;
         height: 20px;
         background: #eee;
+        margin-top: 15px;
     }
     .el-card{
         height: 680px;

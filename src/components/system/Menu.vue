@@ -15,13 +15,14 @@
             </el-input>
            </el-col>
            <el-col :span="3">
-            <el-button type="primary">重置</el-button>
+            <el-button class="chongzhi" type="primary">重置</el-button>
            </el-col>
         </el-row>
          <el-button type="success" @click="addbumenDialogVisible = true">新增</el-button>
          <el-button type="warning" @click="editbumenDialogVisible= true">编辑</el-button>
          <el-button type="danger" @click="deletebumen">删除</el-button>
           <el-table border stripe>
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
             <el-table-column prop="roleName" label="一级菜单名称"></el-table-column>
             <el-table-column prop="roleDesc" label="二级菜单名称"></el-table-column>
@@ -115,5 +116,8 @@ export default {
     }
     .el-button{
       margin-top: 15px;
+    }
+    .chongzhi{
+      margin-top: 0px;
     }
 </style>

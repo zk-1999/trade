@@ -213,5 +213,5 @@ export default {
             margin-left: -100px;
         }
     }
-    
+  
 </style>
