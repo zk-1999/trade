@@ -18,7 +18,7 @@
             <el-button type="primary" class="chongzhi" >重置</el-button>
            </el-col>
         </el-row>
-         <el-button type="success"  @click="addbumenDialogVisible = true">新增</el-button> <el-button type="warning" @click="editbumenDialogVisible= true">编辑</el-button> <el-button type="danger"  @click="deletebumen">删除</el-button>
+         <el-button type="success"  @click="addbumenDialogVisible = true">新增</el-button> <el-button type="warning" @click="editbumenDialogVisible = true">编辑</el-button> <el-button type="danger"  @click="deletebumen">删除</el-button>
           <el-table border stripe :data="tableData">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
@@ -47,12 +47,12 @@
         width="30%"
         :before-close="handleClose">
         <el-form :label-position="labelPosition" label-width="100px">
-          <el-form-item label="部门名称："><el-input placeholder="请输入部门名称" v-model="tableData[0].a"></el-input></el-form-item>
-          <el-form-item label="备注内容："><el-input type="textarea" :rows="2"  v-model="tableData[0].b" placeholder="请输入备注内容"></el-input></el-form-item>
+          <el-form-item label="部门名称："><el-input placeholder="请输入部门名称" v-model="table[0].a"></el-input></el-form-item>
+          <el-form-item label="备注内容："><el-input type="textarea" :rows="2"  v-model="table[0].b" placeholder="请输入备注内容"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editbumenDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="editbumenDialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="editbumenDialogVisible=false">确 定</el-button>
         </span>
       </el-dialog>
     </div>
@@ -64,24 +64,52 @@ export default {
       labelPosition: 'right',
       addbumenDialogVisible: false,
       editbumenDialogVisible:false,
+      ta:[],
+      table:[{
+          a: '',
+          b: '',
+          c:0,
+        }],
       tableData: [{
           a: '惠普',
-          b: '是',
-          c: '原材料供应商',
-          d:'祥子',
-          e:'18859577302',
-          f:'启用',
-          g:'管理员',
-          h:'2019-06-25 00:00',
-          i:'53245454@qq.com',
-          j:'',
-          k:''
-        }]
+          b: '我是惠普',
+          c:1,
+        },
+        {
+          a: '普及',
+          b: '我是普及',
+          c:2,
+        },
+        {
+          a: '嘿嘿',
+          b: '我是嘿嘿',
+          c:3,
+        },
+        {
+          a: '哈啊',
+          b: '我是哈啊',
+          c:4,
+        }],
+        multipleSelection:[],
+        
     }
   },
   created () {   
   },
   methods:{
+
+   
+  //  handleSelectionChange(val) {
+  //       this.multipleSelection = val;
+  //       for (let index = 0; index < this.tableData.length; index++) {
+  //           if () {
+              
+  //           }
+          
+  //       }
+  //       console.log(val);
+
+  //     },
     handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
@@ -95,6 +123,11 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          for (let index = 0; index < this.tableData.length; index++) {
+              if (this.tableData[index].c==this.multipleSelection[0].c) {
+                this.tableData.splice(index, 1); 
+              }
+          }
           this.$message({
             type: 'success',
             message: '删除成功!'

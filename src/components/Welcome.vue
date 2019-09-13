@@ -27,7 +27,6 @@
                 <el-table-column prop="name" label="金额"></el-table-column>
                 <el-table-column prop="name" label="我的审批时间"></el-table-column>
                 <el-table-column prop="name" label="我的审批结果"></el-table-column>
-                
             </el-table>
         </el-tab-pane>
         <el-tab-pane label="审批中">

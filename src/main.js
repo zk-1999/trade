@@ -27,6 +27,10 @@ axios.interceptors.request.use(config => {
     })
     //配置请求的根路径
 axios.defaults.baseURL = "/api";
+// axios.defaults.baseURL = "http://192.168.31.231:8090/";
+// axios.defaults.baseURL = "http://192.168.31.234:8090/";
+
+
 // axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 //把axios请求放到vue原型上使用this调用￥http发送请求
 Vue.prototype.$http = axios

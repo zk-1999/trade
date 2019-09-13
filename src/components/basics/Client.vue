@@ -20,7 +20,7 @@
                     <el-form-item label="联系人：">
                     <el-input placeholder="请输入联系人"></el-input>
                     </el-form-item>
-                    <el-form-item label="联系人手机：">
+                    <el-form-item label="手机：">
                     <el-input placeholder="请输入联系人手机"></el-input>
                     </el-form-item>
                     <el-form-item>
@@ -40,7 +40,7 @@
             <el-table-column prop="b" label="客户名称"></el-table-column>
             <el-table-column prop="c" label="类型"></el-table-column>
             <el-table-column prop="d" label="联系人"></el-table-column>
-            <el-table-column prop="e" label="联系人手机"></el-table-column>
+            <el-table-column prop="e" label="手机"></el-table-column>
             <el-table-column prop="f" label="状态"></el-table-column>
             <el-table-column prop="g" label="创建人"></el-table-column>
             <el-table-column prop="h" label="创建时间"></el-table-column>
@@ -66,11 +66,11 @@
             <el-col :span="12">
               <el-form-item label="客户编码："><el-input placeholder="客户编码"></el-input></el-form-item>
               <el-form-item label="联系人："><el-input placeholder="请输入联系人"></el-input></el-form-item>
-              <el-form-item label="联系邮箱："><el-input placeholder="请输入联系邮箱"></el-input></el-form-item>
+              <el-form-item label="邮箱："><el-input placeholder="请输入联系邮箱"></el-input></el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="客户名称："><el-input placeholder="请输入客户名称"></el-input></el-form-item>
-              <el-form-item label="联系人手机："><el-input placeholder="请输入联系人手机"></el-input></el-form-item>
+              <el-form-item label="手机："><el-input placeholder="请输入手机"></el-input></el-form-item>
               <el-form-item label="类型：">
                 <el-select class="tiantou" placeholder="请选择类型">
                   <el-option></el-option>
@@ -107,11 +107,11 @@
             <el-col :span="12">
               <el-form-item label="客户编码："><el-input placeholder="客户编码" v-model="tableData[0].a"></el-input></el-form-item>
               <el-form-item label="联系人："><el-input placeholder="请输入联系人" v-model="tableData[0].d"></el-input></el-form-item>
-              <el-form-item label="联系邮箱："><el-input placeholder="请输入联系邮箱" v-model="tableData[0].i"></el-input></el-form-item>
+              <el-form-item label="邮箱："><el-input placeholder="请输入邮箱" v-model="tableData[0].i"></el-input></el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="客户名称："><el-input placeholder="请输入客户名称" v-model="tableData[0].b"></el-input></el-form-item>
-              <el-form-item label="联系人手机："><el-input placeholder="请输入联系人手机" v-model="tableData[0].e"></el-input></el-form-item>
+              <el-form-item label="手机："><el-input placeholder="请输入手机" v-model="tableData[0].e"></el-input></el-form-item>
               <el-form-item label="类型：">
                 <el-select class="tiantou" placeholder="请选择类型">
                   <el-option></el-option>
