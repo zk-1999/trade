@@ -19,14 +19,27 @@
            </el-col>
         </el-row>
          <el-button type="success" @click="addbumenDialogVisible = true">新增</el-button>
-         <el-button type="warning" @click="editbumenDialogVisible= true">编辑</el-button>
-         <el-button type="danger" @click="deletebumen">删除</el-button>
-          <el-table border stripe :data="table" style="width: 80%">
+         <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量启用</el-button>
+         <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量禁用</el-button>
+
+         <el-button type="danger" @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
+          <el-table border stripe :data="table" style="width: 100%" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
             <el-table-column prop="a"  label="一级菜单名称" ></el-table-column>
             <el-table-column prop="b" label="二级菜单名称"></el-table-column>
             <el-table-column prop="c" label="菜单访问路径" ></el-table-column>
+            <el-table-column label="状态" width="60px">
+              <template >
+                <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column  label="操作" width="180px">
+              <template slot-scope="scope">
+                  <el-button type="primary" icon="el-icon-edit"  size="mini">修改</el-button>
+                  <el-button type="danger" icon="el-icon-delete" size="mini"  @click="removeGoods(scope.row.goods_id)">删除</el-button>
+              </template>
+            </el-table-column>
           </el-table>
       </el-card>
       <el-dialog
@@ -71,11 +84,26 @@ export default {
       addbumenDialogVisible: false,
       editbumenDialogVisible:false,
       table: [{
-          a: '系统管理',
-          b: '部门设置',
-          c: 'department',
-          d:'祥子',
+          a: '系统管理1',
+          b: '部门设置1',
+          c: 'department1',
+        },
+        {
+          a: '系统管理2',
+          b: '部门设置2',
+          c: 'department2',
+        },
+        {
+          a: '系统管理3',
+          b: '部门设置3',
+          c: 'department3',
+        },
+        {
+          a: '系统管理4',
+          b: '部门设置4',
+          c: 'department4',
         }],
+        selectedList: []
     }
   },
   created () {
@@ -105,6 +133,10 @@ export default {
           });          
         });
       
+    },
+    handleSelectionChange(val) {
+      console.log(val);
+      this.selectedList = val;
     }
   }
 }

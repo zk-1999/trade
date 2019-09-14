@@ -36,16 +36,18 @@
                 </el-form>
         </el-row>
           <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
-          <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button>
-          <el-button type="danger" @click="resetPassdialogVisible=true">密码重置</el-button>
-          <el-button type="info" @click="deletebumen">启用、禁用</el-button>
+          <el-button type="danger" @click="resetPassdialogVisible=true" :disabled="selectedList.length == 0">密码批量重置</el-button>
+           <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量启用</el-button>
+           <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量禁用</el-button>
+
+         <el-button type="danger" @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
           <el-table border stripe :data="table">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
             <!-- <el-table-column prop="roleName" label="头像"></el-table-column> -->
             <el-table-column prop="a" label="姓名"></el-table-column>
             <el-table-column prop="b" label="登录账号"></el-table-column>
-            <el-table-column prop="c" label="手机号码"></el-table-column>
+            <el-table-column prop="c" label="手机号码" width="115px"></el-table-column>
             <el-table-column prop="d" label="部门"></el-table-column>
             <el-table-column prop="e" label="职务"></el-table-column>
             <el-table-column prop="f" label="分销业务"></el-table-column>
@@ -53,6 +55,17 @@
             <el-table-column prop="h" label="工号"></el-table-column>
             <el-table-column prop="i" label="地区"></el-table-column>
             <el-table-column prop="j" label="备注"></el-table-column>
+             <el-table-column label="状态" width="60px">
+              <template >
+                <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column  label="操作" width="180px">
+              <template slot-scope="scope">
+                  <el-button type="primary" icon="el-icon-edit"  size="mini">修改</el-button>
+                  <el-button type="danger" icon="el-icon-delete" size="mini"  @click="removeGoods(scope.row.goods_id)">删除</el-button>
+              </template>
+            </el-table-column>
           </el-table></el-col>
         </el-row>
       </el-card>
@@ -248,6 +261,7 @@
 export default {
   data () {
     return {
+      selectedList: [],
       labelPosition: 'right',
       addyonghuDialogVisible: false,
       edityonghuDialogVisible:false,
@@ -335,7 +349,11 @@ export default {
     },
      handleNodeClick(data) {
         console.log(data);
-     }
+     },
+       handleSelectionChange(val) {
+      console.log(val);
+      this.selectedList = val;
+    }
   }
 }
 </script>

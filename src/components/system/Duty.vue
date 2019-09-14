@@ -27,9 +27,11 @@
                 </el-col>
             </el-row>
             <el-button type="success"  @click="addbumenDialogVisible = true">新增</el-button>
-            <el-button type="warning" @click="editbumenDialogVisible= true">编辑</el-button> 
-            <el-button type="danger"  @click="deletebumen">删除</el-button>
-            <el-button type="info"  @click="rightDialogVisible= true">权限设置</el-button>
+            <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量启用</el-button> 
+            <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量禁用</el-button> 
+
+            <el-button type="danger"  @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
+            <el-button type="info"  @click="rightDialogVisible= true" :disabled="selectedList.length == 0">权限批量设置</el-button>
             <el-table border stripe  :data="table">
               <el-table-column type="selection" width="55"></el-table-column>
               <el-table-column type="index" width="50" ></el-table-column>              
@@ -37,6 +39,24 @@
               <el-table-column label="部门名称" prop="a" property="name"></el-table-column>
               <el-table-column label="职务名称" prop="b" property="address"></el-table-column>
               <el-table-column width="290px" prop="c" label="备注" property="beizhu"></el-table-column>
+              <el-table-column label="状态" width="60px">
+                <template >
+                  <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作" width="180">
+                <template >
+                   <el-tooltip effect="dark" content="修改" placement="top" :enterable="false">
+                  <el-button size="mini" type="primary" icon="el-icon-edit"></el-button>
+                  </el-tooltip>
+                   <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
+                <el-button size="mini" type="danger" icon="el-icon-delete"></el-button>
+               </el-tooltip> 
+               <el-tooltip effect="dark" content="权限分配" placement="top" :enterable="false">
+                  <el-button size="mini" type="warning" icon="el-icon-setting"></el-button>
+                </el-tooltip>
+                </template>
+              </el-table-column>
             </el-table>
           </el-col>
         </el-row>
@@ -213,7 +233,8 @@ export default {
         defaultProps: {
           children: 'children',
           label: 'label'
-        }
+        },
+        selectedList: [],
     }
   },
   created () {  
@@ -251,7 +272,11 @@ export default {
     },
      handleNodeClick(data) {
         console.log(data);
-      }
+      },
+        handleSelectionChange(val) {
+      console.log(val);
+      this.selectedList = val;
+    }
   }
 }
 </script>
