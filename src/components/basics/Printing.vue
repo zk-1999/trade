@@ -142,7 +142,7 @@
                 <el-form-item label="模具号："><el-input placeholder="请输入模具号"></el-input></el-form-item>          
                 <el-form-item label="产能："><el-input placeholder="请输入产能"></el-input></el-form-item>
                 </el-col>
-                </el-col>
+                
             </el-row>
         </el-form>
         <span slot="footer" class="dialog-footer">
