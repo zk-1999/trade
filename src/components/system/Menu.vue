@@ -29,12 +29,12 @@
             <el-table-column prop="a"  label="一级菜单名称" ></el-table-column>
             <el-table-column prop="b" label="二级菜单名称"></el-table-column>
             <el-table-column prop="c" label="菜单访问路径" ></el-table-column>
-            <el-table-column label="状态" width="60px">
+            <el-table-column label="状态" width="65px">
               <template >
                 <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
               </template>
             </el-table-column>
-            <el-table-column  label="操作" width="180px">
+            <el-table-column  label="操作" width="190px">
               <template slot-scope="scope">
                   <el-button type="primary" icon="el-icon-edit"  size="mini">修改</el-button>
                   <el-button type="danger" icon="el-icon-delete" size="mini"  @click="removeGoods(scope.row.goods_id)">删除</el-button>

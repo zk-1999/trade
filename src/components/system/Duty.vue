@@ -32,14 +32,14 @@
 
             <el-button type="danger"  @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
             <el-button type="info"  @click="rightDialogVisible= true" :disabled="selectedList.length == 0">权限批量设置</el-button>
-            <el-table border stripe  :data="table">
+            <el-table border stripe  :data="table" @selection-change="handleSelectionChange">
               <el-table-column type="selection" width="55"></el-table-column>
               <el-table-column type="index" width="50" ></el-table-column>              
               <!-- <el-table-column label="职务编号" property="date"></el-table-column> -->
               <el-table-column label="部门名称" prop="a" property="name"></el-table-column>
               <el-table-column label="职务名称" prop="b" property="address"></el-table-column>
               <el-table-column width="290px" prop="c" label="备注" property="beizhu"></el-table-column>
-              <el-table-column label="状态" width="60px">
+              <el-table-column label="状态" width="65px">
                 <template >
                   <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
                 </template>

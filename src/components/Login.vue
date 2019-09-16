@@ -59,7 +59,7 @@ export default {
         login(){
             this.$refs.loginFormRef.validate(async valid => {
                 if(!valid) return;
-                console.log(this.loginForm);
+                // console.log(this.loginForm);
                 // let param = new URLSearchParams();
                 // param.append("username", this.loginForm.username);
                 // param.append("password", this.loginForm.password);

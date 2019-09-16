@@ -41,7 +41,7 @@
            <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量禁用</el-button>
 
          <el-button type="danger" @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
-          <el-table border stripe :data="table">
+          <el-table border stripe :data="table" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
             <!-- <el-table-column prop="roleName" label="头像"></el-table-column> -->
@@ -55,12 +55,12 @@
             <el-table-column prop="h" label="工号"></el-table-column>
             <el-table-column prop="i" label="地区"></el-table-column>
             <el-table-column prop="j" label="备注"></el-table-column>
-             <el-table-column label="状态" width="60px">
+             <el-table-column label="状态" width="65px">
               <template >
                 <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
               </template>
             </el-table-column>
-            <el-table-column  label="操作" width="180px">
+            <el-table-column  label="操作" width="190px">
               <template slot-scope="scope">
                   <el-button type="primary" icon="el-icon-edit"  size="mini">修改</el-button>
                   <el-button type="danger" icon="el-icon-delete" size="mini"  @click="removeGoods(scope.row.goods_id)">删除</el-button>

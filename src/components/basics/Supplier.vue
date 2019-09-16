@@ -30,10 +30,18 @@
                 </el-form>
         </el-row>
           <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
-          <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button>
-          <el-button type="danger" @click="deletebumen">删除</el-button>
-          <el-button type="info" @click="deletebumen">启用、禁用</el-button>
-          <el-table border stripe :data="tableData">
+          <el-button
+            type="warning"
+            @click="editbumenDialogVisible= true"
+            :disabled="selectedList.length == 0"
+          >批量启用</el-button>
+          <el-button
+            type="warning"
+            @click="editbumenDialogVisible= true"
+            :disabled="selectedList.length == 0"
+          >批量禁用</el-button>
+          <el-button type="danger" @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
+          <el-table border stripe :data="tableData" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column type="index"></el-table-column>
             <el-table-column prop="a" label="供应商编码"></el-table-column>
@@ -44,6 +52,17 @@
             <el-table-column prop="f" label="状态"></el-table-column>
             <el-table-column prop="g" label="创建人"></el-table-column>
             <el-table-column prop="h" label="创建时间"></el-table-column>
+            <el-table-column label="状态" width="65px">
+              <template>
+                <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="190px">
+              <template>
+                <el-button type="primary" icon="el-icon-edit" size="mini">修改</el-button>
+                <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
+              </template>
+            </el-table-column>
           </el-table></el-col>
         </el-row>
         <el-pagination
@@ -152,6 +171,7 @@ export default {
        currentPage2: 5,
        currentPage3: 5,
        currentPage4: 4,
+      selectedList: [],
          tableData: [{
           a: 'GYSOO1',
           b: '祥子纸业',
@@ -170,6 +190,10 @@ export default {
   created () {
   },
   methods:{
+    handleSelectionChange(val) {
+      console.log(val);
+      this.selectedList = val;
+    },
      handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
