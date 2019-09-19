@@ -7,42 +7,110 @@
         <el-breadcrumb-item>基础数据维护</el-breadcrumb-item>
       </el-breadcrumb>
       <el-card>
-        <el-row :gutter="20" class="row">
-          <el-col :span="24">
-             <el-row :gutter="20">
-                <el-form :inline="true" class="demo-form-inline">
-                    <el-form-item label="产品编号：">
-                        <el-select placeholder="请选择产品编号">
-                        <el-option></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="产品名称：">
-                        <el-select placeholder="请选择产品名称">
+            <el-tabs :tab-position="tabPosition">
+            <el-tab-pane label="产品名称">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
                         <el-option></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item>
                         <el-button >查询</el-button>
                         <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
                     </el-form-item>
                 </el-form>
-        </el-row>
-          <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
-          <el-button type="warning" @click="edityonghuDialogVisible= true">编辑</el-button>
-          <el-button type="danger" @click="deletebumen">删除</el-button>
-          <el-button type="info" @click="deletebumen">启用、禁用</el-button>
-          <div class="fenge"></div>
-          <el-tabs :tab-position="tabPosition" style="height: 450px;" type="border-card">
-            <el-tab-pane label="产品编号名称">
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
                 <el-table-column prop="a" label="名称"></el-table-column>
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
-                <el-table-column label="状态"></el-table-column>
+                <el-table-column  label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
+            </el-tab-pane>
+            <el-tab-pane label="产品类型">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
+              <el-table border stripe :data="tableData">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column type="index"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
+                <el-table-column  label="状态"></el-table-column>
+              </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
+            </el-tab-pane>
+            <el-tab-pane label="产品规格">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
+              <el-table border stripe :data="tableData">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column type="index"></el-table-column>
+                <el-table-column prop="a" label="名称"></el-table-column>
+                <el-table-column prop="b" label="所属基础数据"></el-table-column>
+                <el-table-column  label="状态"></el-table-column>
+              </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="纸张品牌">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -50,8 +118,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column  label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="淋膜类型" >
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>                        
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -59,8 +148,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column  label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="纸张克重">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -68,8 +178,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="配盖">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -77,8 +208,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="印刷方式">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -86,8 +238,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="库存单位">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -95,8 +268,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="供应商类型">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -104,8 +298,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="包装类型1">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -113,8 +328,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="包装类型2">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -122,8 +358,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="货币类型">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -131,8 +388,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="收入类型">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -140,8 +418,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="支出类型">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -149,8 +448,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="产品刀模">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -158,8 +478,29 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
             <el-tab-pane label="仓库类型">
+              <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="名称：">
+                        <el-select placeholder="请选择名称">
+                        <el-option></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button >查询</el-button>
+                        <el-button type="primary">重置</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
               <el-table border stripe :data="tableData">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index"></el-table-column>
@@ -167,19 +508,17 @@
                 <el-table-column prop="b" label="所属基础数据"></el-table-column>
                 <el-table-column label="状态"></el-table-column>
               </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
             </el-tab-pane>
           </el-tabs>
-          </el-col>
-        </el-row>
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
-        </el-pagination>
       </el-card>
       <el-dialog
         title="新增基础数据"
@@ -319,12 +658,9 @@ export default {
         background: #eee;
         margin-top: 15px;
     }
-    .el-card{
-        height: 680px;
-    }
+  
     .el-pagination{
-        // text-align: right;
-        // margin-right: 50px;
+        
         margin-top: 10px;
     }
 </style>
