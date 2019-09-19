@@ -89,6 +89,7 @@
       :visible.sync="addyonghuDialogVisible"
       width="48%"
       :before-close="handleClose"
+       @closed="dialogClosed"
     >
       <el-form
         :label-position="labelPosition"
@@ -128,30 +129,39 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="联系地址：">
-         <el-select placeholder="省级地区" v-model="selectsup" class="hu">
+        <el-form-item label="联系地址：" prop="supPriv">
+         <el-select
+            v-model="addSupplierForm.supPriv"
+            @change="choseProvince"
+            placeholder="省级地区">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+              v-for="item in province"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
           </el-select>
-          <el-select placeholder="市级地区" v-model="selectsup" class="hu">
+          <el-select
+            v-model="addSupplierForm.supCity"
+            @change="choseCity"
+            placeholder="市级地区">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+              v-for="item in shi1"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
           </el-select>
-          <el-select placeholder="区级地区" v-model="selectsup" class="hu">
+          <el-select
+            v-model="addSupplierForm.supTown"
+            @change="choseBlock"
+            placeholder="区级地区">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+              v-for="item in qu1"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="详细地址：" prop="supAddress">
@@ -171,6 +181,7 @@
       :visible.sync="edityonghuDialogVisible"
       width="48%"
       :before-close="handleClose"
+      @closed="dialogClosed"
     >
        <el-form
         :label-position="labelPosition"
@@ -210,30 +221,39 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="联系地址：">
-         <el-select placeholder="省级地区" v-model="selectsup" class="hu">
+        <el-form-item label="联系地址：" prop="supPriv">
+         <el-select
+            v-model="addSupplierForm.supPriv"
+            @change="choseProvince"
+            placeholder="省级地区">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+              v-for="item in province"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
           </el-select>
-          <el-select placeholder="市级地区" v-model="selectsup" class="hu">
+          <el-select
+            v-model="addSupplierForm.supCity"
+            @change="choseCity"
+            placeholder="市级地区">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+              v-for="item in shi1"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
           </el-select>
-          <el-select placeholder="区级地区" v-model="selectsup" class="hu">
+          <el-select
+            v-model="addSupplierForm.supTown"
+            @change="choseBlock"
+            placeholder="区级地区">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+              v-for="item in qu1"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="详细地址：" prop="supAddress">
@@ -269,7 +289,11 @@ import { async } from "q";
 export default {
   data() {
     return {
-      // a:'0',
+      province:'',
+      shi1: [],
+      qu1: [],
+      city:'',
+      block:'',
       labelPosition: "right",
       addyonghuDialogVisible: false,
       edityonghuDialogVisible: false,
@@ -296,7 +320,10 @@ export default {
         supCity: "",
         supTown: "",
         supAddress: "",
-        supBank: ""
+        supBank: "",
+        // sheng: '',
+        // shi: '',
+        // qu: '',
       },
       editSupplierForm: {
         supId: "",
@@ -351,20 +378,94 @@ export default {
   },
   created() {
     this.getSupplierList();
+    this.getCityData();
   },
   methods: {
+    // 加载china地点数据，三级
+      getCityData:function(){
+        var that = this
+        this.$http.get('http://localhost:8080/map.json').then(function(response){
+          if (response.status==200) {
+            var data = response.data
+            that.province = []
+            that.city = []
+            that.block = []
+            // 省市区数据分类
+            for (var item in data) {
+              if (item.match(/0000$/)) {//省
+                that.province.push({id: item, value: data[item], children: []})
+              } else if (item.match(/00$/)) {//市
+                that.city.push({id: item, value: data[item], children: []})
+              } else {//区
+                that.block.push({id: item, value: data[item]})
+              }
+            }
+            // 分类市级
+            for (var index in that.province) {
+              for (var index1 in that.city) {
+                if (that.province[index].id.slice(0, 2) === that.city[index1].id.slice(0, 2)) {
+                  that.province[index].children.push(that.city[index1])
+                }
+              }
+            }
+            // 分类区级
+            for(var item1 in that.city) {
+              for(var item2 in that.block) {
+                if (that.block[item2].id.slice(0, 4) === that.city[item1].id.slice(0, 4)) {
+                  that.city[item1].children.push(that.block[item2])
+                }
+              }
+            }
+          }
+          else{
+            console.log(response.status)
+          }
+        }).catch(function(error){console.log(typeof+ error)})
+      },
+      // 选省
+      choseProvince:function(e) {
+        for (var index2 in this.province) {
+          if (e === this.province[index2].id) {
+            this.shi1 = this.province[index2].children
+            this.shi = this.province[index2].children[0].value
+            this.qu1 =this.province[index2].children[0].children
+            this.qu = this.province[index2].children[0].children[0].value
+            this.E = this.qu1[0].id
+          }
+        }
+      },
+      // 选市
+      choseCity:function(e) {
+        for (var index3 in this.city) {
+          if (e === this.city[index3].id) {
+            this.qu1 = this.city[index3].children
+            this.qu = this.city[index3].children[0].value
+            this.E = this.qu1[0].id
+            // console.log(this.E)
+          }
+        }
+      },
+      // 选区
+      choseBlock:function(e) {
+        this.E=e;
+        // console.log(this.E)
+      },
     async getSupplierList() {
       const { data: res } = await this.$http.get("jc/supplier/selectSupplier",{params:this.chaSupplierForm});
       console.log(res);
       this.supplierList = res;
     },
     async userStateChanged(userInfo) {
+      // console.log(userInfo);
+      
       const { data: res } = await this.$http.post("jc/supplier/startSuppiler",userInfo);
       this.getSupplierList();
     },
     addSupplier() {
       this.$refs.addSupplierRef.validate(async valid => {
         if (!valid) return;    
+        console.log(this.addSupplierForm);
+        
         const { data: res } = await this.$http.post("/jc/supplier/addSupplier",this.addSupplierForm);
         this.$message.success("用户创建成功！");
         this.getSupplierList();
@@ -372,8 +473,8 @@ export default {
       });
     },
    async showEditSupplier(supplierId){
-           let param = new URLSearchParams();
-          param.append("supplierId", supplierId);
+      let param = new URLSearchParams();
+      param.append("supplierId", supplierId);
       const {data:res} = await this.$http.post('jc/supplier/selectSupplierbyid/',param);
       console.log(res);
       this.editSupplierForm=res;
@@ -387,6 +488,9 @@ export default {
     chaSupplierResetForm(formName){
         this.$refs.chaSupplierRef.resetFields();
     },
+    dialogClosed(){
+        this.$refs.addSupplierRef.resetFields();
+      },
     handleSelectionChange(val) {
       this.selectedList = val
     },
@@ -405,18 +509,16 @@ export default {
         .catch(_ => {});
     },
     selectedqi(){
+      this.delarr=[];
       this.delVisibleqi = true;
-      console.log(this.selectedList);
-      console.log('------------------------');
       for (let i = 0; i < this.selectedList.length; i++) {
         this.delarr.push({supplierId:this.selectedList[i].supplierId,supState:this.selectedList[i].supState==1?0:1})
       }
       console.log(this.delarr);
     },
     selected(){
+      this.delarr=[];
       this.delVisible = true;
-      console.log(this.selectedList);
-      console.log('------------------------');
       for (let i = 0; i < this.selectedList.length; i++) {
         this.delarr.push(this.selectedList[i].supplierId)
       }
