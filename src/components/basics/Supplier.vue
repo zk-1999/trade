@@ -12,16 +12,33 @@
           <el-row :gutter="20">
             <el-form :inline="true" class="demo-form-inline" :model="chaSupplierForm" ref="chaSupplierRef">
               <el-form-item label="供应商名称：" prop="supName">
-                <el-input placeholder="请输入供应商名称" v-model="chaSupplierForm.supName"></el-input>
+                <!-- <el-input placeholder="请输入供应商名称" v-model="chaSupplierForm.supName"></el-input> -->
+                <el-select v-model="chaSupplierForm.supName" placeholder="请选择">
+                  <el-option
+                    v-for="item in chaSupplierForm1"
+                    :key="item.supplierId"
+                    :label="item.supName"
+                    :value="item.supName">
+                  </el-option>
+                </el-select>
               </el-form-item>
+              
               <el-form-item label="类型：" prop="supType">
-                <el-input placeholder="请输入类型" v-model="chaSupplierForm.supType"></el-input>
+                <!-- <el-input placeholder="请输入类型" v-model="chaSupplierForm.supType"></el-input> -->
+                <el-select v-model="chaSupplierForm.supType" placeholder="请选择">
+                  <el-option
+                    v-for="item in chasupTypelist"
+                    :key="item.basicId"
+                    :label="item.basicRetainone"
+                    :value="item.basicRetainone">
+                  </el-option>
+                </el-select>
               </el-form-item>
               <el-form-item label="联系人：" prop="supContacts">
                 <el-input placeholder="请输入联系人" v-model="chaSupplierForm.supContacts"></el-input>
               </el-form-item>
-              <el-form-item label="联系人手机：" prop="supPhone">
-                <el-input placeholder="请输入联系人手机" v-model="chaSupplierForm.supPhone"></el-input>
+              <el-form-item label="手机：" prop="supPhone">
+                <el-input placeholder="请输入手机" v-model="chaSupplierForm.supPhone"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button @click="getSupplierList">查询</el-button>
@@ -93,9 +110,9 @@
     >
       <el-form
         :label-position="labelPosition"
+        label-width="120px"
         :model="addSupplierForm"
         ref="addSupplierRef"
-        label-width="120px"
         :rules="addsSupplierRules"
       >
         <el-row>
@@ -106,64 +123,78 @@
             <el-form-item label="联系人：" prop="supContacts">
               <el-input v-model="addSupplierForm.supContacts" placeholder="请输入联系人"></el-input>
             </el-form-item>
-            <el-form-item label="联系邮箱：" prop="supEmail">
-              <el-input v-model="addSupplierForm.supEmail" placeholder="请输入联系邮箱"></el-input>
+            <el-form-item label="邮箱：" prop="supEmail">
+              <el-input v-model="addSupplierForm.supEmail" placeholder="请输入邮箱"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="供应商名称：" prop="supName">
               <el-input v-model="addSupplierForm.supName" placeholder="请输入供应商名称"></el-input>
             </el-form-item>
-            <el-form-item label="联系人手机：" prop="supPhone">
-              <el-input v-model="addSupplierForm.supPhone" placeholder="请输入联系人手机"></el-input>
+            <el-form-item label="手机：" prop="supPhone">
+              <el-input v-model="addSupplierForm.supPhone" placeholder="请输入手机"></el-input>
             </el-form-item>
-            <el-form-item label="类型：" prop="selectsup">
-              <el-select class="tiantou" v-model="selectsup" placeholder="请选择类型">
+            <el-form-item label="类型：" prop="supType">
+              <el-select class="tiantou" v-model="addSupplierForm.supType" placeholder="请选择类型">
                 <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+                    v-for="item in chasupTypelist"
+                    :key="item.basicId"
+                    :label="item.basicRetainone"
+                    :value="item.basicRetainone">
+                  </el-option>
+                </el-select>
               </el-select>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="联系地址：" prop="supPriv">
-         <el-select
-            v-model="addSupplierForm.supPriv"
-            @change="choseProvince"
-            placeholder="省级地区">
-            <el-option
-              v-for="item in province"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <el-select
-            v-model="addSupplierForm.supCity"
-            @change="choseCity"
-            placeholder="市级地区">
-            <el-option
-              v-for="item in shi1"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <el-select
-            v-model="addSupplierForm.supTown"
-            @change="choseBlock"
-            placeholder="区级地区">
-            <el-option
-              v-for="item in qu1"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
+        
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="联系地址：" prop="supPriv" >
+              <el-select
+                v-model="addSupplierForm.supPriv"
+                @change="choseProvince"
+                placeholder="省级地区">
+                <el-option
+                  v-for="item in province"
+                  :key="item.id"
+                  :label="item.value"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+            <el-col :span="8">
+            <el-form-item  prop="supCity" label-width="60px">
+              <el-select
+                v-model="addSupplierForm.supCity"
+                @change="choseCity"
+                placeholder="市级地区">
+                <el-option
+                  v-for="item in shi1"
+                  :key="item.id"
+                  :label="item.value"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+            <el-col :span="8">
+            <el-form-item  prop="supTown" label-width="0px">
+              <el-select
+                v-model="addSupplierForm.supTown"
+                @change="choseBlock"
+                placeholder="区级地区">
+                <el-option
+                  v-for="item in qu1"
+                  :key="item.id"
+                  :label="item.value"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-form-item label="详细地址：" prop="supAddress">
           <el-input v-model="addSupplierForm.supAddress" placeholder="请输入详细地址" class="xiang"></el-input>
         </el-form-item>
@@ -198,64 +229,77 @@
             <el-form-item label="联系人：" prop="supContacts">
               <el-input v-model="editSupplierForm.supContacts" placeholder="请输入联系人"></el-input>
             </el-form-item>
-            <el-form-item label="联系邮箱：" prop="supEmail">
-              <el-input v-model="editSupplierForm.supEmail" placeholder="请输入联系邮箱"></el-input>
+            <el-form-item label="邮箱：" prop="supEmail">
+              <el-input v-model="editSupplierForm.supEmail" placeholder="请输入邮箱"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="供应商名称：" prop="supName">
               <el-input v-model="editSupplierForm.supName" placeholder="请输入供应商名称"></el-input>
             </el-form-item>
-            <el-form-item label="联系人手机：" prop="supPhone">
-              <el-input v-model="editSupplierForm.supPhone" placeholder="请输入联系人手机"></el-input>
+            <el-form-item label="手机：" prop="supPhone">
+              <el-input v-model="editSupplierForm.supPhone" placeholder="请输入手机"></el-input>
             </el-form-item>
-            <el-form-item label="类型：" prop="selectsup">
-              <el-select class="tiantou" v-model="selectsup" placeholder="请选择类型">
+            <el-form-item label="类型：" prop="supType">
+              <el-select class="tiantou" v-model="editSupplierForm.supType" placeholder="请选择类型">
                 <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+                    v-for="item in chasupTypelist"
+                    :key="item.basicId"
+                    :label="item.basicRetainone"
+                    :value="item.basicRetainone">
+                  </el-option>
+                </el-select>
               </el-select>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="联系地址：" prop="supPriv">
-         <el-select
-            v-model="addSupplierForm.supPriv"
-            @change="choseProvince"
-            placeholder="省级地区">
-            <el-option
-              v-for="item in province"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <el-select
-            v-model="addSupplierForm.supCity"
-            @change="choseCity"
-            placeholder="市级地区">
-            <el-option
-              v-for="item in shi1"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <el-select
-            v-model="addSupplierForm.supTown"
-            @change="choseBlock"
-            placeholder="区级地区">
-            <el-option
-              v-for="item in qu1"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="联系地址：" prop="supPriv" >
+              <el-select
+                v-model="editSupplierForm.supPriv"
+                @change="choseProvince"
+                placeholder="省级地区">
+                <el-option
+                  v-for="item in province"
+                  :key="item.id"
+                  :label="item.value"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+            <el-col :span="8">
+            <el-form-item  prop="supCity" label-width="60px">
+              <el-select
+                v-model="editSupplierForm.supCity"
+                @change="choseCity"
+                placeholder="市级地区">
+                <el-option
+                  v-for="item in shi1"
+                  :key="item.id"
+                  :label="item.value"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+            <el-col :span="8">
+            <el-form-item  prop="supTown" label-width="0px">
+              <el-select
+                v-model="editSupplierForm.supTown"
+                @change="choseBlock"
+                placeholder="区级地区">
+                <el-option
+                  v-for="item in qu1"
+                  :key="item.id"
+                  :label="item.value"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-form-item label="详细地址：" prop="supAddress">
           <el-input v-model="editSupplierForm.supAddress" placeholder="请输入详细地址" class="xiang"></el-input>
         </el-form-item>
@@ -341,11 +385,14 @@ export default {
         supBank: ""
       },
       chaSupplierForm: {
-        supName: "",
+        supName1: [],
         supType: "",
         supContacts: "",
         supPhone: "",
+        supName:'',
       },
+      chaSupplierForm1:[],
+      chasupTypelist:[],
       addsSupplierRules: {
           supName:[
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -379,6 +426,8 @@ export default {
   created() {
     this.getSupplierList();
     this.getCityData();
+    this.getSupplierList1();
+    this.getChasupTypelist();
   },
   methods: {
     // 加载china地点数据，三级
@@ -425,7 +474,7 @@ export default {
       // 选省
       choseProvince:function(e) {
         for (var index2 in this.province) {
-          if (e === this.province[index2].id) {
+          if (e === this.province[index2].value) {
             this.shi1 = this.province[index2].children
             this.shi = this.province[index2].children[0].value
             this.qu1 =this.province[index2].children[0].children
@@ -437,7 +486,7 @@ export default {
       // 选市
       choseCity:function(e) {
         for (var index3 in this.city) {
-          if (e === this.city[index3].id) {
+          if (e === this.city[index3].value) {
             this.qu1 = this.city[index3].children
             this.qu = this.city[index3].children[0].value
             this.E = this.qu1[0].id
@@ -452,12 +501,20 @@ export default {
       },
     async getSupplierList() {
       const { data: res } = await this.$http.get("jc/supplier/selectSupplier",{params:this.chaSupplierForm});
-      console.log(res);
+      // console.log(res);
       this.supplierList = res;
     },
+    async getSupplierList1() {
+      const { data: res } = await this.$http.get("jc/supplier/selectSupplier");
+      // console.log(res);
+      this.chaSupplierForm1=res;
+    },
+   async getChasupTypelist(){
+      const { data: res } = await this.$http.post("jc/Basic/selectCustype");
+      console.log(res);
+      this.chasupTypelist=res;
+   },
     async userStateChanged(userInfo) {
-      // console.log(userInfo);
-      
       const { data: res } = await this.$http.post("jc/supplier/startSuppiler",userInfo);
       this.getSupplierList();
     },
@@ -470,6 +527,12 @@ export default {
         this.$message.success("用户创建成功！");
         this.getSupplierList();
         this.addyonghuDialogVisible = false;
+        this.getSupplierList1();
+        this.getChasupTypelist();
+        console.log('-----------------------------');
+        
+        console.log(this.province);
+        
       });
     },
    async showEditSupplier(supplierId){
@@ -484,9 +547,12 @@ export default {
        const {data:res} = await this.$http.post('/jc/supplier/updateSupplier',this.editSupplierForm);
        this.getSupplierList();
        this.edityonghuDialogVisible=false;
+       this.getSupplierList1();
+       this.getChasupTypelist();
     },
     chaSupplierResetForm(formName){
         this.$refs.chaSupplierRef.resetFields();
+        this.getSupplierList();
     },
     dialogClosed(){
         this.$refs.addSupplierRef.resetFields();

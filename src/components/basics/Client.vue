@@ -12,7 +12,15 @@
           <el-row :gutter="20">
             <el-form :inline="true" class="demo-form-inline" :model="chaclientForm"  ref="chaclientRef">
               <el-form-item label="客户名称：" prop="cusName">
-                <el-input placeholder="请输入客户名称" v-model="chaclientForm.cusName"></el-input>
+                <!-- <el-input placeholder="请输入客户名称" v-model="chaclientForm.cusName"></el-input> -->
+                <el-select v-model="chaclientForm.cusName" placeholder="请选择">
+                  <el-option
+                    v-for="item in chaClientList"
+                    :key="item.customerId"
+                    :label="item.cusName"
+                    :value="item.cusName">
+                  </el-option>
+                </el-select>
               </el-form-item>
               <el-form-item label="类型：" prop="cusType">
                 <el-input placeholder="请输入类型" v-model="chaclientForm.cusType"></el-input>
@@ -130,7 +138,7 @@
               v-for="item in province"
               :key="item.id"
               :label="item.value"
-              :value="item.id">
+              :value="item.value">
             </el-option>
           </el-select>
           <el-select
@@ -141,7 +149,7 @@
               v-for="item in shi1"
               :key="item.id"
               :label="item.value"
-              :value="item.id">
+              :value="item.value">
             </el-option>
           </el-select>
           <el-select
@@ -152,7 +160,7 @@
               v-for="item in qu1"
               :key="item.id"
               :label="item.value"
-              :value="item.id">
+              :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -216,7 +224,7 @@
               v-for="item in province"
               :key="item.id"
               :label="item.value"
-              :value="item.id">
+              :value="item.value">
             </el-option>
           </el-select>
           <el-select
@@ -227,7 +235,7 @@
               v-for="item in shi1"
               :key="item.id"
               :label="item.value"
-              :value="item.id">
+              :value="item.value">
             </el-option>
           </el-select>
           <el-select
@@ -238,7 +246,7 @@
               v-for="item in qu1"
               :key="item.id"
               :label="item.value"
-              :value="item.id">
+              :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -292,6 +300,7 @@ export default {
       delVisibleqi:false,
       selectedList: [],
       delarr:[],
+      chaClientList:[],
       clientList:[],
       chaclientForm: {
         cusName: "",
@@ -361,21 +370,28 @@ export default {
   },
   created() {
     this.getClientList();
+    this.getClientList1();
     this.getCityData();
   },
   methods: {
     async getClientList(){
-       const { data: res } = await this.$http.post("/jc/customer/selectCustomer",this.chaclientForm);
-      // console.log(res);
+       const { data: res } = await this.$http.post("jc/customer/selectCustomer",this.chaclientForm);
+      console.log(res);
       this.clientList = res;
+    },
+    async getClientList1(){
+       const { data: res } = await this.$http.post("jc/customer/selectCustomer",this.chaclientForm);
+      // console.log(res);
+      this.chaClientList = res;
     },
      async userStateChanged(userInfo) {
       //  console.log(userInfo);
-      const { data: res } = await this.$http.post("/jc/customer/updateCusstate",userInfo);
+      const { data: res } = await this.$http.post("jc/customer/updateCusstate",userInfo);
       this.getClientList();
     },
     chaclientResetForm(){
      this.$refs.chaclientRef.resetFields();
+     this.getClientList();
 
     },
     selectedqi(){
@@ -413,6 +429,8 @@ export default {
         this.$message.success("用户创建成功！");
         this.getClientList();
         this.addyonghuDialogVisible = false;
+        this.getClientList1();
+
       });
     },
     async showEditClient(customerId){
@@ -422,6 +440,8 @@ export default {
       console.log(res);
       this.editClientForm=res;
       this.edityonghuDialogVisible=true;
+      this.getClientList1();
+
     },
     async editClient(){
        const {data:res} = await this.$http.post('jc/customer/updateCustomer',this.editClientForm);
@@ -521,7 +541,7 @@ export default {
       // 选省
       choseProvince:function(e) {
         for (var index2 in this.province) {
-          if (e === this.province[index2].id) {
+          if (e === this.province[index2].value) {
             this.shi1 = this.province[index2].children
             this.shi = this.province[index2].children[0].value
             this.qu1 =this.province[index2].children[0].children
@@ -533,7 +553,7 @@ export default {
       // 选市
       choseCity:function(e) {
         for (var index3 in this.city) {
-          if (e === this.city[index3].id) {
+          if (e === this.city[index3].value) {
             this.qu1 = this.city[index3].children
             this.qu = this.city[index3].children[0].value
             this.E = this.qu1[0].id

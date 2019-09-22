@@ -38,14 +38,15 @@
           >批量禁用</el-button>
           <el-button type="danger" @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
           <el-table border stripe :data="tableData" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column type="index"></el-table-column>
-            <el-table-column prop="a" label="型号"></el-table-column>
+            <el-table-column type="selection" width="30"></el-table-column>
+            <el-table-column type="index" width="30"></el-table-column>
             <el-table-column prop="b" label="编号"></el-table-column>
+            <el-table-column prop="a" label="型号"></el-table-column>
+            <el-table-column prop="a" label="类型"></el-table-column>
             <el-table-column prop="c" label="单齿长/尺数" width="100px"></el-table-column>
-            <el-table-column prop="d" label="齿数/尺数"></el-table-column>
-            <el-table-column prop="e" label="纸宽/尺数"></el-table-column>
-            <el-table-column prop="f" label="片数/尺数" ></el-table-column>
+            <el-table-column prop="d" label="齿数/尺数" width="90px"></el-table-column>
+            <el-table-column prop="e" label="纸宽/尺数" width="90px"></el-table-column>
+            <el-table-column prop="f" label="片数/尺数" width="90px"></el-table-column>
             <el-table-column prop="g" label="纸张/净门幅" width="100px"></el-table-column>
             <el-table-column prop="h" label="片数/净门幅" width="100px"></el-table-column>
             <el-table-column prop="i" label="可用纸长"></el-table-column>
@@ -59,7 +60,7 @@
                 <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="190px">
+            <el-table-column label="操作" width="180px">
               <template>
                 <el-button type="primary" icon="el-icon-edit" size="mini">修改</el-button>
                 <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
