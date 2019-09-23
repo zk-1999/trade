@@ -143,7 +143,6 @@
                     :value="item.basicRetainone">
                   </el-option>
                 </el-select>
-              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -249,7 +248,7 @@
                     :value="item.basicRetainone">
                   </el-option>
                 </el-select>
-              </el-select>
+
             </el-form-item>
           </el-col>
         </el-row>
@@ -529,10 +528,6 @@ export default {
         this.addyonghuDialogVisible = false;
         this.getSupplierList1();
         this.getChasupTypelist();
-        console.log('-----------------------------');
-        
-        console.log(this.province);
-        
       });
     },
    async showEditSupplier(supplierId){

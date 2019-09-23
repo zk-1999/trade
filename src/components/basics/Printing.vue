@@ -43,18 +43,21 @@
             <el-table-column prop="b" label="编号"></el-table-column>
             <el-table-column prop="a" label="型号"></el-table-column>
             <el-table-column prop="a" label="类型"></el-table-column>
-            <el-table-column prop="c" label="单齿长/尺数" width="100px"></el-table-column>
-            <el-table-column prop="d" label="齿数/尺数" width="90px"></el-table-column>
-            <el-table-column prop="e" label="纸宽/尺数" width="90px"></el-table-column>
-            <el-table-column prop="f" label="片数/尺数" width="90px"></el-table-column>
-            <el-table-column prop="g" label="纸张/净门幅" width="100px"></el-table-column>
-            <el-table-column prop="h" label="片数/净门幅" width="100px"></el-table-column>
+            <el-table-column prop="c" label="单齿长"></el-table-column>
+            <el-table-column prop="d" label="齿数"></el-table-column>
+            <el-table-column prop="e" label="纸宽"  width="90px"></el-table-column>
+            <el-table-column prop="f" label="片数" ></el-table-column>
+            <el-table-column prop="g" label="纸张"  width="90px"></el-table-column>
+            <el-table-column prop="h" label="片数" ></el-table-column>
             <el-table-column prop="i" label="可用纸长"></el-table-column>
             <el-table-column prop="j" label="计划纸长"></el-table-column>
             <el-table-column prop="k" label="放量"></el-table-column>
             <el-table-column prop="l" label="片数"></el-table-column>
             <el-table-column prop="m" label="印刷米数"></el-table-column>
             <el-table-column prop="n" label="印刷重量"></el-table-column>
+            <el-table-column prop="l" label="机台号"></el-table-column>
+            <el-table-column prop="m" label="模具号"></el-table-column>
+            <el-table-column prop="n" label="产能"></el-table-column>
             <el-table-column label="状态" width="65px">
               <template>
                 <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>

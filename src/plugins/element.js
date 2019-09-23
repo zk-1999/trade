@@ -40,6 +40,7 @@ import {
     RadioGroup,
     Radio,
     Badge,
+    Image,
 } from 'element-ui'
 Vue.use(Button)
 Vue.use(Form)
@@ -79,5 +80,8 @@ Vue.use(Upload)
 Vue.use(RadioGroup)
 Vue.use(Radio)
 Vue.use(Badge)
+Vue.use(Image)
+
+
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
