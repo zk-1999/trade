@@ -14,11 +14,11 @@
                     <el-form-item label="编号：">
                     <el-input placeholder="请输入编号"></el-input>
                     </el-form-item>
-                    <el-form-item label="类型：">
+                    <!-- <el-form-item label="类型：">
                     <el-select placeholder="请选择类型">
                       <el-option></el-option>
                     </el-select>
-                    </el-form-item>
+                    </el-form-item> -->
                     <el-form-item>
                         <el-button >查询</el-button>
                         <el-button type="primary">重置</el-button>
@@ -28,36 +28,31 @@
           <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
           <el-button
             type="warning"
-            @click="editbumenDialogVisible= true"
+            @click="selectedqi"
             :disabled="selectedList.length == 0"
-          >批量启用</el-button>
-          <el-button
-            type="warning"
-            @click="editbumenDialogVisible= true"
-            :disabled="selectedList.length == 0"
-          >批量禁用</el-button>
-          <el-button type="danger" @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
-          <el-table border stripe :data="tableData" @selection-change="handleSelectionChange">
+          >批量启用/禁用</el-button>
+          <el-button type="danger" @click="selected" :disabled="selectedList.length == 0">批量删除</el-button>
+          <el-table border stripe :data="PrintingList" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="30"></el-table-column>
             <el-table-column type="index" width="30"></el-table-column>
-            <el-table-column prop="b" label="编号"></el-table-column>
-            <el-table-column prop="a" label="型号"></el-table-column>
-            <el-table-column prop="a" label="类型"></el-table-column>
-            <el-table-column prop="c" label="单齿长"></el-table-column>
-            <el-table-column prop="d" label="齿数"></el-table-column>
-            <el-table-column prop="e" label="纸宽"  width="90px"></el-table-column>
-            <el-table-column prop="f" label="片数" ></el-table-column>
-            <el-table-column prop="g" label="纸张"  width="90px"></el-table-column>
-            <el-table-column prop="h" label="片数" ></el-table-column>
-            <el-table-column prop="i" label="可用纸长"></el-table-column>
-            <el-table-column prop="j" label="计划纸长"></el-table-column>
-            <el-table-column prop="k" label="放量"></el-table-column>
-            <el-table-column prop="l" label="片数"></el-table-column>
-            <el-table-column prop="m" label="印刷米数"></el-table-column>
-            <el-table-column prop="n" label="印刷重量"></el-table-column>
-            <el-table-column prop="l" label="机台号"></el-table-column>
-            <el-table-column prop="m" label="模具号"></el-table-column>
-            <el-table-column prop="n" label="产能"></el-table-column>
+            <el-table-column prop="parametersId" label="编号"></el-table-column>
+            <el-table-column prop="parametersName" label="型号"></el-table-column>
+            <el-table-column prop="productType" label="类型"></el-table-column>
+            <el-table-column prop="parametersSingle" label="单齿长"></el-table-column>
+            <el-table-column prop="parametersSinglenum" label="齿数"></el-table-column>
+            <el-table-column prop="parametersPaperwidth" label="纸宽"  width="90px"></el-table-column>
+            <el-table-column prop="parametersTeethnum" label="片数" ></el-table-column>
+            <el-table-column prop="parametersDoorwidth" label="纸张"  width="90px"></el-table-column>
+            <el-table-column prop="parametersDoornum" label="片数" ></el-table-column>
+            <el-table-column prop="parametersUsablepaper" label="可用纸长"></el-table-column>
+            <el-table-column prop="parametersPlanpaper" label="计划纸长"></el-table-column>
+            <el-table-column prop="parametersVolume" label="放量"></el-table-column>
+            <el-table-column prop="parametersNumber" label="片数"></el-table-column>
+            <el-table-column prop="parametersMetre" label="印刷米数"></el-table-column>
+            <el-table-column prop="parametersWeight" label="印刷重量"></el-table-column>
+            <el-table-column prop="" label="机台号"></el-table-column>
+            <el-table-column prop="" label="模具号"></el-table-column>
+            <el-table-column prop="" label="产能"></el-table-column>
             <el-table-column label="状态" width="65px">
               <template>
                 <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
@@ -117,7 +112,7 @@
           <el-button type="primary" @click="addyonghuDialogVisible = false">确 定</el-button>
         </span>
       </el-dialog>
-      <el-dialog
+      <!-- <el-dialog
         title="编辑印刷参数"
         :visible.sync="edityonghuDialogVisible"
         width="48%"
@@ -153,45 +148,77 @@
           <el-button @click="edityonghuDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="edityonghuDialogVisible = false">确 定</el-button>
         </span>
-      </el-dialog>
+      </el-dialog> -->
+      <el-dialog title="提示" :visible.sync="delVisible" width="300px">
+      <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
+      <span slot="footer" class="dialog-footer">
+          <el-button @click="delVisible = false">取 消</el-button>
+          <el-button type="primary" @click="deleteRow" >确 定</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog title="提示" :visible.sync="delVisibleqi" width="300px">
+      <div class="del-dialog-cnt">此操作将批量启用, 是否继续？</div>
+      <span slot="footer" class="dialog-footer">
+          <el-button @click="delVisibleqi = false">取 消</el-button>
+          <el-button type="primary" @click="deleteRowqi" >确 定</el-button>
+      </span>
+    </el-dialog>
     </div>
 </template>
 <script>
 export default {
   data () {
     return {
-       labelPosition: 'right',
-       addyonghuDialogVisible: false,
-       edityonghuDialogVisible:false,
-       resetPassdialogVisible:false,
-       currentPage1: 5,
-       currentPage2: 5,
-       currentPage3: 5,
-       currentPage4: 4,
-         tableData: [{
-          a: '4oz单层',
-          b: 'SW-04',
-          c: '3.175',
-          d:'125',
-          e:'396.8750',
-          f:'5',
-          g:'732.7464',
-          h:'4',
-          i:'737',
-          j:'737',
-          k:'4.2536',
-          l:'20',
-          m:'586',
-          n:'2667',
-          o:'杯子'
-        }],
+      labelPosition: 'right',
+      addyonghuDialogVisible: false,
+      edityonghuDialogVisible:false,
+      resetPassdialogVisible:false,
+      delVisible:false,
+      delVisibleqi:false,
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4,
       selectedList: [],
-
+      PrintingList:[],
+      delarr:[],
+      
     }
   },
   created () {
   },
   methods:{
+    async getPrintingList() {
+      const { data: res } = await this.$http.post("jc/Parameters/selectParameter");
+      console.log(res);
+      this.PrintingList = res;
+    },
+    selectedqi(){
+      this.delarr=[];
+      this.delVisibleqi = true;
+      for (let i = 0; i < this.selectedList.length; i++) {
+        this.delarr.push({supplierId:this.selectedList[i].supplierId,supState:this.selectedList[i].supState==1?0:1})
+      }
+      console.log(this.delarr);
+    },
+    selected(){
+      this.delarr=[];
+      this.delVisible = true;
+      for (let i = 0; i < this.selectedList.length; i++) {
+        this.delarr.push(this.selectedList[i].supplierId)
+      }
+      console.log(this.delarr);
+    },
+    async deleteRow(){
+         const {data:res} = await this.$http.post('/jc/supplier/deleteSup',this.delarr);
+         this.delVisible = false;
+         this.getSupplierList();
+      },
+      async deleteRowqi(){
+         const {data:res} = await this.$http.post('jc/supplier/updatestate',this.delarr);
+         this.delVisibleqi = false;
+         this.getSupplierList();
+      },
     handleSelectionChange(val) {
       console.log(val);
       this.selectedList = val;

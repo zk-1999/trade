@@ -52,15 +52,23 @@
             <el-table-column prop="" label="颜色" align="center">
               <template slot-scope="scope">
                 <!-- {{scope.row.designCol2}} -->
-                <el-tag v-if="scope.row.designCol1!=''&&scope.row.designCol1!=null">{{scope.row.designCol1}}</el-tag>
+                <div><el-tag v-if="scope.row.designCol1!=''&&scope.row.designCol1!=null">{{scope.row.designCol1}}</el-tag>
+                <el-tag type="success" v-if="scope.row.designCol2!=''&&scope.row.designCol2!=null">{{scope.row.designCol2}}</el-tag>
+                <el-tag type="info" v-if="scope.row.designCol3!=''&&scope.row.designCol3!=null">{{scope.row.designCol3}}</el-tag>
+                <el-tag type="warning" v-if="scope.row.designCol4!=''&&scope.row.designCol4!=null">{{scope.row.designCol4}}</el-tag> </div>
+                <!-- <el-tag v-if="scope.row.designCol1!=''&&scope.row.designCol1!=null">{{scope.row.designCol1}}</el-tag>
                 <el-tag type="success" v-if="scope.row.designCol2!=''&&scope.row.designCol2!=null">{{scope.row.designCol2}}</el-tag>
                 <el-tag type="info" v-if="scope.row.designCol3!=''&&scope.row.designCol3!=null">{{scope.row.designCol3}}</el-tag>
                 <el-tag type="warning" v-if="scope.row.designCol4!=''&&scope.row.designCol4!=null">{{scope.row.designCol4}}</el-tag> 
-                </br>
-                <el-tag v-if="scope.row.designCol5!=''&&scope.row.designCol5!=null">{{scope.row.designCol5}}</el-tag>
+                </br> -->
+                <div><el-tag v-if="scope.row.designCol5!=''&&scope.row.designCol5!=null">{{scope.row.designCol5}}</el-tag>
                 <el-tag type="success" v-if="scope.row.designCol6!=''&&scope.row.designCol6!=null">{{scope.row.designCol6}}</el-tag>
                 <el-tag type="info" v-if="scope.row.designCol7!=''&&scope.row.designCol7!=null">{{scope.row.designCol7}}</el-tag>
-                <el-tag type="warning" v-if="scope.row.designCol8!=''&&scope.row.designCol8!=null">{{scope.row.designCol8}}</el-tag>
+                <el-tag type="warning" v-if="scope.row.designCol8!=''&&scope.row.designCol8!=null">{{scope.row.designCol8}}</el-tag></div>
+                <!-- <el-tag v-if="scope.row.designCol5!=''&&scope.row.designCol5!=null">{{scope.row.designCol5}}</el-tag>
+                <el-tag type="success" v-if="scope.row.designCol6!=''&&scope.row.designCol6!=null">{{scope.row.designCol6}}</el-tag>
+                <el-tag type="info" v-if="scope.row.designCol7!=''&&scope.row.designCol7!=null">{{scope.row.designCol7}}</el-tag>
+                <el-tag type="warning" v-if="scope.row.designCol8!=''&&scope.row.designCol8!=null">{{scope.row.designCol8}}</el-tag> -->
                 <!-- {{scope.row.designCol1==null?'':scope.row.designCol1+','+scope.row.designCol2+','+scope.row.designCol3+','+scope.row.designCol4+','+
                 scope.row.designCol5+','+scope.row.designCol6+','+scope.row.designCol7+','+scope.row.designCol8}} -->
               </template>

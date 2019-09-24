@@ -364,9 +364,6 @@ export default {
         supTown: "",
         supAddress: "",
         supBank: "",
-        // sheng: '',
-        // shi: '',
-        // qu: '',
       },
       editSupplierForm: {
         supId: "",
@@ -397,29 +394,6 @@ export default {
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
           ],},
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      selectsup: ""
     };
   },
   created() {

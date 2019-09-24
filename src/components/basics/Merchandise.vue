@@ -7,10 +7,9 @@
       <el-breadcrumb-item>供应商商品管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-row :gutter="20" class="row">
-        <el-col :span="24">
-          <el-row :gutter="20">
-            <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
+      <el-tabs @tab-click="handleClick" type="border-card">
+    <el-tab-pane label="纸张" >
+      <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
               <el-form-item label="供应商名称：" prop="supName">
                 <el-select v-model="chamerchandiseForm.supName" placeholder="请选择">
                   <el-option
@@ -18,16 +17,6 @@
                     :key="item.suppliergoolsId"
                     :label="item.supName"
                     :value="item.supName">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="商品大类型：" prop="supgoolsBigType">
-                <el-select v-model="chamerchandiseForm.supgoolsBigType" placeholder="请选择">
-                  <el-option
-                    v-for="item in chamerchandiseForm1"
-                    :key="item.suppliergoolsId"
-                    :label="item.supgoolsBigType"
-                    :value="item.supgoolsBigType">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -42,11 +31,10 @@
                 </el-select>
               </el-form-item>
               <el-form-item>
-                <el-button @click="getMerchandiseList">查询</el-button>
+                <el-button @click="getMerchandiseList5">查询</el-button>
                 <el-button type="primary" @click="chaMerchandiseResetForm">重置</el-button>
               </el-form-item>
             </el-form>
-          </el-row>
           <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
           <el-button
             type="warning"
@@ -54,63 +42,20 @@
             :disabled="selectedList.length == 0"
           >批量启用/禁用</el-button>
           <el-button type="danger" @click="selected" :disabled="selectedList.length == 0">批量删除</el-button>
-          <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
+      <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="35" align="center"></el-table-column>
             <el-table-column type="index" width="35" fixed align="center"></el-table-column>
-            <el-table-column prop="supId" label="供应商编码" width="100px" align="center"></el-table-column>
-            <el-table-column prop="supName" label="供应商名称" width="100px" align="center"></el-table-column>
-            <el-table-column prop="supgoolsBigType" label="商品大类型" width="100px" align="center"></el-table-column>
+            <el-table-column prop="supId" label="供应商编码"  align="center"></el-table-column>
+            <el-table-column prop="supName" label="供应商名称"  align="center"></el-table-column>
+            <el-table-column prop="supgoolsBigType" label="商品大类型"  align="center"></el-table-column>
             <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
-            <el-table-column prop="supgoolssmallType" label="商品小类型" width="100px" align="center">
-              <template slot-scope="scope">
-                {{scope.row.supgoolssmallType != ''  ? scope.row.supgoolssmallType : '-'}}
-              </template>
-            </el-table-column>
-            <el-table-column prop="supgoolCoated" label="淋膜类型" width="120px" align="center">
-              <template slot-scope="scope">
-                {{scope.row.supgoolCoated != '' ? scope.row.supgoolCoated : '-'}}
-              </template>
-            </el-table-column>
-            <el-table-column prop="supgoolsBrand" label="品牌" align="center">
-              <template slot-scope="scope">
-                {{scope.row.supgoolsBrand != '' ? scope.row.supgoolsBrand : '-'}}
-              </template>
-            </el-table-column>
-            <el-table-column prop="supgoolsWeight" label="克重" align="center">
-              <template slot-scope="scope">
-                {{scope.row.supgoolsWeight != null ? scope.row.supgoolsWeight : '-'}}
-              </template>
-            </el-table-column>
-            <el-table-column prop="supgoolsWidths" label="门幅" align="center">
-              <template slot-scope="scope">
-                {{scope.row.supgoolsWidths != null ? scope.row.supgoolsWidths : '-'}}
-              </template>
-            </el-table-column>
-            <el-table-column prop="supgoolsBradth" label="宽度" align="center">
-              <template slot-scope="scope">
-                {{scope.row.supgoolsBradth != null ? scope.row.supgoolsBradth : '-'}}
-              </template>
-            </el-table-column>
-            <el-table-column prop="supgoolsLength" label="尺寸/长" align="center">
-            <template slot-scope="scope">
-                {{scope.row.supgoolsLength != null ? scope.row.supgoolsLength : '-'}}
-              </template></el-table-column>
-            <el-table-column prop="supgoolsWidth" label="尺寸/宽" align="center">
-            <template slot-scope="scope">
-                {{scope.row.supgoolsWidth != null ? scope.row.supgoolsWidth : '-'}}
-              </template></el-table-column>
-            <el-table-column prop="supgoolsHeight" label="尺寸/高" align="center">
-            <template slot-scope="scope">
-                {{scope.row.supgoolsHeight != null ? scope.row.supgoolsHeight : '-'}}
-              </template></el-table-column>
-            <el-table-column prop="supgoolsColor" label="颜色" align="center">
-              <template slot-scope="scope">
-                {{scope.row.supgoolsColor != '' ? scope.row.supgoolsColor : '-'}}
-              </template>
-            </el-table-column>
+            <el-table-column prop="supgoolssmallType" label="商品小类型"  align="center"></el-table-column>
+            <el-table-column prop="supgoolCoated" label="淋膜类型"  align="center"></el-table-column>
+            <el-table-column prop="supgoolsBrand" label="品牌" align="center"></el-table-column>
+            <el-table-column prop="supgoolsWeight" label="克重" align="center"></el-table-column>
+            <el-table-column prop="supgoolsWidths" label="门幅" align="center"></el-table-column>
             <el-table-column label="状态" width="65px" align="center">
               <template slot-scope="scope">
-                <!-- {{scope.row}} -->
                 <el-switch
                   v-model="scope.row.supgoolsState"
                   active-color="#13ce66"
@@ -133,102 +78,281 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage4"
-            :page-sizes="[100, 200, 300, 400]"
-            :page-size="100"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="400"
-          ></el-pagination>
-          <!-- <el-table :data="tableData" class="shoop" border style="width: 100%">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column type="index" width="50" fixed></el-table-column>
-            <el-table-column prop="date" label="供应商编码"></el-table-column>
-            <el-table-column prop="name" label="供应商名称"></el-table-column>
-            <el-table-column prop="name" label="商品大类型"></el-table-column>
-            <el-table-column prop="name" label="商品编号"></el-table-column>
-            <el-table-column prop="name" label="商品小类型"></el-table-column>
-            <el-table-column prop="name" label="克重"></el-table-column>
-            <el-table-column label="状态" width="65px">
-              <template>
-                <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+    </el-tab-pane>
+    <el-tab-pane label="纸箱" >
+      <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
+              <el-form-item label="供应商名称：" prop="supName">
+                <el-select v-model="chamerchandiseForm.supName" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.suppliergoolsId"
+                    :label="item.supName"
+                    :value="item.supName">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="商品小类型：" prop="supgoolssmallType">
+                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.suppliergoolsId"
+                    :label="item.supgoolssmallType"
+                    :value="item.supgoolssmallType">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-button @click="getMerchandiseList6">查询</el-button>
+                <el-button type="primary" @click="chaMerchandiseResetForm">重置</el-button>
+              </el-form-item>
+            </el-form>
+          <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+          <el-button
+            type="warning"
+            @click="selectedqi"
+            :disabled="selectedList.length == 0"
+          >批量启用/禁用</el-button>
+          <el-button type="danger" @click="selected" :disabled="selectedList.length == 0">批量删除</el-button>
+      <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="35" align="center"></el-table-column>
+            <el-table-column type="index" width="35" fixed align="center"></el-table-column>
+            <el-table-column prop="supId" label="供应商编码" align="center"></el-table-column>
+            <el-table-column prop="supName" label="供应商名称" align="center"></el-table-column>
+            <el-table-column prop="supgoolsBigType" label="商品大类型" align="center"></el-table-column>
+            <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
+            <el-table-column prop="supgoolssmallType" label="商品小类型" align="center"></el-table-column>
+            <el-table-column prop="supgoolsWeight" label="克重" align="center"></el-table-column>
+            <el-table-column label="状态" width="65px" align="center">
+              <template slot-scope="scope">
+                <el-switch
+                  v-model="scope.row.supgoolsState"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="190px">
-              <template>
-                <el-button type="primary" icon="el-icon-edit" size="mini">修改</el-button>
-                <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-          <el-table :data="tableData" class="shoop" border style="width: 100%">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column type="index" width="50"></el-table-column>
-            <el-table-column prop="date" label="供应商编码"></el-table-column>
-            <el-table-column prop="name" label="供应商名称"></el-table-column>
-            <el-table-column prop="name" label="商品大类型"></el-table-column>
-            <el-table-column prop="name" label="商品编号"></el-table-column>
-            <el-table-column prop="name" label="商品小类型"></el-table-column>
-            <el-table-column prop="name" label="尺寸/长"></el-table-column>
-            <el-table-column prop="name" label="尺寸/宽"></el-table-column>
-            <el-table-column prop="name" label="尺寸/高"></el-table-column>
-            <el-table-column label="状态" width="65px">
-              <template>
-                <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作" width="190px">
-              <template>
-                <el-button type="primary" icon="el-icon-edit" size="mini">修改</el-button>
-                <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-          <el-table :data="tableData" class="shoop" border style="width: 100%">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column type="index" width="50"></el-table-column>
-            <el-table-column prop="date" label="供应商编码"></el-table-column>
-            <el-table-column prop="name" label="供应商名称"></el-table-column>
-            <el-table-column prop="name" label="商品大类型"></el-table-column>
-            <el-table-column prop="name" label="商品编号"></el-table-column>
-            <el-table-column prop="name" label="淋膜类型"></el-table-column>
-            <el-table-column label="状态" width="65px">
-              <template>
-                <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作" width="190px">
-              <template>
-                <el-button type="primary" icon="el-icon-edit" size="mini">修改</el-button>
-                <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
+            <el-table-column label="操作" width="190px" align="center">
+              <template slot-scope="scope">
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showMerchandise(scope.row.suppliergoolsId)">修改</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.suppliergoolsId)"
+                  size="mini"
+                >删除</el-button>
               </template>
             </el-table-column>
           </el-table>
-          <el-table :data="tableData" class="shoop" border style="width: 100%">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column type="index" width="50"></el-table-column>
-            <el-table-column prop="date" label="供应商编码"></el-table-column>
-            <el-table-column prop="name" label="供应商名称"></el-table-column>
-            <el-table-column prop="name" label="商品大类型"></el-table-column>
-            <el-table-column prop="name" label="商品编号"></el-table-column>
-            <el-table-column prop="name" label="宽度"></el-table-column>
-            <el-table-column prop="name" label="颜色"></el-table-column>
-            <el-table-column label="状态" width="65px">
-              <template>
-                <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+    </el-tab-pane>
+    <el-tab-pane label="袋子" >
+      <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
+              <el-form-item label="供应商名称：" prop="supName">
+                <el-select v-model="chamerchandiseForm.supName" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.suppliergoolsId"
+                    :label="item.supName"
+                    :value="item.supName">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="商品小类型：" prop="supgoolssmallType">
+                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.suppliergoolsId"
+                    :label="item.supgoolssmallType"
+                    :value="item.supgoolssmallType">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-button @click="getMerchandiseList7">查询</el-button>
+                <el-button type="primary" @click="chaMerchandiseResetForm">重置</el-button>
+              </el-form-item>
+            </el-form>
+          <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+          <el-button
+            type="warning"
+            @click="selectedqi"
+            :disabled="selectedList.length == 0"
+          >批量启用/禁用</el-button>
+          <el-button type="danger" @click="selected" :disabled="selectedList.length == 0">批量删除</el-button>
+      <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="35" align="center"></el-table-column>
+            <el-table-column type="index" width="35" fixed align="center"></el-table-column>
+            <el-table-column prop="supId" label="供应商编码" width="100px" align="center"></el-table-column>
+            <el-table-column prop="supName" label="供应商名称" width="100px" align="center"></el-table-column>
+            <el-table-column prop="supgoolsBigType" label="商品大类型" width="100px" align="center"></el-table-column>
+            <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
+            <el-table-column prop="supgoolsLength" label="尺寸/长" align="center"></el-table-column>
+            <el-table-column prop="supgoolsWidth" label="尺寸/宽" align="center"></el-table-column>
+            <el-table-column prop="supgoolsHeight" label="尺寸/高" align="center"></el-table-column>
+            <el-table-column label="状态" width="65px" align="center">
+              <template slot-scope="scope">
+                <el-switch
+                  v-model="scope.row.supgoolsState"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="190px">
-              <template>
-                <el-button type="primary" icon="el-icon-edit" size="mini">修改</el-button>
-                <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
+            <el-table-column label="操作" width="190px" align="center">
+              <template slot-scope="scope">
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showMerchandise(scope.row.suppliergoolsId)">修改</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.suppliergoolsId)"
+                  size="mini"
+                >删除</el-button>
               </template>
             </el-table-column>
-          </el-table> -->
-        </el-col>
-      </el-row>
+          </el-table>
+    </el-tab-pane>
+    <el-tab-pane label="油墨" >
+      <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
+              <el-form-item label="供应商名称：" prop="supName">
+                <el-select v-model="chamerchandiseForm.supName" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.suppliergoolsId"
+                    :label="item.supName"
+                    :value="item.supName">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="商品小类型：" prop="supgoolssmallType">
+                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.suppliergoolsId"
+                    :label="item.supgoolssmallType"
+                    :value="item.supgoolssmallType">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-button @click="getMerchandiseList8">查询</el-button>
+                <el-button type="primary" @click="chaMerchandiseResetForm">重置</el-button>
+              </el-form-item>
+            </el-form>
+          <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+          <el-button
+            type="warning"
+            @click="selectedqi"
+            :disabled="selectedList.length == 0"
+          >批量启用/禁用</el-button>
+          <el-button type="danger" @click="selected" :disabled="selectedList.length == 0">批量删除</el-button>
+      <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="35" align="center"></el-table-column>
+            <el-table-column type="index" width="35" fixed align="center"></el-table-column>
+            <el-table-column prop="supId" label="供应商编码" align="center"></el-table-column>
+            <el-table-column prop="supName" label="供应商名称" align="center"></el-table-column>
+            <el-table-column prop="supgoolsBigType" label="商品大类型" align="center"></el-table-column>
+            <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
+            <el-table-column prop="supgoolCoated" label="淋膜类型" align="center"></el-table-column>
+            <el-table-column label="状态" width="65px" align="center">
+              <template slot-scope="scope">
+                <el-switch
+                  v-model="scope.row.supgoolsState"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="190px" align="center">
+              <template slot-scope="scope">
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showMerchandise(scope.row.suppliergoolsId)">修改</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.suppliergoolsId)"
+                  size="mini"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+    </el-tab-pane>
+    
+    <el-tab-pane label="胶带" >
+      <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
+              <el-form-item label="供应商名称：" prop="supName">
+                <el-select v-model="chamerchandiseForm.supName" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.suppliergoolsId"
+                    :label="item.supName"
+                    :value="item.supName">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="商品小类型：" prop="supgoolssmallType">
+                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.suppliergoolsId"
+                    :label="item.supgoolssmallType"
+                    :value="item.supgoolssmallType">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-button @click="getMerchandiseList9">查询</el-button>
+                <el-button type="primary" @click="chaMerchandiseResetForm">重置</el-button>
+              </el-form-item>
+            </el-form>
+          <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+          <el-button
+            type="warning"
+            @click="selectedqi"
+            :disabled="selectedList.length == 0"
+          >批量启用/禁用</el-button>
+          <el-button type="danger" @click="selected" :disabled="selectedList.length == 0">批量删除</el-button>
+      <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="35" align="center"></el-table-column>
+            <el-table-column type="index" width="35" fixed align="center"></el-table-column>
+            <el-table-column prop="supId" label="供应商编码"  align="center"></el-table-column>
+            <el-table-column prop="supName" label="供应商名称" align="center"></el-table-column>
+            <el-table-column prop="supgoolsBigType" label="商品大类型" align="center"></el-table-column>
+            <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
+            <el-table-column prop="supgoolsBradth" label="宽度" align="center"></el-table-column>
+            <el-table-column prop="supgoolsColor" label="颜色" align="center"></el-table-column>
+            <el-table-column label="状态" width="65px" align="center">
+              <template slot-scope="scope">
+                <el-switch
+                  v-model="scope.row.supgoolsState"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="190px" align="center">
+              <template slot-scope="scope">
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showMerchandise(scope.row.suppliergoolsId)">修改</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.suppliergoolsId)"
+                  size="mini"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+    </el-tab-pane>
+  </el-tabs>
     </el-card>
     <el-dialog
       title="新增供应商商品"
@@ -446,8 +570,8 @@ export default {
       chamerchandiseForm1:[],
       chamerchandiseForm:{
         supName:'',
-        supgoolsBigType:'',
-        supgoolssmallType:''
+        supgoolssmallType:'',
+        lab:'纸张',
       },
       delarr:[],
       merchandiseList:[],
@@ -467,6 +591,7 @@ export default {
         supgoolsColor:'',
         supId:'',
       },
+
       editMerchandiseFrom:{
         supgoolsId:'',
         supName:'',
@@ -496,11 +621,39 @@ export default {
 
   },
   methods: {
+   async handleClick(tab) {
+        this.chamerchandiseForm.lab=tab.label;
+        const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+        this.merchandiseList = res;
+      },
    async getMerchandiseList(){
+      this.chamerchandiseForm.lab=this.chamerchandiseForm.lab;
       const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
-      // console.log(res);
-      console.log(this.chamerchandiseForm);
-      
+      this.merchandiseList = res;
+    },
+    async getMerchandiseList5(){
+      this.chamerchandiseForm.lab="纸张";
+      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res;
+    },
+    async getMerchandiseList6(){
+      this.chamerchandiseForm.lab="纸箱";
+      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res;
+    },
+    async getMerchandiseList7(){
+      this.chamerchandiseForm.lab="袋子";
+      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res;
+    },
+    async getMerchandiseList8(){
+      this.chamerchandiseForm.lab="油墨";
+      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res;
+    },
+    async getMerchandiseList9(){
+      this.chamerchandiseForm.lab="胶带";
+      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
       this.merchandiseList = res;
     },
     async getMerchandiseList1(){
@@ -680,4 +833,5 @@ export default {
 .shoop {
   display: none;
 }
+
 </style>
