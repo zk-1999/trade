@@ -97,31 +97,105 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="产品编码：" prop="productId"><el-input placeholder="请输入产品编码" v-model="addProductionForm.productId"></el-input></el-form-item>      
-                    <el-form-item label="产品名称：" prop="productName"><el-input placeholder="请输入产品名称" v-model="addProductionForm.productName"></el-input></el-form-item>
-                    <el-form-item label="产品类型：" prop="productType"><el-input placeholder="请输入产品类型" v-model="addProductionForm.productType"></el-input></el-form-item>      
+                    <el-form-item label="产品名称：" prop="productName">
+                      <el-select v-model="addProductionForm.productName" placeholder="请选择">
+                        <el-option
+                          v-for="item in chanpingmingcheng"
+                          :key="item.basicId"
+                          :label="item.basicRetainone"
+                          :value="item.basicRetainone">
+                        </el-option>
+                      </el-select>
+                    </el-form-item>
+                    <el-form-item label="产品类型：" prop="productType">
+                      <el-select v-model="addProductionForm.productType" placeholder="请选择">
+                        <el-option
+                          v-for="item in chanpingleixing"
+                          :key="item.basicId"
+                          :label="item.basicRetainone"
+                          :value="item.basicRetainone">
+                        </el-option>
+                      </el-select>
+                    </el-form-item>      
                     
-                    <el-form-item label="纸张品牌/内：" prop="productBrandinner"><el-input placeholder="请输入纸张品牌/内" v-model="addProductionForm.productBrandinner"></el-input></el-form-item>     
+                    <el-form-item label="纸张品牌/内：" prop="productBrandinner">
+                    
+                    <el-select v-model="addProductionForm.productBrandinner" placeholder="请选择">
+                        <el-option
+                          v-for="item in zhizhang"
+                          :key="item.basicId"
+                          :label="item.basicRetainone"
+                          :value="item.basicRetainone">
+                        </el-option>
+                      </el-select>
+                    </el-form-item>     
                     <el-form-item label="克数/内：" prop="productGraminner"><el-input placeholder="请输入克数/内" v-model="addProductionForm.productGraminner"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/内：" prop="productCoatedinner"><el-input placeholder="请输入淋膜类型/内" v-model="addProductionForm.productCoatedinner"></el-input></el-form-item>   
+                    <el-form-item label="淋膜类型/内：" prop="productCoatedinner">
+                    <el-select v-model="addProductionForm.productCoatedinner" placeholder="请选择">
+                        <el-option
+                          v-for="item in linmo"
+                          :key="item.basicId"
+                          :label="item.basicRetainone"
+                          :value="item.basicRetainone">
+                        </el-option>
+                      </el-select>
+                    </el-form-item>   
                 </el-col>
                 <el-col :span="12"> 
-                    <el-form-item label="纸张品牌/外：" prop="productBrandabroad"><el-input placeholder="请输入纸张品牌/外" v-model="addProductionForm.productBrandabroad"></el-input></el-form-item>     
+                    <el-form-item label="纸张品牌/外：" prop="productBrandabroad">
+                    <el-select v-model="addProductionForm.productBrandabroad" placeholder="请选择">
+                        <el-option
+                          v-for="item in zhizhang"
+                          :key="item.basicId"
+                          :label="item.basicRetainone"
+                          :value="item.basicRetainone">
+                        </el-option>
+                      </el-select>
+                    </el-form-item>     
                     <el-form-item label="克数/外：" prop="productGramabroad"><el-input placeholder="请输入克数/外" v-model="addProductionForm.productGramabroad"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/外：" prop="productCoatedabroad"><el-input placeholder="请输入淋膜类型/外" v-model="addProductionForm.productCoatedabroad"></el-input></el-form-item>  
-                    <el-form-item label="纸张品牌/中：" prop="productBrandmid"><el-input placeholder="请输入纸张品牌/中" v-model="addProductionForm.productBrandmid"></el-input></el-form-item>     
+                    <el-form-item label="淋膜类型/外：" prop="productCoatedabroad">
+                    <el-select v-model="addProductionForm.productCoatedabroad" placeholder="请选择">
+                        <el-option
+                          v-for="item in linmo"
+                          :key="item.basicId"
+                          :label="item.basicRetainone"
+                          :value="item.basicRetainone">
+                        </el-option>
+                      </el-select>
+                    </el-form-item>  
+                    <el-form-item label="纸张品牌/中：" prop="productBrandmid">
+                    <el-select v-model="addProductionForm.productBrandmid" placeholder="请选择">
+                        <el-option
+                          v-for="item in zhizhang"
+                          :key="item.basicId"
+                          :label="item.basicRetainone"
+                          :value="item.basicRetainone">
+                        </el-option>
+                      </el-select>
+                    </el-form-item>     
                     <el-form-item label="克数/中：" prop="productGrammid"><el-input placeholder="请输入克数/中" v-model="addProductionForm.productGrammid"></el-input></el-form-item>
-                    <el-form-item label="淋膜类型/中：" prop="productCoatedmid"><el-input placeholder="请输入淋膜类型/中" v-model="addProductionForm.productCoatedmid"></el-input></el-form-item>             
+                    <el-form-item label="淋膜类型/中：" prop="productCoatedmid">
+                    <el-select v-model="addProductionForm.productCoatedmid" placeholder="请选择">
+                        <el-option
+                          v-for="item in linmo"
+                          :key="item.basicId"
+                          :label="item.basicRetainone"
+                          :value="item.basicRetainone">
+                        </el-option>
+                      </el-select>
+                    
+                    </el-form-item>             
                 </el-col>
             </el-row>
             <el-form-item label="设计稿：" prop="designCode">
-            <!-- <el-select v-model="addProductionForm.designCode" placeholder="请选择">
+            <el-select v-model="addProductionForm.designCode" placeholder="请选择">
                   <el-option
-                    v-for="item in chaSupplierForm1"
-                    :key="item.supplierId"
-                    :label="item.supName"
-                    :value="item.supName">
+                    v-for="item in shejigao"
+                    :key="item.designId"
+                    :label="item.designModel+'-'+item.designName+'-'+item.designName"
+                    :value="item.designId">
                   </el-option>
-                </el-select> -->
+                </el-select>
             </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -205,6 +279,11 @@ export default {
         productState:'',
         designCode:'',
       },
+      chanpingleixing:[],
+      linmo:[],
+      zhizhang:[],
+      chanpingmingcheng:[],
+      shejigao:[],
       addProductionRules: {
           productId:[
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -214,24 +293,42 @@ export default {
   },
   created () {
     this.getProductionList();
+    this.getProductionList1();
+
   },
   methods:{
     async getProductionList() {
       const { data: res } = await this.$http.post("jc/Produconggoods/selectProducing");
+      // console.log(res);
+      
       let design='';
       for (let index = 0; index < res.length; index++) {
         for (let i = 0; i < res[index].designDOs.length; i++) {
-          design=res[index].designDOs[i].designModel+'-'+res[index].designDOs[i].designName+'-'+res[index].designDOs[i].designDate
+          design=res[index].designDOs[i].designModel+'-'+res[index].designDOs[i].designDate+'-'+res[index].designDOs[i].designName
         }
         res[index].list=design;
       }
       this.ProductionList = res;
-      console.log(this.ProductionList);
     },
+    async getProductionList1() {
+      const { data: res } = await this.$http.post("jc/Basic/selectProducttype");
+      const { data: res1 } = await this.$http.post("jc/Basic/selectcoated");
+      const { data: res2 } = await this.$http.post("jc/Basic/selectparper");
+      const { data: res3 } = await this.$http.post("jc/Basic/selectProductName");
+      const { data: res4 } = await this.$http.post("jc/Design/selectdesignname");
+      this.chanpingleixing = res;
+      this.linmo = res1;
+      this.zhizhang = res2;
+      this.chanpingmingcheng = res3;
+      this.shejigao=res4;
+      console.log(res4);
+      
+    },
+    
     addSupplier() {
       this.$refs.addProductionRef.validate(async valid => {
         if (!valid) return;    
-        const { data: res } = await this.$http.post("/jc/supplier/addSupplier",this.addProductionForm);
+        const { data: res } = await this.$http.post("jc/Produconggoods/addProducing",this.addProductionForm);
         this.$message.success("用户创建成功！");
         this.getProductionList();
         this.addyonghuDialogVisible = false;
@@ -247,7 +344,6 @@ export default {
       for (let i = 0; i < this.selectedList.length; i++) {
         this.delarr.push({productgoodsId:this.selectedList[i].productgoodsId,productState:this.selectedList[i].productState==1?0:1})
       }
-      console.log(this.delarr);
     },
     selected(){
       this.delarr=[];
@@ -255,7 +351,6 @@ export default {
       for (let i = 0; i < this.selectedList.length; i++) {
         this.delarr.push(this.selectedList[i].productgoodsId)
       }
-      console.log(this.delarr);
     },
     async deleteRow(){
          const {data:res} = await this.$http.post('jc/Produconggoods/deleteProducingmore',this.delarr);
@@ -268,7 +363,6 @@ export default {
          this.getProductionList();
       },
     handleSelectionChange(val) {
-      console.log(val);
       this.selectedList = val;
     },
      handleSizeChange(val) {
