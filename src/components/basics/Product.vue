@@ -74,18 +74,17 @@
               </template>
             </el-table-column>
             <el-table-column prop="" label="图片" align="center">
-              <!-- <el-image
-                style="width: 200px; height: 100px"
-                :src="url"
-                ></el-image> -->
-                <div class="demo-image__preview">
+                <!-- <div class="demo-image__preview">
                   <el-image
                     style="width:200px; height: 100px"
                     :src="url" 
                     :preview-src-list="srcList"
                     >
                   </el-image>
-                </div>
+                </div> -->
+                <template scope="scope">
+                  <img :src="scope.row.designPicture" />
+                </template>
             </el-table-column>
             <el-table-column label="状态" width="65px" align="center">
               <template slot-scope="scope">
@@ -167,12 +166,26 @@
             
             <el-form-item label="上传设计稿：" prop="designPicture">
              <el-upload
-              action="https://jsonplaceholder.typicode.com/posts/"
-              list-type="picture-card"
-              :on-preview="handlePictureCardPreview"
-              :on-remove="handleRemove">
-              <i class="el-icon-plus"></i>
+                      ref="upload"
+                      action="http://192.168.31.234:8090/upload"
+                      name="picture"
+                      list-type="picture-card"
+                      :limit="1"
+                      :on-exceed="onExceed"
+                      :before-upload="beforeUpload"
+                      :on-preview="handlePreview"
+                      :on-success="handleSuccess"
+                      :on-remove="handleRemove">
+                <i class="el-icon-plus"></i>
             </el-upload>
+            <!-- <el-upload
+  action="http://192.168.31.234:8090/upload"
+  list-type="picture-card"
+  :on-preview="handlePictureCardPreview"
+  :on-remove="handleRemove">
+  <i class="el-icon-plus"></i>
+</el-upload> -->
+            
             </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -263,8 +276,6 @@
 export default {
   data () {
     return {
-      dialogImageUrl: '',
-      dialogVisible: false,
       labelPosition: 'right',
       addyonghuDialogVisible: false,
       edityonghuDialogVisible:false,
@@ -279,8 +290,6 @@ export default {
       delarr:[],
       productList:[],
       
-      dialogImageUrl: '',
-      dialogVisible: false,
       chaproductList:[{designState:1,a:'启用',designId:0},{designState:0,a:'禁用',designId:1}],
       chaProductForm:{
         designName:'',
@@ -315,6 +324,7 @@ export default {
         designCol7:'',
         designCol8:'',
       },
+      
       addProductRules: {
           designName:[
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -322,21 +332,79 @@ export default {
           ],},
       url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       srcList: [
-          'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-          'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-        ]
+          
+        ],
+        //文件上传的参数
+            dialogImageUrl: '',
+            dialogVisible: false,
+            //图片列表（用于在上传组件中回显图片）
     }
   },
   created () {
     this.getProductList();
   },
   methods:{
+    //文件上传成功的钩子函数
+        handleSuccess(res, file) {
+            this.$message({
+                type: 'info',
+                message: '图片上传成功',
+                duration: 6000
+            });
+            if (file.response.success) {
+                // this.editor.picture = file.response.message; //将返回的文件储存路径赋值picture字段
+                
+                this.addProductForm.designPicture=file.response.message;
+                // this.productList.picture=file.response.message;
+                console.log(file.response.message);
+                
+            }
+        },
+        //删除文件之前的钩子函数
+        handleRemove(file, fileList) {
+            this.$message({
+                type: 'info',
+                message: '已删除原有图片',
+                duration: 6000
+            });
+        },
+        //点击列表中已上传的文件事的钩子函数
+        handlePreview(file) {
+          this.dialogImageUrl = file.url;
+          this.dialogVisible = true;
+        },
+        //上传的文件个数超出设定时触发的函数
+        onExceed(files, fileList) {
+            this.$message({
+                type: 'info',
+                message: '最多只能上传一个图片',
+                duration: 6000
+            });
+        },
+        //文件上传前的前的钩子函数
+        //参数是上传的文件，若返回false，或返回Primary且被reject，则停止上传
+        beforeUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isGIF = file.type === 'image/gif';
+            const isPNG = file.type === 'image/png';
+            const isBMP = file.type === 'image/bmp';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG && !isGIF && !isPNG && !isBMP) {
+                this.$message.error('上传图片必须是JPG/GIF/PNG/BMP 格式!');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传图片大小不能超过 2MB!');
+            }
+            return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
+        },     
     async getProductList(){
       const { data: res } = await this.$http.post("jc/Design/selectDesign",this.chaProductForm);
       console.log(res);
       // console.log(this.chamerchandiseForm);
       
       this.productList = res;
+      
     },
     async userStateChanged(userInfo) {
       const { data: res } = await this.$http.post("jc/Design/updatedesignstate",userInfo);
