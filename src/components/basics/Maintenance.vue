@@ -962,7 +962,7 @@ export default {
     },
     chaMaintenanceResetForm(formName){
         this.$refs.chaMaintenanceRef.resetFields();
-        // this.handleClick(this.ta);
+        this.handleClick(this.ta);
     },
      handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
