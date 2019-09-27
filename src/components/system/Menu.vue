@@ -7,54 +7,84 @@
         <el-breadcrumb-item>菜单管理</el-breadcrumb-item>
       </el-breadcrumb>
       <el-card>
-         <el-row :gutter="20">
-           <span>&nbsp;&nbsp;&nbsp;菜单名称：</span>
-           <el-col :span="7">
-            <el-input placeholder="请输入菜单名称" clearable  class="cor" >
-              <el-button slot="append" icon="el-icon-search"></el-button>
-            </el-input>
-           </el-col>
-           <el-col :span="3">
-            <el-button class="chongzhi" type="primary">重置</el-button>
-           </el-col>
-        </el-row>
-         <el-button type="success" @click="addbumenDialogVisible = true">新增</el-button>
-         <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量启用</el-button>
-         <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量禁用</el-button>
-
-         <el-button type="danger" @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
-          <el-table border stripe :data="table" style="width: 100%" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55"></el-table-column>
+         <el-button type="success" @click="addbumenDialogVisible = true">新增一级菜单</el-button>
+         <el-button type="success" @click="addbumenDialogVisible1 = true">新增二级菜单</el-button>
+          <el-table border stripe :data="menuList"  style="width: 100% padding:0px" @selection-change="handleSelectionChange">   
             <el-table-column type="index"></el-table-column>
-            <el-table-column prop="a"  label="一级菜单名称" ></el-table-column>
-            <el-table-column prop="b" label="二级菜单名称"></el-table-column>
-            <el-table-column prop="c" label="菜单访问路径" ></el-table-column>
+            <el-table-column prop="name" label="菜单名称"></el-table-column>
+            <el-table-column prop="router" label="菜单访问路径"></el-table-column>
             <el-table-column label="状态" width="65px">
-              <template >
-                <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+              <template slot-scope="scope">
+                <!-- {{scope.row}} -->
+                <el-switch
+                  v-model="scope.row.isShow"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
               </template>
             </el-table-column>
-            <el-table-column  label="操作" width="190px">
+            <el-table-column  label="操作" width="90px">
               <template slot-scope="scope">
-                  <el-button type="primary" icon="el-icon-edit"  size="mini">修改</el-button>
-                  <el-button type="danger" icon="el-icon-delete" size="mini"  @click="removeGoods(scope.row.goods_id)">删除</el-button>
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditMenu(scope.row.menuId)">修改</el-button>
               </template>
             </el-table-column>
           </el-table>
+          <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      ></el-pagination>
       </el-card>
       <el-dialog
-        title="新增菜单"
+        title="新增一级菜单"
         :visible.sync="addbumenDialogVisible"
         width="30%"
-        :before-close="handleClose">
-        <el-form :label-position="labelPosition" label-width="120px">
-          <el-form-item label="一级菜单名称："><el-input placeholder="请输入一级菜单名称"></el-input></el-form-item>
-          <el-form-item label="二级菜单名称："><el-input placeholder="请输入二级菜单名称"></el-input></el-form-item>
-          <el-form-item label="菜单访问路径："><el-input placeholder="请输入菜单访问路径"></el-input></el-form-item>
+        :before-close="handleClose"
+        @closed="dialogClosed">
+        <el-form :label-position="labelPosition" label-width="140px"
+        :model="addMenuForm"
+        ref="addMenuRef"
+        :rules="addMenuRules">
+          <el-form-item label="一级菜单名称：" prop="name"><el-input placeholder="请输入一级菜单名称" v-model="addMenuForm.name"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="addbumenDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addbumenDialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="addMenu">确 定</el-button>
+        </span>
+      </el-dialog>
+      <el-dialog
+        title="新增二级菜单"
+        :visible.sync="addbumenDialogVisible1"
+        width="30%"
+        :before-close="handleClose"
+        @closed="dialogClosed">
+        <el-form :label-position="labelPosition" label-width="140px"
+        :model="addMenuForm"
+        ref="addMenuRef"
+        :rules="addMenuRules">
+          <el-form-item label="一级菜单名称：">
+            <el-select placeholder="请选择" v-model="addMenuForm.parentId">
+              <el-option
+                v-for="item in menuList1"
+                :key="item.menuId"
+                :label="item.name"
+                :value="item.menuId">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="二级菜单名称：" prop="name"><el-input placeholder="请输入二级菜单名称" v-model="addMenuForm.name"></el-input></el-form-item>
+          <el-form-item label="菜单访问路径：" prop="router"><el-input placeholder="请输入菜单访问路径" v-model="addMenuForm.router"></el-input></el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="addbumenDialogVisible1 = false">取 消</el-button>
+          <el-button type="primary" @click="addMenu">确 定</el-button>
         </span>
       </el-dialog>
       <el-dialog
@@ -62,14 +92,15 @@
         :visible.sync="editbumenDialogVisible"
         width="30%"
         :before-close="handleClose">
-        <el-form :label-position="labelPosition" label-width="120px">
-          <el-form-item label="一级菜单名称："><el-input placeholder="请输入一级菜单名称" v-model="table[0].a"></el-input></el-form-item>
-          <el-form-item label="二级菜单名称："><el-input placeholder="请输入二级菜单名称" v-model="table[0].b"></el-input></el-form-item>
-          <el-form-item label="菜单访问路径："><el-input placeholder="请输入菜单访问路径" v-model="table[0].c"></el-input></el-form-item>
+        <el-form :label-position="labelPosition" label-width="120px"
+        :model="editMenuForm"
+        ref="addMenuRef"
+        :rules="addMenuRules">
+          <el-form-item label="菜单名称：" prop="name"><el-input placeholder="请输入菜单名称" v-model="editMenuForm.name"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editbumenDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="editbumenDialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="editMenu">确 定</el-button>
         </span>
       </el-dialog>
 
@@ -82,33 +113,99 @@ export default {
     return {
       labelPosition: 'right',
       addbumenDialogVisible: false,
+      addbumenDialogVisible1: false,
       editbumenDialogVisible:false,
-      table: [{
-          a: '系统管理1',
-          b: '部门设置1',
-          c: 'department1',
-        },
-        {
-          a: '系统管理2',
-          b: '部门设置2',
-          c: 'department2',
-        },
-        {
-          a: '系统管理3',
-          b: '部门设置3',
-          c: 'department3',
-        },
-        {
-          a: '系统管理4',
-          b: '部门设置4',
-          c: 'department4',
-        }],
-        selectedList: []
+      currentPage: 0,
+      total:0,
+      menuList:[],
+      menuList1:[],
+      selectedList: [],
+      addMenuForm:{
+        name:'',
+        router:'',
+        parentId:0,
+      },
+      editMenuForm:{
+        name:'',
+      },
+      addMenuForm1:{
+      
+        parentId:0,
+      },
+      chaMenuForm:{
+         pageCode: 1, //当前页
+         pageSize: 5,//每页显示的记录数
+      },
+
+      addMenuRules: {
+        name:[
+        { required: true, message: '请输入用户名', trigger: 'blur' },
+        { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+        ],},
     }
   },
   created () {
+    this.getMenuList();
+    this.getMenuList1();
+
   },
   methods:{
+    async getMenuList() {
+      const { data: res } = await this.$http.post("sys/menu/listNew",{params:this.chaMenuForm});
+      // console.log(res);
+      this.total=res.body.total;
+      this.menuList = res.body.rows;
+    },
+    async getMenuList1() {
+      const { data: res } = await this.$http.post("sys/menu/listNewOne",{params:this.addMenuForm1});
+    
+      console.log(res.body.rows);
+      this.menuList1=res.body.rows;
+      
+    },
+    addMenu() {
+      this.$refs.addMenuRef.validate(async valid => {
+        if (!valid) return;    
+        const { data: res } = await this.$http.post("sys/menu/save",this.addMenuForm);
+        console.log(this.addMenuForm);
+        this.$message.success("用户创建成功！");
+        this.getMenuList();
+        this.getMenuList1();
+        this.addbumenDialogVisible = false;
+      });
+    },
+    async showEditMenu(menuId){
+      let param = new URLSearchParams();
+      param.append("id", menuId);
+      const {data:res} = await this.$http.post('sys/menu/getMenu',param);
+      this.editMenuForm=res.body.menu;
+      console.log(res);
+      
+      this.editbumenDialogVisible=true;
+    },
+    async editMenu(){
+       const {data:res} = await this.$http.post('sys/menu/update',this.editMenuForm);
+       this.getMenuList();
+       this.editbumenDialogVisible=false;
+    },
+    async userStateChanged(userInfo) {
+      const { data: res } = await this.$http.post("sys/menu/update",userInfo);
+       this.getMenuList();
+    },
+    dialogClosed(){
+        this.$refs.addMenuRef.resetFields();
+      },
+    handleSizeChange(val) {
+      this.chaMenuForm.pageSize=val;
+      console.log(`每页 ${val} 条`);
+      this.getMenuList();
+    },
+    handleCurrentChange(val) {
+      this.chaMenuForm.pageCode=val;
+      console.log(`当前页: ${val}`);
+      this.currentPage=val;
+      this.getMenuList();
+    },
     handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
@@ -152,10 +249,10 @@ export default {
     .el-table{
         margin-top: 15px;
     }
-    .el-button{
-      margin-top: 15px;
-    }
     .chongzhi{
       margin-top: 0px;
+    }
+    .el-form-item .el-input,.el-select{
+      width: 350px;
     }
 </style>
