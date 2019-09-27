@@ -6,42 +6,38 @@
         <el-breadcrumb-item>系统管理</el-breadcrumb-item>
         <el-breadcrumb-item>职务设置</el-breadcrumb-item>
       </el-breadcrumb>
-      <el-card class="quan">
-        <div class="shu">
-          <div class="togglr-button">全部部门</div>  
-          <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
-        </div>
-      </el-card>
       <el-card class="min1300">
         <el-row :gutter="20" class="row">
           <el-col :span="24">
             <el-row :gutter="20">
-                <span>&nbsp;&nbsp;&nbsp;职务名称：</span>
-                <el-col :span="7">
-                  <el-input placeholder="请输入职务名称" clearable  class="cor" >
-                    <el-button slot="append" icon="el-icon-search"></el-button>
-                  </el-input>
-                </el-col>
-                <el-col :span="3">
-                  <el-button type="primary" class="chongzhi">重置</el-button>
-                </el-col>
+               <el-form :inline="true" class="demo-form-inline" :model="chaDutyForm" ref="chaDepartmentRef">
+              <el-form-item label="职务名称：" prop="a">
+                <el-input placeholder="请输入职务名称" v-model="chaDutyForm.roleName"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button @click="getDutyList">查询</el-button>
+                <el-button type="primary"  >重置</el-button>
+              </el-form-item>
+            </el-form>
             </el-row>
             <el-button type="success"  @click="addbumenDialogVisible = true">新增</el-button>
-            <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量启用</el-button> 
-            <el-button type="warning" @click="editbumenDialogVisible= true" :disabled="selectedList.length == 0">批量禁用</el-button> 
-
-            <el-button type="danger"  @click="deletebumen" :disabled="selectedList.length == 0">批量删除</el-button>
+          <el-button type="danger" @click="selected" :disabled="selectedList.length == 0">批量删除</el-button>
             <el-button type="info"  @click="rightDialogVisible= true" :disabled="selectedList.length == 0">权限批量设置</el-button>
-            <el-table border stripe  :data="table" @selection-change="handleSelectionChange">
+            <el-table border stripe  :data="DutyList" @selection-change="handleSelectionChange">
               <el-table-column type="selection" width="55"></el-table-column>
               <el-table-column type="index" width="50" ></el-table-column>              
-              <!-- <el-table-column label="职务编号" property="date"></el-table-column> -->
-              <el-table-column label="部门名称" prop="a" property="name"></el-table-column>
-              <el-table-column label="职务名称" prop="b" property="address"></el-table-column>
-              <el-table-column width="290px" prop="c" label="备注" property="beizhu"></el-table-column>
+              <el-table-column label="职务名称" prop="roleName" property="address"></el-table-column>
+              <el-table-column prop="remark" label="备注" property="beizhu"></el-table-column>
               <el-table-column label="状态" width="65px">
-                <template >
-                  <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                <template slot-scope="scope">
+                  <el-switch
+                  v-model="scope.row.status"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
                 </template>
               </el-table-column>
               <el-table-column label="操作" width="180">
@@ -63,11 +59,11 @@
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
+          :current-page="currentPage"
+          :page-sizes="[3, 5, 10, 15]"
+          :page-size="100"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
+          :total="total">
         </el-pagination>
       </el-card>
       <el-dialog
@@ -75,17 +71,19 @@
         :visible.sync="addbumenDialogVisible"
         width="30%"
         :before-close="handleClose">
-        <el-form :label-position="labelPosition" label-width="100px">
-          <el-form-item label="部门名称："><el-input placeholder="请输入部门名称"></el-input></el-form-item>
-          <el-form-item label="职务名称："><el-input placeholder="请输入职务名称"></el-input></el-form-item>
-          <el-form-item label="备注内容："><el-input type="textarea" :rows="2" placeholder="请输入备注内容"></el-input></el-form-item>
+        <el-form :label-position="labelPosition" label-width="100px"
+        :model="addDutyForm"
+        ref="addDutyRef"
+        :rules="addDutyRules">
+          <el-form-item label="职务名称：" prop="roleName"><el-input placeholder="请输入职务名称" v-model="addDutyForm.roleName"></el-input></el-form-item>
+          <el-form-item label="备注内容：" prop="remark"><el-input type="textarea" :rows="2" placeholder="请输入备注内容" v-model="addDutyForm.remark"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="addbumenDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addbumenDialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="addDuty">确 定</el-button>
         </span>
       </el-dialog>
-      <el-dialog
+      <!-- <el-dialog
         title="编辑职务"
         :visible.sync="editbumenDialogVisible"
         width="30%"
@@ -99,15 +97,9 @@
           <el-button @click="editbumenDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="editbumenDialogVisible = false">确 定</el-button>
         </span>
-      </el-dialog>
+      </el-dialog> -->
       <el-dialog title="分配权限" :visible.sync="rightDialogVisible" width="50%" >
-        <!-- <el-tree
-          :data="rightList"
-          show-checkbox
-          node-key="id"
-          default-expand-all
-          :props="defaultPropss">
-        </el-tree> -->
+        
         <hr>
         <el-row class="lei">
           <el-col :span="8">权限类别</el-col>
@@ -134,6 +126,13 @@
             <el-button type="primary" @click="rightDialogVisible=false">确 定</el-button>
         </span>
       </el-dialog>
+      <el-dialog title="提示" :visible.sync="delVisible" width="300px">
+      <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
+      <span slot="footer" class="dialog-footer">
+          <el-button @click="delVisible = false">取 消</el-button>
+          <el-button type="primary" @click="deleteRow" >确 定</el-button>
+      </span>
+    </el-dialog>
     </div>
 </template>
 <script>
@@ -145,106 +144,77 @@ export default {
         children: 'children',
         label: 'authName'
        },
-       labelPosition: 'right',
-       rightDialogVisible:false,
-       currentPage1: 5,
-       currentPage2: 5,
-       currentPage3: 5,
-       currentPage4: 4,
-        table: [{
-          a: '生产部门',
-          b: '2737',
-          c: '主管',
-          d:'祥子',
-        }],
-       tableData: [{
-          date: '1001',
-          name: '财务部',
-          address: '财务总监',
-          beizhu:'管理公司账务'
-        }, {
-          date: '1002',
-          name: '财务部',
-          address: '财务总监',
-          beizhu:'管理公司账务'
-        }, {
-          date: '1003',
-          name: '财务部',
-          address: '财务总监',
-          beizhu:'管理公司账务'
-        }, {
-          date: '1004',
-          name: '财务部',
-          address: '财务总监',
-          beizhu:'管理公司账务'
-        }, {
-          date: '1005',
-          name: '财务部',
-          address: '财务总监',
-          beizhu:'管理公司账务'
-        }, {
-          date: '1006',
-          name: '财务部',
-          address: '财务总监',
-          beizhu:'管理公司账务'
-        }, {
-          date: '1007',
-          name: '财务部',
-          address: '财务总监',
-          beizhu:'管理公司账务'
-        }],
+      labelPosition: 'right',
+      rightDialogVisible:false,
       addbumenDialogVisible: false,
       editbumenDialogVisible:false,
-      data: [{
-          label: '一级 1',
-          children: [{
-            label: '二级 1-1',
-            children: [{
-              label: '三级 1-1-1'
-            }]
-          }]
-        }, {
-          label: '一级 2',
-          children: [{
-            label: '二级 2-1',
-            children: [{
-              label: '三级 2-1-1'
-            }]
-          }, {
-            label: '二级 2-2',
-            children: [{
-              label: '三级 2-2-1'
-            }]
-          }]
-        }, {
-          label: '一级 3',
-          children: [{
-            label: '二级 3-1',
-            children: [{
-              label: '三级 3-1-1'
-            }]
-          }, {
-            label: '二级 3-2',
-            children: [{
-              label: '三级 3-2-1'
-            }]
-          }]
-        }],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        },
-        selectedList: [],
+      delVisible:false,
+      delarr:'',
+      currentPage: 0,
+      total:0,
+      chaDutyForm:{
+        roleName:'',
+        pageCode: 1, //当前页
+        pageSize: 3,//每页显示的记录数
+      },
+      DutyList:[],
+      selectedList: [],
+      addDutyForm:{
+        roleName:'',
+        remark:'',
+      },
+      addDutyRules: {
+          roleName:[
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          ],},
     }
   },
   created () {  
+    this.getDutyList();
   },
   methods:{
+    async getDutyList() {
+      const { data: res } = await this.$http.post("sys/role/list",{params:this.chaDutyForm});
+      console.log(res);
+      
+      this.total=res.body.total;
+      this.DutyList = res.body.rows;
+    },
+    addDuty() {
+      this.$refs.addDutyRef.validate(async valid => {
+        if (!valid) return;    
+        const { data: res } = await this.$http.post("sys/role/save",{params:this.addDutyForm});
+        this.$message.success("用户创建成功！");
+        this.getDutyList();
+        this.addbumenDialogVisible = false;
+      });
+    },
+    selected(){
+      this.delarr=[];
+      this.delVisible = true;
+      for (let i = 0; i < this.selectedList.length; i++) {
+        this.delarr+=this.selectedList[i].deptId+','
+      }
+      console.log(this.delarr);
+    },
+    async deleteRow(){
+      let param = new URLSearchParams();
+      param.append("deptIds", this.delarr);
+         const {data:res} = await this.$http.post('sys/dept/batchRemove',param);
+         this.delVisible = false;
+         this.getDepartmentList();
+      },
     handleSizeChange(val) {
+      this.chaDutyForm.pageSize=val;
       console.log(`每页 ${val} 条`);
+      this.getDepartmentList();
     },
     handleCurrentChange(val) {
+      this.chaDutyForm.pageCode=val;
+      this.currentPage=val;
       console.log(`当前页: ${val}`);
+      this.getDepartmentList();
     },
     handleClose(done) {
         this.$confirm('确认关闭？')
@@ -294,9 +264,7 @@ export default {
     .el-table{
         margin-top: 15px;
     }
-    .el-button{
-      margin-top: 15px;
-    }
+
     .quan{
       float: left;
       margin-right: 20px;

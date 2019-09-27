@@ -23,39 +23,39 @@ import Journal from './components/system/Journal.vue'
 Vue.use(Router)
 
 const router = new Router({
-        routes: [
-            { path: '/', redirect: '/login' },
-            { path: '/login', component: Login },
-            {
-                path: '/home',
-                component: Home,
-                redirect: '/welcome',
-                children: [
-                    { path: '/welcome', component: Welcome },
-                    { path: '/supplier', component: Supplier },
-                    { path: '/client', component: Client },
-                    { path: '/printing', component: Printing },
-                    { path: '/production', component: Production },
-                    { path: '/maintenance', component: Maintenance },
-                    { path: '/product', component: Product },
-                    { path: '/merchandise', component: Merchandise },
-                    { path: '/duty', component: Duty },
-                    { path: '/department', component: Department },
-                    { path: '/user', component: User },
-                    { path: '/menu', component: Menu },
-                    { path: '/journal', component: Journal },
-                    { path: '/categories', component: Cate },
-                    { path: '/params', component: Params },
-                    { path: '/goods', component: Goods },
-                    { path: '/goodsadd', component: Add },
-                ]
-            }
-        ]
-    })
-    // router.beforeEach((to, from, next) => {
-    //     if (to.path == '/login') return next();
-    //     const tokenStr = window.sessionStorage.getItem('token')
-    //     if (!tokenStr) return next('/login')
-    //     next()
-    // })
+    routes: [
+        { path: '/', redirect: '/login' },
+        { path: '/login', component: Login },
+        {
+            path: '/home',
+            component: Home,
+            redirect: '/welcome',
+            children: [
+                { path: '/welcome', component: Welcome },
+                { path: '/supplier', component: Supplier },
+                { path: '/client', component: Client },
+                { path: '/printing', component: Printing },
+                { path: '/production', component: Production },
+                { path: '/maintenance', component: Maintenance },
+                { path: '/product', component: Product },
+                { path: '/merchandise', component: Merchandise },
+                { path: '/duty', component: Duty },
+                { path: '/department', component: Department },
+                { path: '/user', component: User },
+                { path: '/menu', component: Menu },
+                { path: '/journal', component: Journal },
+                { path: '/categories', component: Cate },
+                { path: '/params', component: Params },
+                { path: '/goods', component: Goods },
+                { path: '/goodsadd', component: Add },
+            ]
+        }
+    ]
+})
+router.beforeEach((to, from, next) => {
+    if (to.path == '/login') return next();
+    const tokenStr = window.sessionStorage.getItem('token')
+    if (!tokenStr) return next('/login')
+    next()
+})
 export default router

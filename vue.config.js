@@ -13,9 +13,9 @@ module.exports = {
         proxy: {
             '/api': {
                 // target: 'http://127.0.0.1:8888/api/private/v1/',
-                // target: 'http://192.168.31.231:8090/',
+                target: 'http://192.168.31.231:8090/',
                 // target: 'http://192.168.31.147:8090/',
-                target: 'http://192.168.31.234:8090/',
+                // target: 'http://192.168.31.234:8090/',
 
 
                 ws: true,

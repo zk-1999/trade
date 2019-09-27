@@ -59,16 +59,16 @@ export default {
         login(){
             this.$refs.loginFormRef.validate(async valid => {
                 if(!valid) return;
-                // console.log(this.loginForm);
-                // let param = new URLSearchParams();
-                // param.append("username", this.loginForm.username);
-                // param.append("password", this.loginForm.password);
-                // const {data:res}=await this.$http.post('login',param);
+                console.log(this.loginForm);
+                let param = new URLSearchParams();
+                param.append("username", this.loginForm.username);
+                param.append("password", this.loginForm.password);
+                const {data:res}=await this.$http.post('login',param);
                 
-                // console.log(res.body);
-                // if (res.body.user==null) return this.$message.error('登陆失败');
-                // this.$message.success('登录成功');
-                // window.sessionStorage.setItem('token',res.body.user.token);
+                console.log(res.body);
+                if (res.body.user==null) return this.$message.error('登陆失败');
+                this.$message.success('登录成功');
+                window.sessionStorage.setItem('token',res.body.user.token);
                 
                 const self = this;
                 //判断复选框是否被勾选 勾选则调用配置cookie方法
