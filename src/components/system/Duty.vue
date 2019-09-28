@@ -41,15 +41,23 @@
                 </template>
               </el-table-column>
               <el-table-column label="操作" width="180">
-                <template >
+                <template slot-scope="scope">
                    <el-tooltip effect="dark" content="修改" placement="top" :enterable="false">
-                  <el-button size="mini" type="primary" icon="el-icon-edit"></el-button>
+                  <!-- <el-button size="mini" type="primary" icon="el-icon-edit"></el-button> -->
+                  <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDuty(scope.row.roleId)"></el-button>
+                
                   </el-tooltip>
                    <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
-                <el-button size="mini" type="danger" icon="el-icon-delete"></el-button>
+                     <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.roleId)"
+                  size="mini"
+                ></el-button>
+                <!-- <el-button size="mini" type="danger" icon="el-icon-delete"></el-button> -->
                </el-tooltip> 
                <el-tooltip effect="dark" content="权限分配" placement="top" :enterable="false">
-                  <el-button size="mini" type="warning" icon="el-icon-setting"></el-button>
+                  <el-button size="mini" type="warning" icon="el-icon-setting" @click="showquanxian(scope.row)"></el-button>
                 </el-tooltip>
                 </template>
               </el-table-column>
@@ -83,24 +91,26 @@
           <el-button type="primary" @click="addDuty">确 定</el-button>
         </span>
       </el-dialog>
-      <!-- <el-dialog
+      <el-dialog
         title="编辑职务"
         :visible.sync="editbumenDialogVisible"
         width="30%"
         :before-close="handleClose">
-        <el-form :label-position="labelPosition" label-width="100px">
-          <el-form-item label="部门名称："><el-input placeholder="请输入部门名称" v-model="table[0].a"></el-input></el-form-item>
-          <el-form-item label="职务名称："><el-input placeholder="请输入职务名称" v-model="table[0].b"></el-input></el-form-item>
-          <el-form-item label="备注内容："><el-input type="textarea" :rows="2" placeholder="请输入备注内容" v-model="table[0].c"></el-input></el-form-item>
+        <el-form :label-position="labelPosition" label-width="100px"
+        :model="editDutyForm"
+        ref="addDutyRef"
+        :rules="addDutyRules">
+          <el-form-item label="职务名称：" prop="roleName"><el-input placeholder="请输入职务名称" v-model="editDutyForm.roleName"></el-input></el-form-item>
+          <el-form-item label="备注内容：" prop="remark"><el-input type="textarea" :rows="2" placeholder="请输入备注内容" v-model="editDutyForm.remark"></el-input></el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editbumenDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="editbumenDialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="editDuty">确 定</el-button>
         </span>
-      </el-dialog> -->
+      </el-dialog>
       <el-dialog title="分配权限" :visible.sync="rightDialogVisible" width="50%" >
         
-        <hr>
+        <!-- <hr>
         <el-row class="lei">
           <el-col :span="8">权限类别</el-col>
           <el-col :span="8">权限名称</el-col>
@@ -120,10 +130,19 @@
               </el-col>
             </el-row>
           </el-col>
-        </el-row>
+        </el-row> -->
+        <el-tree
+        :data="rightList"
+        :props="defaultProps"
+        show-checkbox
+        default-expand-all
+        node-key="menuId"
+        :default-checked-keys="defKeys"
+        ref="mytree">
+        </el-tree>
         <span slot="footer" class="dialog-footer">
             <el-button @click="rightDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="rightDialogVisible=false">确 定</el-button>
+            <el-button type="primary" @click="alloRight">确 定</el-button>
         </span>
       </el-dialog>
       <el-dialog title="提示" :visible.sync="delVisible" width="300px">
@@ -136,14 +155,16 @@
     </div>
 </template>
 <script>
+
 export default {
   data () {
     return {
-      rightList:[{"id":101,"authName":"商品管理","path":"goods","pid":0,"children":[{"id":104,"authName":"商品列表","path":"goods","pid":101,"children":[{"id":105,"authName":"添加商品","path":"goods","pid":"104,101"},{"id":116,"authName":"商品修改","path":"goods","pid":"104,101"},{"id":117,"authName":"商品删除","path":"goods","pid":"104,101"},{"id":150,"authName":"更新商品图片","path":"goods","pid":"104,101"},{"id":151,"authName":"更新商品属性","path":"goods","pid":"104,101"},{"id":152,"authName":"更新商品状态","path":"goods","pid":"104,101"},{"id":153,"authName":"获取商品详情","path":"goods","pid":"104,101"}]},{"id":115,"authName":"分类参数","path":"params","pid":101,"children":[{"id":142,"authName":"获取参数列表","path":"categories","pid":"115,101"},{"id":143,"authName":"创建商品参数","path":"categories","pid":"115,101"},{"id":144,"authName":"删除商品参数","path":"categories","pid":"115,101"}]},{"id":121,"authName":"商品分类","path":"categories","pid":101,"children":[{"id":122,"authName":"添加分类","path":"categories","pid":"121,101"},{"id":123,"authName":"删除分类","path":"categories","pid":"121,101"},{"id":149,"authName":"获取分类详情","path":"categories","pid":"121,101"}]}]},{"id":102,"authName":"订单管理","path":"orders","pid":0,"children":[{"id":107,"authName":"订单列表","path":"orders","pid":102,"children":[{"id":109,"authName":"添加订单","path":"orders","pid":"107,102"},{"id":154,"authName":"订单更新","path":"orders","pid":"107,102"},{"id":155,"authName":"获取订单详情","path":"orders","pid":"107,102"}]}]},{"id":103,"authName":"权限管理","path":"rights","pid":0,"children":[{"id":111,"authName":"角色列表","path":"roles","pid":103,"children":[{"id":129,"authName":"添加角色","path":"roles","pid":"111,103"},{"id":130,"authName":"删除角色","path":"roles","pid":"111,103"},{"id":134,"authName":"角色授权","path":"roles","pid":"111,103"},{"id":135,"authName":"取消角色授权","path":"roles","pid":"111,103"},{"id":138,"authName":"获取角色列表","path":"roles","pid":"111,103"},{"id":139,"authName":"获取角色详情","path":"roles","pid":"111,103"},{"id":140,"authName":"更新角色信息","path":"roles","pid":"111,103"},{"id":141,"authName":"更新角色权限","path":"roles","pid":"111,103"}]},{"id":112,"authName":"权限列表","path":"rights","pid":103,"children":[{"id":147,"authName":"查看权限","path":"rights","pid":"112,103"}]}]},{"id":125,"authName":"用户管理","path":"users","pid":0,"children":[{"id":110,"authName":"用户列表","path":"users","pid":125,"children":[{"id":131,"authName":"添加用户","path":"users","pid":"110,125"},{"id":132,"authName":"删除用户","path":"users","pid":"110,125"},{"id":133,"authName":"更新用户","path":"users","pid":"110,125"},{"id":136,"authName":"获取用户详情","path":"users","pid":"110,125"},{"id":137,"authName":"分配用户角色","path":"users","pid":"110,125"},{"id":159,"authName":"设置管理状态","path":"users","pid":"110,125"}]}]},{"id":145,"authName":"数据统计","path":"reports","pid":0,"children":[{"id":146,"authName":"数据报表","path":"reports","pid":145,"children":[{"id":148,"authName":"查看数据","path":"reports","pid":"146,145"}]}]}],
-      defaultPropss: {
+      rightList:[],
+      defaultProps: {
         children: 'children',
-        label: 'authName'
+        label: 'name'
        },
+       defKeys:[],
       labelPosition: 'right',
       rightDialogVisible:false,
       addbumenDialogVisible: false,
@@ -163,6 +184,15 @@ export default {
         roleName:'',
         remark:'',
       },
+      editDutyForm:{
+        roleId:'',
+        roleName:'',
+        remark:'',
+        muneIds:''
+      },
+      chaMenuForm:{
+         a: 0, //当前页页显示的记录数
+      },
       addDutyRules: {
           roleName:[
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -176,8 +206,6 @@ export default {
   methods:{
     async getDutyList() {
       const { data: res } = await this.$http.post("sys/role/list",{params:this.chaDutyForm});
-      console.log(res);
-      
       this.total=res.body.total;
       this.DutyList = res.body.rows;
     },
@@ -190,31 +218,69 @@ export default {
         this.addbumenDialogVisible = false;
       });
     },
+     async showEditDuty(id){
+      let param = new URLSearchParams();
+      param.append("id", id);
+      const {data:res} = await this.$http.post('sys/role/getInfo',param);
+      this.editDutyForm=res.body.role;
+      console.log(res);
+      
+      this.editbumenDialogVisible=true;
+    },
+     async userStateChanged(userInfo) {
+      const { data: res } = await this.$http.post("sys/role/update",userInfo);
+       this.getDutyList();
+    },
+    async editDuty(){
+       const {data:res} = await this.$http.post('sys/role/update',this.editDutyForm);
+        this.getDutyList();
+       this.editbumenDialogVisible=false;
+    },
     selected(){
       this.delarr=[];
       this.delVisible = true;
       for (let i = 0; i < this.selectedList.length; i++) {
-        this.delarr+=this.selectedList[i].deptId+','
+        this.delarr+=this.selectedList[i].roleId+','
       }
       console.log(this.delarr);
     },
+   async showquanxian(duty){
+     console.log(duty);
+     this.editDutyForm.roleId=duty.roleId;
+     this.editDutyForm.roleName=duty.roleName;
+     this.editDutyForm.remark=duty.remark;
+      const { data: res } = await this.$http.post("sys/menu/simpleTree",{params:this.chaMenuForm});
+      // console.log(res.body);
+      this.rightList=res.body
+      this.rightDialogVisible=true;
+    },
+    async alloRight(){
+      var ids=[...this.$refs.mytree.getCheckedKeys(),...this.$refs.mytree.getHalfCheckedKeys()];
+           ids=ids.join(',');
+           this.editDutyForm.muneIds=ids;
+           const {data:res} = await this.$http.post('sys/role/update',this.editDutyForm);
+           this.rightDialogVisible=false;
+        },
+    getCheckedKeys() {
+        console.log(this.$refs.tree.getCheckedKeys());
+      },
     async deleteRow(){
       let param = new URLSearchParams();
-      param.append("deptIds", this.delarr);
-         const {data:res} = await this.$http.post('sys/dept/batchRemove',param);
+      param.append("roleIds", this.delarr);
+         const {data:res} = await this.$http.post('sys/role/remove',param);
          this.delVisible = false;
-         this.getDepartmentList();
+         this.getDutyList();
       },
     handleSizeChange(val) {
       this.chaDutyForm.pageSize=val;
       console.log(`每页 ${val} 条`);
-      this.getDepartmentList();
+     this.getDutyList();
     },
     handleCurrentChange(val) {
       this.chaDutyForm.pageCode=val;
       this.currentPage=val;
       console.log(`当前页: ${val}`);
-      this.getDepartmentList();
+      this.getDutyList();
     },
     handleClose(done) {
         this.$confirm('确认关闭？')
@@ -223,12 +289,19 @@ export default {
           })
           .catch(_ => {});
     },
-    deletebumen(){
+    deletebumen(roleIds){
       this.$confirm('此操作将永久删除该职务, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-        }).then(() => {
+        }).then(async () => {
+          let param = new URLSearchParams();
+          param.append("roleIds", roleIds);
+          const { data: res } = await this.$http.post(
+            "sys/role/remove",
+            param
+          );
+          this.getDutyList();
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -270,9 +343,6 @@ export default {
       margin-right: 20px;
       // width: 220px !important;
       // min-width: 220px;
-    }
-    .el-card{
-      height: 650px;
     }
     .togglr-button{
       width: 180px;

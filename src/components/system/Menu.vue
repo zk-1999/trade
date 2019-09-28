@@ -152,7 +152,6 @@ export default {
   methods:{
     async getMenuList() {
       const { data: res } = await this.$http.post("sys/menu/listNew",{params:this.chaMenuForm});
-      // console.log(res);
       this.total=res.body.total;
       this.menuList = res.body.rows;
     },
