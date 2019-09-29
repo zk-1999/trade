@@ -41,6 +41,7 @@ import {
     Radio,
     Badge,
     Image,
+    DatePicker
 } from 'element-ui'
 Vue.use(Button)
 Vue.use(Form)
@@ -81,6 +82,7 @@ Vue.use(RadioGroup)
 Vue.use(Radio)
 Vue.use(Badge)
 Vue.use(Image)
+Vue.use(DatePicker)
 
 
 Vue.prototype.$message = Message

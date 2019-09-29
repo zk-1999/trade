@@ -10,19 +10,19 @@
         <el-row :gutter="20" class="row">
           <el-col :span="24">
             <el-row :gutter="20">
-               <el-form :inline="true" class="demo-form-inline" :model="chaDutyForm" ref="chaDepartmentRef">
-              <el-form-item label="职务名称：" prop="a">
+               <el-form :inline="true" class="demo-form-inline" :model="chaDutyForm" ref="chaDutyRef">
+              <el-form-item label="职务名称：" prop="roleName">
                 <el-input placeholder="请输入职务名称" v-model="chaDutyForm.roleName"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button @click="getDutyList">查询</el-button>
-                <el-button type="primary"  >重置</el-button>
+                <el-button type="primary" @click="chaDutyResetForm" >重置</el-button>
               </el-form-item>
             </el-form>
             </el-row>
             <el-button type="success"  @click="addbumenDialogVisible = true">新增</el-button>
           <el-button type="danger" @click="selected" :disabled="selectedList.length == 0">批量删除</el-button>
-            <el-button type="info"  @click="rightDialogVisible= true" :disabled="selectedList.length == 0">权限批量设置</el-button>
+            <!-- <el-button type="info"  @click="rightDialogVisible= true" :disabled="selectedList.length == 0">权限批量设置</el-button> -->
             <el-table border stripe  :data="DutyList" @selection-change="handleSelectionChange">
               <el-table-column type="selection" width="55"></el-table-column>
               <el-table-column type="index" width="50" ></el-table-column>              
@@ -261,6 +261,10 @@ export default {
            const {data:res} = await this.$http.post('sys/role/update',this.editDutyForm);
            this.rightDialogVisible=false;
         },
+    chaDutyResetForm(formName){
+        this.$refs.chaDutyRef.resetFields();
+        this.getDutyList();
+    },
     getCheckedKeys() {
         console.log(this.$refs.tree.getCheckedKeys());
       },

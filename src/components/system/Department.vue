@@ -14,7 +14,7 @@
               </el-form-item>
               <el-form-item>
                 <el-button @click="getDepartmentList">查询</el-button>
-                <el-button type="primary"  >重置</el-button>
+                <el-button type="primary"  @click="chaDepartmentResetForm">重置</el-button>
               </el-form-item>
             </el-form>
       </el-row>
@@ -121,7 +121,6 @@ export default {
       addbumenDialogVisible: false,
       editbumenDialogVisible: false,
       delVisible:false,
-      currentPage1: 5,
       currentPage: 0,
       total:0,
       delarr:'',
@@ -175,6 +174,10 @@ export default {
         this.getDepartmentList();
         this.addbumenDialogVisible = false;
       });
+    },
+    chaDepartmentResetForm(formName){
+        this.$refs.chaDepartmentRef.resetFields();
+        this.getDepartmentList();
     },
     async userStateChanged(userInfo) {
       const { data: res } = await this.$http.post("sys/dept/update",userInfo);
@@ -235,6 +238,10 @@ export default {
             param
           );
           this.getDepartmentList();
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
         })
         .catch(() => {
           this.$message({
