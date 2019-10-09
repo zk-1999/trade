@@ -85,14 +85,14 @@
           </el-table></el-col>
         </el-row>
         <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
-        </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
       </el-card>
       <el-dialog
         title="新增印刷参数"
@@ -215,10 +215,7 @@ export default {
       resetPassdialogVisible:false,
       delVisible:false,
       delVisibleqi:false,
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      currentPage: 0,
       selectedList: [],
       PrintingList:[],
       delarr:[],
@@ -264,8 +261,11 @@ export default {
       },
       chaPrintingForm:{
         parametersId:'',
-        productType:''
+        productType:'',
+        pageCode: 1, //当前页
+        pageSize: 3,//每页显示的记录数
       },
+      total:0,
       chanpingleixing:[],
       addPrintingRules: {
           parametersId:[
@@ -281,7 +281,8 @@ export default {
   methods:{
     async getPrintingList() {
       const { data: res } = await this.$http.post("jc/Parameters/selectParameter",this.chaPrintingForm);
-      this.PrintingList = res;
+      this.total=res.body.total;
+      this.PrintingList = res.body.rows;
     },
     async getPrintingList1() {
       const { data: res } = await this.$http.post("jc/Basic/selectProducttype");
@@ -354,9 +355,14 @@ export default {
     },
      handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.chaPrintingForm.pageSize=val;
+      this.getPrintingList();
     },
     handleCurrentChange(val) {
+      this.chaPrintingForm.pageCode=val;
       console.log(`当前页: ${val}`);
+      this.currentPage=val;
+      this.getPrintingList();
     },
     handleClose(done) {
         this.$confirm('确认关闭？')

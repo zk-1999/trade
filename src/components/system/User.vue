@@ -16,25 +16,47 @@
         <el-row :gutter="20" class="row">
           <el-col :span="24">
              <el-row :gutter="20">
-                <el-form :inline="true" class="demo-form-inline">
-                    <el-form-item label="所属部门：">
-                    <el-input placeholder="请输入所属部门"></el-input>
+                <el-form :inline="true" class="demo-form-inline" :model="chaUserForm" ref="chaUserRef">
+                    <el-form-item label="所属部门：" prop="deptId">
+                    <el-select v-model="chaUserForm.deptId" placeholder="请选择">
+                <el-option
+                  v-for="item in departmentList"
+                  :key="item.deptId"
+                  :label="item.name"
+                  :value="item.deptId">
+                </el-option>
+              </el-select>
                     </el-form-item>
-                    <el-form-item label="姓名：">
-                    <el-input placeholder="请输入姓名"></el-input>
+                    <el-form-item label="姓名：" prop="name">
+                    <el-input placeholder="请输入姓名" v-model="chaUserForm.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="工号：">
-                    <el-input placeholder="请输入工号"></el-input>
+                    <el-form-item label="工号：" prop="employeeId">
+                    <el-input placeholder="工号" v-model="chaUserForm.employeeId"></el-input>
                     </el-form-item>
-                    <el-form-item label="出生日期：">
-                    <el-input placeholder="请输入出生日期"></el-input>
+                    <!-- <el-form-item label="出生日期：" prop="birth">
+                    <el-date-picker
+                      v-model="chaUserForm.birth"
+                      type="date"
+                      placeholder="选择日期">
+                    </el-date-picker>
                     </el-form-item>
-                    <el-form-item label="入职离职日期：">
-                    <el-input placeholder="请输入入职离职日期"></el-input>
-                    </el-form-item>
+                    <el-form-item label="入职时间：" prop="rzDate">
+            <el-date-picker
+              v-model="chaUserForm.rzDate"
+              type="date"
+              placeholder="选择日期">
+            </el-date-picker>
+            </el-form-item>
+          <el-form-item label="离职时间：" prop="lzDate">
+            <el-date-picker
+              v-model="chaUserForm.lzDate"
+              type="date"
+              placeholder="选择日期">
+            </el-date-picker>
+            </el-form-item> -->
                     <el-form-item>
-                        <el-button >查询</el-button>
-                        <el-button type="primary">重置</el-button>
+                        <el-button @click="getUserList">查询</el-button>
+                        <el-button type="primary" @click="chaUserResetForm">重置</el-button>
                     </el-form-item>
                 </el-form>
         </el-row>
@@ -551,6 +573,12 @@ export default {
       },
       DutyList:[],
       chaUserForm:{
+        name:'',
+        employeeId:'',
+        // birth:'',
+        deptId:'',
+        // lzDate:'',
+        // rzDate:'',
         pageCode: 1, //当前页
         pageSize: 3,//每页显示的记录数
       },
@@ -636,6 +664,7 @@ export default {
       }
       console.log(this.delarr);
     },
+    
      async deleteRowqi(){
          const {data:res} = await this.$http.post('jc/supplier/updatestate',this.delarr);
          this.delVisibleqi = false;
@@ -648,6 +677,10 @@ export default {
          this.delVisible = false;
          this.getUserList();
       },
+      chaUserResetForm(){
+        this.$refs.chaUserRef.resetFields();
+        this.getUserList();
+    },
      handleSizeChange(val) {
       this.chaUserForm.pageSize=val;
       console.log(`每页 ${val} 条`);
@@ -790,7 +823,7 @@ export default {
       line-height: 30px;
     }
     .demo-form-inline .el-input{
-      width: 180px;
+      width: 240px;
     }
     .el-select{
       width: 225px;

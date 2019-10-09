@@ -11,7 +11,7 @@
             <el-tab-pane label="产品名称" >
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable ></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -48,19 +48,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="产品类型">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -97,19 +97,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
-            </el-tab-pane>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
+      </el-tab-pane>
             <el-tab-pane label="产品规格">
              <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -146,19 +146,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="纸张品牌">
              <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -195,19 +195,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="淋膜类型" >
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -244,19 +244,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="纸张克重">
              <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -293,19 +293,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="配盖">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -342,19 +342,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="印刷方式">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -391,19 +391,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="库存单位">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -440,19 +440,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="供应商类型">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -489,19 +489,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="包装类型1">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -538,19 +538,20 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
+             
             </el-tab-pane>
             <el-tab-pane label="包装类型2">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -587,19 +588,20 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
+             
             </el-tab-pane>
             <el-tab-pane label="货币类型">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -636,19 +638,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="收入类型">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -685,19 +687,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="支出类型">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -734,19 +736,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="产品刀模">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -783,19 +785,19 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="仓库类型">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
-                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone"></el-input>
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button @click="handleClick(ta)">查询</el-button>
@@ -832,14 +834,14 @@
             </el-table-column>
               </el-table>
               <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
             </el-tab-pane>
             
           </el-tabs>
@@ -889,14 +891,15 @@ export default {
         addyonghuDialogVisible: false,
         edityonghuDialogVisible:false,
         resetPassdialogVisible:false,
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4,
+        currentPage: 0,
         maintenanceList:[],
         chaMaintenanceForm:{
+          basicValue:'',
           basicRetainone:'',
+           pageCode: 1, //当前页
+          pageSize: 3,//每页显示的记录数
         },
+        total:0,
         addMaintenanceRules: {
           basicRetainone:[
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -925,16 +928,15 @@ export default {
      
      this.ta.label=tab.label;
      this.ta.index=tab.index;     
-     let param = new URLSearchParams();
-     param.append("basicValue", tab.index);
-     param.append("basicRetainone", this.chaMaintenanceForm.basicRetainone);
-    const { data: res } = await this.$http.post("jc/Basic/selectBasic",param);
+     this.chaMaintenanceForm.basicValue=tab.index;
+    const { data: res } = await this.$http.post("jc/Basic/selectBasic",this.chaMaintenanceForm);
     for (let index = 0; index < res.length; index++) {
       res[index].basicName=tab.label;
-      
     }
-    this.maintenanceList=res;
-    this.chaMaintenanceResetForm();
+    this.total=res.body.total;
+      this.maintenanceList = res.body.rows;
+      this.chaMaintenanceForm.pageCode=1;
+     this.chaMaintenanceForm.pageSize=3;
     },
     addMainte(){
       this.$refs.addMaintenanceRef.validate(async valid => {
@@ -964,11 +966,16 @@ export default {
         this.$refs.chaMaintenanceRef.resetFields();
         this.handleClick(this.ta);
     },
-     handleSizeChange(val) {
+    handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.chaMaintenanceForm.pageSize=val;
+      this.handleClick(this.ta);
     },
     handleCurrentChange(val) {
+      this.chaMaintenanceForm.pageCode=val;
       console.log(`当前页: ${val}`);
+      this.currentPage=val;
+      this.handleClick(this.ta);
     },
     handleClose(done) {
         this.$confirm('确认关闭？')

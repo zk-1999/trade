@@ -82,9 +82,14 @@
                     >
                   </el-image>
                 </div> -->
-                <template scope="scope">
+                <!-- <template scope="scope">
                   <img :src="scope.row.designPicture" />
-                </template>
+                </template> -->
+                 <el-image 
+    style="width: 200px; height: 100px"
+    :src="url" 
+    :preview-src-list="srcList" @click="a(url)">
+  </el-image>
             </el-table-column>
             <el-table-column label="状态" width="65px" align="center">
               <template slot-scope="scope">
@@ -112,14 +117,14 @@
           </el-table></el-col>
         </el-row>
         <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
-        </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
       </el-card>
       <el-dialog
         title="新增产品设计稿"
@@ -270,6 +275,15 @@
     <el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
 </el-dialog>
+    <el-dialog
+      title=""
+      :visible.sync="tupainfangdadialogVisible"
+      width="45%"
+      :before-close="handleClose" class="fanggda">
+      <img :src="tupainfangda" alt="" width="100%">
+      <span slot="footer" class="dialog-footer">
+      </span>
+    </el-dialog>
     </div>
 </template>
 <script>
@@ -280,12 +294,10 @@ export default {
       addyonghuDialogVisible: false,
       edityonghuDialogVisible:false,
       resetPassdialogVisible:false,
+      tupainfangdadialogVisible:false,
       delVisible:false,
       delVisibleqi:false,
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      currentPage: 0,
       selectedList: [],
       delarr:[],
       productList:[],
@@ -295,7 +307,10 @@ export default {
         designName:'',
         designCol1:'',
         designState:'',
+         pageCode: 1, //当前页
+        pageSize: 3,//每页显示的记录数
       },
+      total:0,
       addProductForm:{
         designName:'',
         designModel:'',
@@ -324,7 +339,7 @@ export default {
         designCol7:'',
         designCol8:'',
       },
-      
+      tupainfangda:'',
       addProductRules: {
           designName:[
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -332,7 +347,8 @@ export default {
           ],},
       url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       srcList: [
-          
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
         ],
         //文件上传的参数
             dialogImageUrl: '',
@@ -344,6 +360,11 @@ export default {
     this.getProductList();
   },
   methods:{
+    a(url){
+      this.tupainfangdadialogVisible=true;
+      this.tupainfangda=url;
+      
+    },
     //文件上传成功的钩子函数
         handleSuccess(res, file) {
             this.$message({
@@ -402,8 +423,8 @@ export default {
       const { data: res } = await this.$http.post("jc/Design/selectDesign",this.chaProductForm);
       console.log(res);
       // console.log(this.chamerchandiseForm);
-      
-      this.productList = res;
+      this.total=res.body.total
+      this.productList = res.body.rows;
       
     },
     async userStateChanged(userInfo) {
@@ -473,11 +494,16 @@ export default {
       console.log(val);
       this.selectedList = val;
     },
-     handleSizeChange(val) {
+    handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.chaProductForm.pageSize=val;
+      this.getProductList();
     },
     handleCurrentChange(val) {
+      this.chaProductForm.pageCode=val;
       console.log(`当前页: ${val}`);
+      this.currentPage=val;
+       this.getProductList();
     },
     handleClose(done) {
         this.$confirm('确认关闭？')
@@ -523,6 +549,7 @@ export default {
     .el-row{
         align-items: center;
         display: flex;
+        
     }
     .el-table{
         margin-top: 15px;
@@ -554,5 +581,8 @@ export default {
     }
     .el-form-item{
       margin-bottom: 15px;
+    }
+    .el-dialog__body{
+      padding-top: 10px;
     }
 </style>

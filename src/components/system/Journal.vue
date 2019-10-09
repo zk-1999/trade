@@ -8,24 +8,24 @@
       </el-breadcrumb>
       <el-card>
         <el-button type="primary">导出日志</el-button>
-        <el-table border stripe :data="table">
-          <el-table-column type="selection" width="55"></el-table-column>
+        <el-table border stripe :data="journalList">
+          <!-- <el-table-column type="selection" width="55"></el-table-column> -->
           <el-table-column type="index"></el-table-column>
-          <el-table-column prop="a" label="时间"></el-table-column>
-          <el-table-column prop="b" label="用户"></el-table-column>
-          <el-table-column prop="c" label="所属部门"></el-table-column>
-          <el-table-column prop="d" label="所属职位"></el-table-column>
-          <el-table-column prop="e" label="IP地址"></el-table-column>
-          <el-table-column prop="f" label="操作记录"></el-table-column>
+          <el-table-column prop="dateTime" label="时间"></el-table-column>
+          <el-table-column prop="userName" label="用户"></el-table-column>
+          <el-table-column prop="name" label="所属部门"></el-table-column>
+          <el-table-column prop="roleName" label="所属职位"></el-table-column>
+          <el-table-column prop="userIp" label="IP地址"></el-table-column>
+          <el-table-column prop="logDesc" label="操作记录"></el-table-column>
         </el-table>
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
+          :current-page="currentPage"
+          :page-sizes="[3, 5, 10, 15]"
           :page-size="100"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
+          :total="total">
         </el-pagination>
       </el-card>
     </div>
@@ -34,29 +34,36 @@
 export default {
   data () {
     return {
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4,
-        table: [{
-          a: '2019-09-03 14:36:21',
-          b: 'admin',
-          c: '采购部门',
-          d:'主管',
-          e:'189.12.135.21',
-          f:'登录',
-        }],
+        currentPage: 0,
+        journalList:[],
+        total:0,
+        chaJournalForm:{
+           pageCode: 1, //当前页
+        pageSize: 3,//每页显示的记录数
+        },
     }
   },
   created () {
+    this.getJournalList();
   },
   methods:{
-    handleSizeChange(val) {
-    console.log(`每页 ${val} 条`);
+     async getJournalList() {
+      const { data: res } = await this.$http.post("/system/logdata/doGetLogDataList",{params:this.chaJournalForm});
+      console.log(res);
+      this.total=res.body.total;
+      this.journalList = res.body.rows;
+    },
+     handleSizeChange(val) {
+      this.chaJournalForm.pageSize=val;
+      console.log(`每页 ${val} 条`);
+       this.getJournalList();
     },
     handleCurrentChange(val) {
-    console.log(`当前页: ${val}`);
-    }
+      this.chaJournalForm.pageCode=val;
+      console.log(`当前页: ${val}`);
+      this.currentPage=val;
+       this.getJournalList();
+    },
   }
 }
 </script>

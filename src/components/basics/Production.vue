@@ -76,17 +76,19 @@
                 >删除</el-button>
               </template>
             </el-table-column>
-          </el-table></el-col>
+          </el-table>
+          
+          </el-col>
         </el-row>
         <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
-        </el-pagination>
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
       </el-card>
       <el-dialog
         title="新增生产商品"
@@ -350,10 +352,7 @@ export default {
       resetPassdialogVisible:false,
       delVisible:false,
       delVisibleqi:false,
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      currentPage:0 ,
       ProductionList:[],
       selectedList: [],
       delarr:[],
@@ -391,7 +390,10 @@ export default {
       },
       chaProductionForm:{
         productName:'',
+        pageCode: 1, //当前页
+        pageSize: 3,//每页显示的记录数
       },
+      total:0,
       chanpingleixing:[],
       linmo:[],
       zhizhang:[],
@@ -400,7 +402,7 @@ export default {
       addProductionRules: {
           productId:[
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          // { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
           ],},
     }
   },
@@ -414,13 +416,14 @@ export default {
       const { data: res } = await this.$http.post("jc/Produconggoods/selectProducing",this.chaProductionForm);
       
       let design='';
-      for (let index = 0; index < res.length; index++) {
-        for (let i = 0; i < res[index].designDOs.length; i++) {
-          design=res[index].designDOs[i].designModel+'-'+res[index].designDOs[i].designDate+'-'+res[index].designDOs[i].designName
+      for (let index = 0; index < res.body.rows.length; index++) {
+        for (let i = 0; i < res.body.rows[index].designDOs.length; i++) {
+          design=res.body.rows[index].designDOs[i].designModel+'-'+res.body.rows[index].designDOs[i].designDate+'-'+res.body.rows[index].designDOs[i].designName
         }
-        res[index].list=design;
+        res.body.rows[index].list=design;
       }
-      this.ProductionList = res;
+      this.ProductionList = res.body.rows;
+      this.total=res.body.total;
     },
     async getProductionList1() {
       const { data: res } = await this.$http.post("jc/Basic/selectProducttype");
@@ -497,11 +500,16 @@ export default {
     handleSelectionChange(val) {
       this.selectedList = val;
     },
-     handleSizeChange(val) {
+    handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.chaProductionForm.pageSize=val;
+      this.getProductionList();
     },
     handleCurrentChange(val) {
+      this.chaProductionForm.pageCode=val;
       console.log(`当前页: ${val}`);
+      this.currentPage=val;
+      this.getProductionList();
     },
     handleClose(done) {
         this.$confirm('确认关闭？')

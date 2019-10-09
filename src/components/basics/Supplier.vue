@@ -94,11 +94,11 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
         :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
+        :total="total"
       ></el-pagination>
     </el-card>
     <el-dialog
@@ -343,12 +343,10 @@ export default {
       resetPassdialogVisible: false,
       delVisible:false,
       delVisibleqi:false,
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      currentPage:0,
       selectedList: [],
       delarr:[],
+      total:0,
       supplierList: [],
       addSupplierForm: {
         supId: "",
@@ -386,6 +384,8 @@ export default {
         supContacts: "",
         supPhone: "",
         supName:'',
+        pageCode: 1, //当前页
+        pageSize: 3,//每页显示的记录数
       },
       chaSupplierForm1:[],
       chasupTypelist:[],
@@ -473,14 +473,15 @@ export default {
         // console.log(this.E)
       },
     async getSupplierList() {
-      const { data: res } = await this.$http.get("jc/supplier/selectSupplier",{params:this.chaSupplierForm});
+      const { data: res } = await this.$http.post("jc/supplier/selectSupplier",{params:this.chaSupplierForm});
       // console.log(res);
-      this.supplierList = res;
+      this.total=res.body.total
+      this.supplierList = res.body.rows;
     },
     async getSupplierList1() {
-      const { data: res } = await this.$http.get("jc/supplier/selectSupplier");
+      const { data: res } = await this.$http.post("jc/supplier/selectSupplier",{params:this.chaSupplierForm});
       // console.log(res);
-      this.chaSupplierForm1=res;
+      this.chaSupplierForm1=res.body.rows;
     },
    async getChasupTypelist(){
       const { data: res } = await this.$http.post("jc/Basic/selectCustype");
@@ -532,9 +533,14 @@ export default {
     
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.chaSupplierForm.pageSize=val;
+      this.getSupplierList();
     },
     handleCurrentChange(val) {
+      this.chaSupplierForm.pageCode=val;
       console.log(`当前页: ${val}`);
+      this.currentPage=val;
+      this.getSupplierList();
     },
     handleClose(done) {
       this.$confirm("确认关闭？")

@@ -14,21 +14,22 @@
                 <el-select v-model="chamerchandiseForm.supName" placeholder="请选择">
                   <el-option
                     v-for="item in chamerchandiseForm1"
-                    :key="item.suppliergoolsId"
+                    :key="item.supplierId"
                     :label="item.supName"
                     :value="item.supName">
                   </el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="商品小类型：" prop="supgoolssmallType">
-                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                <el-input placeholder="请输入商品小类型" v-model="chamerchandiseForm.supgoolssmallType"></el-input>
+                <!-- <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
                   <el-option
                     v-for="item in chamerchandiseForm1"
                     :key="item.suppliergoolsId"
                     :label="item.supgoolssmallType"
                     :value="item.supgoolssmallType">
                   </el-option>
-                </el-select>
+                </el-select> -->
               </el-form-item>
               <el-form-item>
                 <el-button @click="getMerchandiseList5">查询</el-button>
@@ -45,7 +46,7 @@
       <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="35" align="center"></el-table-column>
             <el-table-column type="index" width="35" fixed align="center"></el-table-column>
-            <el-table-column prop="supId" label="供应商编码"  align="center"></el-table-column>
+            <!-- <el-table-column prop="supId" label="供应商编码"  align="center"></el-table-column> -->
             <el-table-column prop="supName" label="供应商名称"  align="center"></el-table-column>
             <el-table-column prop="supgoolsBigType" label="商品大类型"  align="center"></el-table-column>
             <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
@@ -78,6 +79,15 @@
               </template>
             </el-table-column>
           </el-table>
+          <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
     </el-tab-pane>
     <el-tab-pane label="纸箱" >
       <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
@@ -92,14 +102,16 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="商品小类型：" prop="supgoolssmallType">
-                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                <el-input placeholder="请输入商品小类型" v-model="chamerchandiseForm.supgoolssmallType"></el-input>
+                <!-- <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
                   <el-option
                     v-for="item in chamerchandiseForm1"
                     :key="item.suppliergoolsId"
                     :label="item.supgoolssmallType"
                     :value="item.supgoolssmallType">
                   </el-option>
-                </el-select>
+                </el-select> -->
+                
               </el-form-item>
               <el-form-item>
                 <el-button @click="getMerchandiseList6">查询</el-button>
@@ -116,7 +128,7 @@
       <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="35" align="center"></el-table-column>
             <el-table-column type="index" width="35" fixed align="center"></el-table-column>
-            <el-table-column prop="supId" label="供应商编码" align="center"></el-table-column>
+            <!-- <el-table-column prop="supId" label="供应商编码" align="center"></el-table-column> -->
             <el-table-column prop="supName" label="供应商名称" align="center"></el-table-column>
             <el-table-column prop="supgoolsBigType" label="商品大类型" align="center"></el-table-column>
             <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
@@ -146,6 +158,15 @@
               </template>
             </el-table-column>
           </el-table>
+          <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
     </el-tab-pane>
     <el-tab-pane label="袋子" >
       <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
@@ -160,14 +181,15 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="商品小类型：" prop="supgoolssmallType">
-                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                <el-input placeholder="请输入商品小类型" v-model="chamerchandiseForm.supgoolssmallType"></el-input>
+                <!-- <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
                   <el-option
                     v-for="item in chamerchandiseForm1"
                     :key="item.suppliergoolsId"
                     :label="item.supgoolssmallType"
                     :value="item.supgoolssmallType">
                   </el-option>
-                </el-select>
+                </el-select> -->
               </el-form-item>
               <el-form-item>
                 <el-button @click="getMerchandiseList7">查询</el-button>
@@ -184,7 +206,7 @@
       <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="35" align="center"></el-table-column>
             <el-table-column type="index" width="35" fixed align="center"></el-table-column>
-            <el-table-column prop="supId" label="供应商编码" width="100px" align="center"></el-table-column>
+            <!-- <el-table-column prop="supId" label="供应商编码" width="100px" align="center"></el-table-column> -->
             <el-table-column prop="supName" label="供应商名称" width="100px" align="center"></el-table-column>
             <el-table-column prop="supgoolsBigType" label="商品大类型" width="100px" align="center"></el-table-column>
             <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
@@ -215,6 +237,15 @@
               </template>
             </el-table-column>
           </el-table>
+          <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
     </el-tab-pane>
     <el-tab-pane label="油墨" >
       <el-form :inline="true" class="demo-form-inline" :model="chamerchandiseForm" ref="chamerchandiseRef">
@@ -229,14 +260,15 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="商品小类型：" prop="supgoolssmallType">
-                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                <el-input placeholder="请输入商品小类型" v-model="chamerchandiseForm.supgoolssmallType"></el-input>
+                <!-- <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
                   <el-option
                     v-for="item in chamerchandiseForm1"
                     :key="item.suppliergoolsId"
                     :label="item.supgoolssmallType"
                     :value="item.supgoolssmallType">
                   </el-option>
-                </el-select>
+                </el-select> -->
               </el-form-item>
               <el-form-item>
                 <el-button @click="getMerchandiseList8">查询</el-button>
@@ -253,7 +285,7 @@
       <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="35" align="center"></el-table-column>
             <el-table-column type="index" width="35" fixed align="center"></el-table-column>
-            <el-table-column prop="supId" label="供应商编码" align="center"></el-table-column>
+            <!-- <el-table-column prop="supId" label="供应商编码" align="center"></el-table-column> -->
             <el-table-column prop="supName" label="供应商名称" align="center"></el-table-column>
             <el-table-column prop="supgoolsBigType" label="商品大类型" align="center"></el-table-column>
             <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
@@ -282,6 +314,15 @@
               </template>
             </el-table-column>
           </el-table>
+          <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
     </el-tab-pane>
     
     <el-tab-pane label="胶带" >
@@ -297,14 +338,15 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="商品小类型：" prop="supgoolssmallType">
-                <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
+                <el-input placeholder="请输入商品小类型" v-model="chamerchandiseForm.supgoolssmallType"></el-input>
+                <!-- <el-select v-model="chamerchandiseForm.supgoolssmallType" placeholder="请选择">
                   <el-option
                     v-for="item in chamerchandiseForm1"
                     :key="item.suppliergoolsId"
                     :label="item.supgoolssmallType"
                     :value="item.supgoolssmallType">
                   </el-option>
-                </el-select>
+                </el-select> -->
               </el-form-item>
               <el-form-item>
                 <el-button @click="getMerchandiseList9">查询</el-button>
@@ -321,7 +363,7 @@
       <el-table :data="merchandiseList" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="35" align="center"></el-table-column>
             <el-table-column type="index" width="35" fixed align="center"></el-table-column>
-            <el-table-column prop="supId" label="供应商编码"  align="center"></el-table-column>
+            <!-- <el-table-column prop="supId" label="供应商编码"  align="center"></el-table-column> -->
             <el-table-column prop="supName" label="供应商名称" align="center"></el-table-column>
             <el-table-column prop="supgoolsBigType" label="商品大类型" align="center"></el-table-column>
             <el-table-column prop="supgoolsId" label="商品编号" align="center"></el-table-column>
@@ -351,6 +393,15 @@
               </template>
             </el-table-column>
           </el-table>
+          <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
     </el-tab-pane>
   </el-tabs>
     </el-card>
@@ -366,18 +417,36 @@
         :rules="addMerchandiseRules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="供应商编号：" prop="supId">
-              <el-input placeholder="请输入供应商编号" v-model="addMerchandiseFrom.supId"></el-input>
-            </el-form-item>
+            <!-- <el-form-item label="供应商编号：" prop="supId">
+              <el-select v-model="chamerchandiseForm.supId" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.supplierId"
+                    :label="item.supId"
+                    :value="item.supId">
+                  </el-option>
+                </el-select>
+            </el-form-item> -->
             <el-form-item label="供应商名称：" prop="supName">
-              <el-input placeholder="请输入供应商名称" v-model="addMerchandiseFrom.supName"></el-input>
+              <el-select v-model="addMerchandiseFrom.supName" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.supplierId"
+                    :label="item.supName"
+                    :value="item.supName">
+                  </el-option>
+                </el-select>
             </el-form-item>
+            
           </el-col>
           <el-col :span="12">
             <el-form-item label="商品编号：" prop="supgoolsId">
               <el-input placeholder="请输入商品编号" v-model="addMerchandiseFrom.supgoolsId"></el-input>
             </el-form-item>
-            <el-form-item label="商品大类型：" prop="supgoolsBigType">
+            
+          </el-col>
+        </el-row>
+        <el-form-item label="商品大类型：" prop="supgoolsBigType">
           <el-select class="tiantou" placeholder="请选择商品大类型" @change="showshoop"  v-model="addMerchandiseFrom.supgoolsBigType">
             <el-option value="纸张" id="show">纸张</el-option>
             <el-option value="纸箱" id="show">纸箱</el-option>
@@ -386,8 +455,6 @@
             <el-option value="胶带" id="show">胶带</el-option>
           </el-select>
         </el-form-item>
-          </el-col>
-        </el-row>
         <div v-show="bigType == '纸张'">
           <el-form-item label="商品小类型：" prop="supgoolssmallType">
             <el-input placeholder="请输入商品小类型" class="xiang" v-model="addMerchandiseFrom.supgoolssmallType"></el-input>
@@ -457,18 +524,30 @@
         :rules="addMerchandiseRules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="供应商编号：" prop="supId">
+            <!-- <el-form-item label="供应商编号：" prop="supId">
               <el-input placeholder="请输入供应商编号" v-model="editMerchandiseFrom.supId"></el-input>
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item label="供应商名称：" prop="supName">
-              <el-input placeholder="请输入供应商名称" v-model="editMerchandiseFrom.supName"></el-input>
+              <!-- <el-input placeholder="请输入供应商名称" v-model="editMerchandiseFrom.supName"></el-input> -->
+              <el-select v-model="editMerchandiseFrom.supName" placeholder="请选择">
+                  <el-option
+                    v-for="item in chamerchandiseForm1"
+                    :key="item.supplierId"
+                    :label="item.supName"
+                    :value="item.supName">
+                  </el-option>
+                </el-select>
             </el-form-item>
+            
           </el-col>
           <el-col :span="12">
             <el-form-item label="商品编号：" prop="supgoolsId">
               <el-input placeholder="请输入商品编号" v-model="editMerchandiseFrom.supgoolsId"></el-input>
             </el-form-item>
-            <el-form-item label="商品大类型：" prop="supgoolsBigType">
+            
+          </el-col>
+        </el-row>
+        <el-form-item label="商品大类型：" prop="supgoolsBigType">
           <el-select class="tiantou" placeholder="请选择商品大类型" @change="showshoop"  v-model="editMerchandiseFrom.supgoolsBigType">
             <el-option value="纸张" id="show">纸张</el-option>
             <el-option value="纸箱" id="show">纸箱</el-option>
@@ -477,8 +556,6 @@
             <el-option value="胶带" id="show">胶带</el-option>
           </el-select>
         </el-form-item>
-          </el-col>
-        </el-row>
         <div v-show="bigType == '纸张'">
           <el-form-item label="商品小类型：" prop="supgoolssmallType">
             <el-input placeholder="请输入商品小类型" class="xiang" v-model="editMerchandiseFrom.supgoolssmallType"></el-input>
@@ -561,10 +638,7 @@ export default {
       resetPassdialogVisible: false,
       delVisible:false,
       delVisibleqi:false,
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      currentPage: 0,
       bigType: "",
       selectedList: [],
       chamerchandiseForm1:[],
@@ -572,7 +646,10 @@ export default {
         supName:'',
         supgoolssmallType:'',
         lab:'纸张',
+        pageCode: 1, //当前页
+        pageSize: 3,//每页显示的记录数
       },
+      total:0,
       delarr:[],
       merchandiseList:[],
       addMerchandiseFrom:{
@@ -608,8 +685,11 @@ export default {
         supgoolsColor:'',
         supId:'',
       },
+       chaSupplierForm: {
+        a:''
+      },
       addMerchandiseRules: {
-          supName:[
+          supgoolsId:[
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
           ],},
@@ -622,44 +702,61 @@ export default {
   },
   methods: {
    async handleClick(tab) {
+        this.chamerchandiseForm.pageCode=1;
+        this.chamerchandiseForm.pageSize=3;
+        this.currentPage=0;
         this.chamerchandiseForm.lab=tab.label;
-        const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
-        this.merchandiseList = res;
+        const { data: res } = await this.$http.post("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+        this.merchandiseList = res.body.rows;
+        this.total=res.body.total;
+        this.bigType=tab.label;
       },
    async getMerchandiseList(){
       this.chamerchandiseForm.lab=this.chamerchandiseForm.lab;
-      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
-      this.merchandiseList = res;
+      this.bigType=this.chamerchandiseForm.lab;
+      const { data: res } = await this.$http.post("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res.body.rows;
+      this.total=res.body.total;
     },
     async getMerchandiseList5(){
       this.chamerchandiseForm.lab="纸张";
-      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
-      this.merchandiseList = res;
+      const { data: res } = await this.$http.post("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res.body.rows;
+      this.total=res.body.total;
     },
     async getMerchandiseList6(){
       this.chamerchandiseForm.lab="纸箱";
-      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
-      this.merchandiseList = res;
+      const { data: res } = await this.$http.post("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res.body.rows;
+      this.total=res.body.total;
     },
     async getMerchandiseList7(){
       this.chamerchandiseForm.lab="袋子";
-      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
-      this.merchandiseList = res;
+      const { data: res } = await this.$http.post("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res.body.rows;
+      this.total=res.body.total;
     },
     async getMerchandiseList8(){
       this.chamerchandiseForm.lab="油墨";
-      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
-      this.merchandiseList = res;
+      const { data: res } = await this.$http.post("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res.body.rows;
+      this.total=res.body.total;
     },
     async getMerchandiseList9(){
       this.chamerchandiseForm.lab="胶带";
-      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
-      this.merchandiseList = res;
+      const { data: res } = await this.$http.post("jc/suppliergoods/selectSuppliergoolslist",{params:this.chamerchandiseForm});
+      this.merchandiseList = res.body.rows;
+      this.total=res.body.total;
     },
+    // async getMerchandiseList1(){
+    //   const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist");
+    //   // console.log(res);
+    //   this.chamerchandiseForm1 = res;
+    // },
     async getMerchandiseList1(){
-      const { data: res } = await this.$http.get("jc/suppliergoods/selectSuppliergoolslist");
+      const { data: res } = await this.$http.post("jc/supplier/selectSupplier",{params:this.chaSupplierForm});
       // console.log(res);
-      this.chamerchandiseForm1 = res;
+      this.chamerchandiseForm1 = res.body.rows;
     },
     async userStateChanged(userInfo) {
       const { data: res } = await this.$http.post("jc/suppliergoods/updatestate",userInfo);
@@ -684,6 +781,7 @@ export default {
       console.log(res);
       this.editMerchandiseFrom=res;
       this.edityonghuDialogVisible=true;
+      this.bigType=res.supgoolsBigType;
     },
     async editMerchandise(){
        const {data:res} = await this.$http.post('jc/suppliergoods/updateSupgools',this.editMerchandiseFrom);
@@ -736,9 +834,14 @@ export default {
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.chamerchandiseForm.pageSize=val;
+      this.getMerchandiseList();
     },
     handleCurrentChange(val) {
+      this.chamerchandiseForm.pageCode=val;
       console.log(`当前页: ${val}`);
+      this.currentPage=val;
+      this.getMerchandiseList();
     },
     handleClose(done) {
       this.$confirm("确认关闭？")

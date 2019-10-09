@@ -83,11 +83,11 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
         :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
+        :total=total
       ></el-pagination>
     </el-card>
     <el-dialog
@@ -292,10 +292,7 @@ export default {
       addyonghuDialogVisible: false,
       edityonghuDialogVisible: false,
       resetPassdialogVisible: false,
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      currentPage:0,
       delVisible:false,
       delVisibleqi:false,
       selectedList: [],
@@ -307,7 +304,10 @@ export default {
         cusType: "",
         cusContacts: "",
         cusPhone: "",
+        pageCode: 1, //当前页
+        pageSize: 3,//每页显示的记录数
       },
+      total:0,
       addClientFrom:{
         cusId:'',
         cusName:'',
@@ -377,12 +377,13 @@ export default {
     async getClientList(){
        const { data: res } = await this.$http.post("jc/customer/selectCustomer",this.chaclientForm);
       console.log(res);
-      this.clientList = res;
+      this.total=res.body.total;
+      this.clientList = res.body.rows;
     },
     async getClientList1(){
        const { data: res } = await this.$http.post("jc/customer/selectCustomer",this.chaclientForm);
       // console.log(res);
-      this.chaClientList = res;
+      this.chaClientList = res.body.rows;
     },
      async userStateChanged(userInfo) {
       //  console.log(userInfo);
@@ -457,9 +458,14 @@ export default {
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.chaclientForm.pageSize=val;
+      this.getClientList();
     },
     handleCurrentChange(val) {
+      this.chaclientForm.pageCode=val;
       console.log(`当前页: ${val}`);
+      this.currentPage=val;
+      this.getClientList();
     },
     handleClose(done) {
       this.$confirm("确认关闭？")

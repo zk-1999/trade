@@ -53,10 +53,13 @@
         ref="addMenuRef"
         :rules="addMenuRules">
           <el-form-item label="一级菜单名称：" prop="name"><el-input placeholder="请输入一级菜单名称" v-model="addMenuForm.name"></el-input></el-form-item>
+          <el-input type="hidden"  placeholder="请输入一级菜单名称" v-model="addMenuForm.parentId" value="0"></el-input>
+        
+        
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="addbumenDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addMenu">确 定</el-button>
+          <el-button type="primary" @click="addMenu(0)">确 定</el-button>
         </span>
       </el-dialog>
       <el-dialog
@@ -103,8 +106,6 @@
           <el-button type="primary" @click="editMenu">确 定</el-button>
         </span>
       </el-dialog>
-
-
     </div>
 </template>
 <script>
@@ -123,7 +124,8 @@ export default {
       addMenuForm:{
         name:'',
         router:'',
-        parentId:0,
+        parentId:'',
+        type:'',
       },
       editMenuForm:{
         name:'',
@@ -147,7 +149,6 @@ export default {
   created () {
     this.getMenuList();
     this.getMenuList1();
-
   },
   methods:{
     async getMenuList() {
@@ -162,10 +163,17 @@ export default {
       this.menuList1=res.body.rows;
       
     },
-    addMenu() {
+    addMenu(ismenu) {
       this.$refs.addMenuRef.validate(async valid => {
         if (!valid) return;    
+        console.log(ismenu);
+        if (ismenu==0) {
+          this.addMenuForm.parentId=ismenu;
+          this.addMenuForm.type=0;
+        }
+         this.addMenuForm.type=1;
         const { data: res } = await this.$http.post("sys/menu/save",this.addMenuForm);
+        this.addMenuForm.parentId='';
         console.log(this.addMenuForm);
         this.$message.success("用户创建成功！");
         this.getMenuList();
