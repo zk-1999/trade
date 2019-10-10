@@ -34,6 +34,7 @@ axios.defaults.baseURL = "/api";
 //把axios请求放到vue原型上使用this调用￥http发送请求
 Vue.prototype.$http = axios
 Vue.prototype.qs = qs
+Vue.prototype.ips = "http://192.168.31.235:8090/";
 Vue.config.productionTip = false
 
 new Vue({

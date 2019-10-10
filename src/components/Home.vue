@@ -6,10 +6,10 @@
                 <span>贸普实业ERP管理系统</span>
             </div>
            <div class="tubiao"> 
-               <div class="im"><img src="../assets/img/yong.jpg" alt=""></div>
-               <div class="yong">你好，{{username}}</div>
+               <div class="im"><img :src="a" alt=""></div>
+               <div class="yong">你好，{{user.name}}</div>
                <el-badge  :value="3" class="item tuituxin"><el-button size="small" type="success" circle icon="el-icon-chat-line-round"></el-button></el-badge>
-               <el-button class="tuituxin" type="warning" icon="el-icon-setting" size="small" circle @click="shezhidialogVisible=true"></el-button>
+               <el-button class="tuituxin" type="warning" icon="el-icon-setting" size="small" circle @click="showEditUser(user.userId)"></el-button>
                <el-button type="info" @click="logout" size="small" class="tuituxin">退出</el-button>
             </div>
         </el-header>
@@ -19,20 +19,20 @@
                 <el-menu background-color="#001529" text-color="#fff" active-text-color="#409eff" :unique-opened="true" :collapse="isCollapse" :collapse-transition="false"
                 :router="true" :default-active="activePath">
                     <!-- 一级菜单 -->
-                <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id">
+                <el-submenu :index="item.menuId+''" v-for="item in menuList" :key="item.menuId">
                 <!-- 一级菜单的模板区域 -->
                     <template slot="title">
                         <!-- 图标 -->
-                    <i :class="iconsObj[item.id]"></i>
+                    <i :class="iconsObj[item.menuId]"></i>
                     <!-- 文本 -->
-                    <span>{{item.authName}}</span>
+                    <span>{{item.name}}</span>
                     </template>
                     <!-- 二级菜单的模板区域 -->
-                    <el-menu-item :index="'/'+subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/'+subItem.path)">
+                    <el-menu-item :index="'/'+subItem.router" v-for="subItem in item.children" :key="subItem.menuId" @click="saveNavState('/'+subItem.router)">
                          <!-- 图标 -->
                     <i class="el-icon-menu"></i>
                     <!-- 文本 -->
-                    <span>{{subItem  .authName}}</span>
+                    <span>{{subItem.name}}</span>
                     </el-menu-item>
                 </el-submenu>
                 </el-menu>
@@ -45,29 +45,33 @@
         width="40%"
         :before-close="handleClose">
         <div class="ti">
-            <el-form :label-position="labelPosition" label-width="100px">
+            <el-form :label-position="labelPosition" label-width="100px" :model="editUserForm"
+        ref="addUserRef"
+        :rules="addUserRules">
                 <el-form-item class="tupian">
                     <el-upload
-                        class="avatar-uploader"
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        :show-file-list="false"
-                        :on-success="handleAvatarSuccess"
-                        :before-upload="beforeAvatarUpload">
-                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    </el-upload>
+                      ref="upload"
+                      :action="ip"
+                      name="picture"
+                      list-type="picture-card"
+                      :limit="1"
+                      :on-exceed="onExceed"
+                      :before-upload="beforeUpload"
+                      :on-preview="handlePreview"
+                      :on-success="handleSuccess"
+                      :on-remove="handleRemove">
+                <i class="el-icon-plus"></i>
+            </el-upload>
                 </el-form-item>
-                <el-form-item class="tian" label="用户名:"><el-input  placeholder="请输入用户名"></el-input></el-form-item>
-                <el-form-item class="tian" label="手机号:"><el-input  placeholder="请输入手机号"></el-input></el-form-item>
-                <el-form-item class="tian" label="邮箱:"><el-input  placeholder="请输入邮箱"></el-input></el-form-item>
-                <el-form-item class="tian" label="旧密码:"><el-input  placeholder="请输入旧密码"></el-input></el-form-item>
-                <el-form-item class="tian" label="新密码:"><el-input  placeholder="请输入新密码"></el-input></el-form-item>
-                <el-form-item class="tian" label="确认新密码:"><el-input  placeholder="请输入确认新密码"></el-input></el-form-item>
+                <el-form-item class="tian" label="用户名:" prop="name"><el-input  placeholder="请输入用户名" v-model="editUserForm.name"></el-input></el-form-item>
+                <el-form-item class="tian" label="手机号:" prop="mobile"><el-input  placeholder="请输入手机号" v-model="editUserForm.mobile"></el-input></el-form-item>
+                <el-form-item class="tian" label="新密码:" prop="newpassword"><el-input  placeholder="请输入新密码" v-model="editUserForm.newpassword"></el-input></el-form-item>
+                <el-form-item class="tian" label="确认新密码:" prop="quepassword"><el-input  placeholder="请输入确认新密码" v-model="editUserForm.quepassword"></el-input></el-form-item>
             </el-form>
         </div>
         <span slot="footer" class="dialog-footer">
             <el-button @click="shezhidialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="shezhidialogVisible = false">确 定</el-button>
+            <el-button type="primary" @click="editUser">确 定</el-button>
         </span>
         </el-dialog>
     </el-container>
@@ -79,7 +83,25 @@ export default {
             imageUrl: '',
             labelPosition: 'right',
             shezhidialogVisible : false,
-            menuList:[{"id":125,"authName":"基础资料","path":"basics","children":[{"id":110,"authName":"供应商管理","path":"supplier","children":[],"order":null},{"id":111,"authName":"客户管理","path":"client","children":[],"order":null},{"id":112,"authName":"供应商商品管理","path":"merchandise","children":[],"order":null},{"id":113,"authName":"生产商品管理","path":"production","children":[],"order":null},{"id":114,"authName":"产品设计稿维护","path":"product","children":[],"order":null},{"id":115,"authName":"印刷参数","path":"printing","children":[],"order":null},{"id":116,"authName":"基础数据维护","path":"maintenance","children":[],"order":null}],"order":1},{"id":103,"authName":"系统管理","path":"rights","children":[{"id":111,"authName":"部门设置","path":"department","children":[],"order":null},{"id":112,"authName":"职务设置","path":"duty","children":[],"order":null},{"id":113,"authName":"用户管理","path":"user","children":[],"order":null},{"id":114,"authName":"菜单管理","path":"menu","children":[],"order":null},{"id":115,"authName":"系统日志","path":"journal","children":[],"order":null}],"order":2},{"id":101,"authName":"进货管理","path":"goods","children":[],"order":3},{"id":102,"authName":"销售管理","path":"orders","children":[],"order":4},{"id":145,"authName":"生产管理","path":"reports","children":[],"order":5}],
+            // menuList:[{"id":125,"authName":"基础资料","path":"basics","children":[{"id":110,"authName":"供应商管理","path":"supplier","children":[],"order":null},{"id":111,"authName":"客户管理","path":"client","children":[],"order":null},{"id":112,"authName":"供应商商品管理","path":"merchandise","children":[],"order":null},{"id":113,"authName":"生产商品管理","path":"production","children":[],"order":null},{"id":114,"authName":"产品设计稿维护","path":"product","children":[],"order":null},{"id":115,"authName":"印刷参数","path":"printing","children":[],"order":null},{"id":116,"authName":"基础数据维护","path":"maintenance","children":[],"order":null}],"order":1},{"id":103,"authName":"系统管理","path":"rights","children":[{"id":111,"authName":"部门设置","path":"department","children":[],"order":null},{"id":112,"authName":"职务设置","path":"duty","children":[],"order":null},{"id":113,"authName":"用户管理","path":"user","children":[],"order":null},{"id":114,"authName":"菜单管理","path":"menu","children":[],"order":null},{"id":115,"authName":"系统日志","path":"journal","children":[],"order":null}],"order":2},{"id":101,"authName":"进货管理","path":"goods","children":[],"order":3},{"id":102,"authName":"销售管理","path":"orders","children":[],"order":4},{"id":145,"authName":"生产管理","path":"reports","children":[],"order":5}],
+            editUserForm:{
+                name:'',
+                password:'',
+                mobile:'',
+                newpassword:'',
+                quepassword:'',
+                picUrl:'',
+            },
+            ip:'',
+            ip1:'',
+            a:'',
+            addUserRules: {
+          name:[
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          ],},
+            menuList:[],
+            user:{},
             iconsObj:{
                 '125':'iconfont icon-user',
                 '103':'iconfont icon-tijikongjian',
@@ -95,14 +117,89 @@ export default {
         };
     },
     created () {
-        // this.getMenuList(),
+        this.getMenuList(),
         this.activePath=window.sessionStorage.getItem('activePath')
-        // this.username=window.sessionStorage.getItem('username')
-        // console.log(username);
-        this.getCookie();
+        this.getUser();
     },
     methods:{
+        //文件上传成功的钩子函数
+        handleSuccess(res, file) {
+            this.$message({
+                type: 'info',
+                message: '图片上传成功',
+                duration: 6000
+            });
+            if (file.response.success) {
+                // this.editor.picture = file.response.message; //将返回的文件储存路径赋值picture字段
+                
+                // this.addProductForm.designPicture=file.response.message;
+                this.editUserForm.picUrl=file.response.message;
+
+                // this.productList.picture=file.response.message;
+                console.log(file.response.message);
+                
+            }
+        },
+        //删除文件之前的钩子函数
+        handleRemove(file, fileList) {
+            this.$message({
+                type: 'info',
+                message: '已删除原有图片',
+                duration: 6000
+            });
+        },
+        //点击列表中已上传的文件事的钩子函数
+        handlePreview(file) {
+          this.dialogImageUrl = file.url;
+          this.dialogVisible = true;
+        },
+        //上传的文件个数超出设定时触发的函数
+        onExceed(files, fileList) {
+            this.$message({
+                type: 'info',
+                message: '最多只能上传一个图片',
+                duration: 6000
+            });
+        },
+        //文件上传前的前的钩子函数
+        //参数是上传的文件，若返回false，或返回Primary且被reject，则停止上传
+        beforeUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isGIF = file.type === 'image/gif';
+            const isPNG = file.type === 'image/png';
+            const isBMP = file.type === 'image/bmp';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG && !isGIF && !isPNG && !isBMP) {
+                this.$message.error('上传图片必须是JPG/GIF/PNG/BMP 格式!');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传图片大小不能超过 2MB!');
+            }
+            return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
+        },     
+       async getUser() {
+      const { data: res } = await this.$http.post("sys/user/getCurrentUser");
       
+      this.a=this.ip1+res.body.user.picUrl;
+      this.user = res.body.user;
+console.log(this.user );
+
+    },
+     async showEditUser(id){
+      let param = new URLSearchParams();
+      param.append("id", id);
+      const {data:res} = await this.$http.post('sys/user/getInfo',param);
+      this.editUserForm=res.body.user;
+      console.log(res);
+      
+      this.shezhidialogVisible=true;
+    },
+    async editUser(){
+       this.editUserForm.password=this.editUserForm.quepassword;
+       const {data:res} = await this.$http.post('sys/user/update',this.editUserForm);
+       this.shezhidialogVisible=false;
+    },
         handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
@@ -123,30 +220,12 @@ export default {
             this.$router.push('/login');
         },
         async getMenuList(){
-            // this.$http.get('menus').then((res) => {
-            //     console.log(res);
-            //     this.menuList = res;
-            // }).catch(err => err)
-        //  const {data:res} = await this.$http.get('menus');
-        //   if(res.meta.status!==200) return this.$message.error(res.meta.msg)
-        //   this.menuList=res.data
+         const {data:res} = await this.$http.post('getPermissMenu');
+         this.ip=this.ips+'upload';
+      this.ip1=this.ips;
+         console.log(res);
+          this.menuList=res.body.menu;
         },
-        getCookie: function() {
-            
-            
-          if (document.cookie.length > 0) {
-              var arr = document.cookie.split('; '); //这里显示的格式需要切割一下自己可输出看下
-              for (var i = 0; i < arr.length; i++) {
-                  var arr2 = arr[i].split('='); //再次切割
-                  //判断查找相对应的值
-                  
-                  if (arr2[0] == 'userName') {
-                    //  console.log(arr2[1])
-                      this.username = arr2[1]; //保存到保存数据的地方
-                  }
-              }
-          }
-      },
         //点击按钮，切换菜单的折叠与展开
         toggleCollapse(){
             this.isCollapse=!this.isCollapse;

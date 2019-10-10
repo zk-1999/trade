@@ -73,7 +73,7 @@
                 scope.row.designCol5+','+scope.row.designCol6+','+scope.row.designCol7+','+scope.row.designCol8}} -->
               </template>
             </el-table-column>
-            <el-table-column prop="" label="图片" align="center">
+            <el-table-column prop="designPicture" label="图片" align="center">
                 <!-- <div class="demo-image__preview">
                   <el-image
                     style="width:200px; height: 100px"
@@ -82,14 +82,15 @@
                     >
                   </el-image>
                 </div> -->
-                <!-- <template scope="scope">
-                  <img :src="scope.row.designPicture" />
-                </template> -->
-                 <el-image 
+                <template scope="scope">
+                  <!-- <img :src="scope.row.designPicture" /> -->
+                   <el-image 
     style="width: 200px; height: 100px"
-    :src="url" 
-    :preview-src-list="srcList" @click="a(url)">
+    :src="scope.row.designPicture" 
+    :preview-src-list="srcList" @click="a(scope.row.designPicture)">
   </el-image>
+                </template>
+                
             </el-table-column>
             <el-table-column label="状态" width="65px" align="center">
               <template slot-scope="scope">
@@ -172,7 +173,7 @@
             <el-form-item label="上传设计稿：" prop="designPicture">
              <el-upload
                       ref="upload"
-                      action="http://192.168.31.234:8090/upload"
+                      :action="ip"
                       name="picture"
                       list-type="picture-card"
                       :limit="1"
@@ -242,12 +243,18 @@
             
             <el-form-item label="上传设计稿：" prop="designPicture">
               <el-upload
-                action="https://jsonplaceholder.typicode.com/posts/"
-                list-type="picture-card"
-                :on-preview="handlePictureCardPreview"
-                :on-remove="handleRemove">
+                      ref="upload"
+                      :action="ip"
+                      name="picture"
+                      list-type="picture-card"
+                      :limit="1"
+                      :on-exceed="onExceed"
+                      :before-upload="beforeUpload"
+                      :on-preview="handlePreview"
+                      :on-success="handleSuccess"
+                      :on-remove="handleRemove">
                 <i class="el-icon-plus"></i>
-              </el-upload>
+            </el-upload>
             </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -301,7 +308,8 @@ export default {
       selectedList: [],
       delarr:[],
       productList:[],
-      
+      ip:'',
+      ip1:'',
       chaproductList:[{designState:1,a:'启用',designId:0},{designState:0,a:'禁用',designId:1}],
       chaProductForm:{
         designName:'',
@@ -358,6 +366,7 @@ export default {
   },
   created () {
     this.getProductList();
+    
   },
   methods:{
     a(url){
@@ -376,6 +385,8 @@ export default {
                 // this.editor.picture = file.response.message; //将返回的文件储存路径赋值picture字段
                 
                 this.addProductForm.designPicture=file.response.message;
+                this.editProductForm.designPicture=file.response.message;
+
                 // this.productList.picture=file.response.message;
                 console.log(file.response.message);
                 
@@ -421,9 +432,16 @@ export default {
         },     
     async getProductList(){
       const { data: res } = await this.$http.post("jc/Design/selectDesign",this.chaProductForm);
-      console.log(res);
-      // console.log(this.chamerchandiseForm);
+      this.ip=this.ips+'upload';
+      this.ip1=this.ips;
+      console.log(this.ip);
+      
+      for (let index = 0; index < res.body.rows.length; index++) {
+        res.body.rows[index].designPicture=this.ip1+res.body.rows[index].designPicture
+        
+      }
       this.total=res.body.total
+
       this.productList = res.body.rows;
       
     },
@@ -448,7 +466,6 @@ export default {
       let param = new URLSearchParams();
       param.append("designId", designId);
       const {data:res} = await this.$http.post('jc/Design/selectDesignByid',param);
-      console.log(res);
       this.editProductForm=res;
       this.edityonghuDialogVisible=true;
     },
@@ -471,7 +488,6 @@ export default {
       for (let i = 0; i < this.selectedList.length; i++) {
         this.delarr.push(this.selectedList[i].designId)
       }
-      console.log(this.delarr);
     },
     async deleteRow(){
          const {data:res} = await this.$http.post('jc/Design/deleteDesignmore',this.delarr);
@@ -484,7 +500,6 @@ export default {
          this.getProductList();
       },
      handleRemove(file, fileList) {
-        console.log(file, fileList);
       },
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;

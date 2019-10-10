@@ -136,7 +136,7 @@ export default {
       },
       chaMenuForm:{
          pageCode: 1, //当前页
-         pageSize: 5,//每页显示的记录数
+         pageSize: 3,//每页显示的记录数
       },
 
       addMenuRules: {

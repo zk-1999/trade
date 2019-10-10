@@ -184,6 +184,8 @@ export default {
         roleName:'',
         remark:'',
       },
+      ids:[],
+      parentIds:[],
       editDutyForm:{
         roleId:'',
         roleName:'',
@@ -245,21 +247,36 @@ export default {
       console.log(this.delarr);
     },
    async showquanxian(duty){
-     console.log(duty);
      this.editDutyForm.roleId=duty.roleId;
      this.editDutyForm.roleName=duty.roleName;
      this.editDutyForm.remark=duty.remark;
-      const { data: res } = await this.$http.post("sys/menu/simpleTree",{params:this.chaMenuForm});
-      // console.log(res.body);
-      this.rightList=res.body
+     let param = new URLSearchParams();
+      param.append("roleId", duty.roleId);
+      const { data: res } = await this.$http.post("sys/menu/getRoleMenuIds",param);
+      const { data: res1 } = await this.$http.post("sys/menu/simpleTree",this.editDutyForm);
+      this.defKeys=res.body.menuIds;
+      for (let index = 0; index < res1.body.length; index++) {
+        if (res1.body[index].parentId==0) {
+          this.parentIds.push(res1.body[index].menuId);
+        }
+      }
+      for (let index = 0; index < this.defKeys.length; index++) {
+       for (let i = 0; i < this.parentIds.length; i++) {
+          if (this.defKeys[index]==this.parentIds[i]) {
+            this.defKeys.splice(index,1);
+          }
+       }
+     }
+      this.rightList=res1.body;
       this.rightDialogVisible=true;
     },
     async alloRight(){
-      var ids=[...this.$refs.mytree.getCheckedKeys(),...this.$refs.mytree.getHalfCheckedKeys()];
-           ids=ids.join(',');
-           this.editDutyForm.muneIds=ids;
-           const {data:res} = await this.$http.post('sys/role/update',this.editDutyForm);
-           this.rightDialogVisible=false;
+      var ids =[...this.$refs.mytree.getCheckedKeys(),...this.$refs.mytree.getHalfCheckedKeys()];
+      ids=ids.join(',');
+      console.log(ids);
+      this.editDutyForm.muneIds=ids;
+      const {data:res} = await this.$http.post('sys/role/update',this.editDutyForm);
+      this.rightDialogVisible=false;
         },
     chaDutyResetForm(formName){
         this.$refs.chaDutyRef.resetFields();
