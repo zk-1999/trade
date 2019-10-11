@@ -121,9 +121,9 @@
               <el-select class="tiantou" v-model="addClientFrom.cusType" placeholder="请选择类型">
                 <el-option
               v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :key="item.basicId"
+              :label="item.basicRetainone"
+              :value="item.basicRetainone"
             ></el-option>
               </el-select>
             </el-form-item>
@@ -207,9 +207,9 @@
               <el-select class="tiantou" v-model="editClientForm.cusType" placeholder="请选择类型">
                 <el-option
               v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :key="item.basicId"
+              :label="item.basicRetainone"
+              :value="item.basicRetainone"
             ></el-option>
               </el-select>
             </el-form-item>
@@ -344,34 +344,14 @@ export default {
         cusAddress:'',
         cusBank:'',
       },
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
+      options: [],
     };
   },
   created() {
     this.getClientList();
     this.getClientList1();
     this.getCityData();
+    this.kehuleixing();
   },
   methods: {
     async getClientList(){
@@ -379,6 +359,11 @@ export default {
       console.log(res);
       this.total=res.body.total;
       this.clientList = res.body.rows;
+    },
+    async kehuleixing(){
+      const { data: res } = await this.$http.post("jc/Basic/selectcustomer");
+      console.log(res);
+      this.options = res;
     },
     async getClientList1(){
        const { data: res } = await this.$http.post("jc/customer/selectCustomer",this.chaclientForm);

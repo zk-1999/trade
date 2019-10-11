@@ -103,8 +103,8 @@ export default {
             menuList:[],
             user:{},
             iconsObj:{
-                '125':'iconfont icon-user',
-                '103':'iconfont icon-tijikongjian',
+                '14':'iconfont icon-user',
+                '12':'iconfont icon-tijikongjian',
                 '101':'iconfont icon-shangpin',
                 '102':'iconfont icon-danju',
                 '145':'iconfont icon-baobiao'
@@ -130,14 +130,8 @@ export default {
                 duration: 6000
             });
             if (file.response.success) {
-                // this.editor.picture = file.response.message; //将返回的文件储存路径赋值picture字段
-                
-                // this.addProductForm.designPicture=file.response.message;
                 this.editUserForm.picUrl=file.response.message;
-
-                // this.productList.picture=file.response.message;
-                console.log(file.response.message);
-                
+                console.log(file.response.message);  
             }
         },
         //删除文件之前的钩子函数
@@ -169,7 +163,6 @@ export default {
             const isPNG = file.type === 'image/png';
             const isBMP = file.type === 'image/bmp';
             const isLt2M = file.size / 1024 / 1024 < 2;
-
             if (!isJPG && !isGIF && !isPNG && !isBMP) {
                 this.$message.error('上传图片必须是JPG/GIF/PNG/BMP 格式!');
             }
@@ -180,25 +173,21 @@ export default {
         },     
        async getUser() {
       const { data: res } = await this.$http.post("sys/user/getCurrentUser");
-      
       this.a=this.ip1+res.body.user.picUrl;
       this.user = res.body.user;
-console.log(this.user );
-
     },
      async showEditUser(id){
       let param = new URLSearchParams();
       param.append("id", id);
       const {data:res} = await this.$http.post('sys/user/getInfo',param);
       this.editUserForm=res.body.user;
-      console.log(res);
-      
       this.shezhidialogVisible=true;
     },
     async editUser(){
        this.editUserForm.password=this.editUserForm.quepassword;
        const {data:res} = await this.$http.post('sys/user/update',this.editUserForm);
        this.shezhidialogVisible=false;
+       this.getUser();
     },
         handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);

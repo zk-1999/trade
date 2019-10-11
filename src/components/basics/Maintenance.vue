@@ -8,6 +8,7 @@
       </el-breadcrumb>
       <el-card>
             <el-tabs :tab-position="tabPosition" @tab-click="handleClick" >
+              
             <el-tab-pane label="产品名称" >
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
@@ -795,6 +796,203 @@
       ></el-pagination>
             </el-tab-pane>
             <el-tab-pane label="仓库类型">
+              <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
+                    <el-form-item label="名称：" prop="basicRetainone">
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button @click="handleClick(ta)">查询</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
+              <el-table border stripe :data="maintenanceList">
+                <el-table-column type="index"></el-table-column>
+                <el-table-column prop="basicRetainone" label="名称"></el-table-column>
+                <el-table-column prop="basicName" label="所属基础数据"></el-table-column>
+                <el-table-column prop="supState" label="状态" width="65px">
+              <template slot-scope="scope">
+                <!-- {{scope.row}} -->
+                <el-switch
+                  v-model="scope.row.basicState"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="190px">
+              <template slot-scope="scope">
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditSupplier(scope.row.supplierId)">修改</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.supplierId)"
+                  size="mini"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+              </el-table>
+              <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
+            </el-tab-pane>
+            <el-tab-pane label="箱唛">
+              <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
+                    <el-form-item label="名称：" prop="basicRetainone">
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button @click="handleClick(ta)">查询</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
+              <el-table border stripe :data="maintenanceList">
+                <el-table-column type="index"></el-table-column>
+                <el-table-column prop="basicRetainone" label="名称"></el-table-column>
+                <el-table-column prop="basicName" label="所属基础数据"></el-table-column>
+                <el-table-column prop="supState" label="状态" width="65px">
+              <template slot-scope="scope">
+                <!-- {{scope.row}} -->
+                <el-switch
+                  v-model="scope.row.basicState"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="190px">
+              <template slot-scope="scope">
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditSupplier(scope.row.supplierId)">修改</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.supplierId)"
+                  size="mini"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+              </el-table>
+              <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
+            </el-tab-pane>
+            <el-tab-pane label="标唛">
+              <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
+                    <el-form-item label="名称：" prop="basicRetainone">
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button @click="handleClick(ta)">查询</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
+              <el-table border stripe :data="maintenanceList">
+                <el-table-column type="index"></el-table-column>
+                <el-table-column prop="basicRetainone" label="名称"></el-table-column>
+                <el-table-column prop="basicName" label="所属基础数据"></el-table-column>
+                <el-table-column prop="supState" label="状态" width="65px">
+              <template slot-scope="scope">
+                <!-- {{scope.row}} -->
+                <el-switch
+                  v-model="scope.row.basicState"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="190px">
+              <template slot-scope="scope">
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditSupplier(scope.row.supplierId)">修改</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.supplierId)"
+                  size="mini"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+              </el-table>
+              <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
+            </el-tab-pane>
+  
+            <el-tab-pane label="PE总重">
+              <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
+                    <el-form-item label="名称：" prop="basicRetainone">
+                      <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button @click="handleClick(ta)">查询</el-button>
+                        <el-button type="success" @click="addyonghuDialogVisible = true">新增</el-button>
+                    </el-form-item>
+                </el-form>
+              <el-table border stripe :data="maintenanceList">
+                <el-table-column type="index"></el-table-column>
+                <el-table-column prop="basicRetainone" label="名称"></el-table-column>
+                <el-table-column prop="basicName" label="所属基础数据"></el-table-column>
+                <el-table-column prop="supState" label="状态" width="65px">
+              <template slot-scope="scope">
+                <!-- {{scope.row}} -->
+                <el-switch
+                  v-model="scope.row.basicState"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  :active-value="1"
+                  :inactive-value="0"
+                  @change="userStateChanged(scope.row)"
+                ></el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="190px">
+              <template slot-scope="scope">
+                <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditSupplier(scope.row.supplierId)">修改</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deletebumen(scope.row.supplierId)"
+                  size="mini"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+              </el-table>
+              <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[3, 5, 10, 15]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=total
+      ></el-pagination>
+            </el-tab-pane>
+            <el-tab-pane label="客户类型">
               <el-form :inline="true" class="demo-form-inline" :model="chaMaintenanceForm" ref="chaMaintenanceRef">
                     <el-form-item label="名称：" prop="basicRetainone">
                       <el-input placeholder="请输入供应商名称" v-model="chaMaintenanceForm.basicRetainone" clearable></el-input>
